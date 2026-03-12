@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { ChevronsDown, Languages, TrendingUp, Zap, DollarSign, UserSquare2, Settings2 } from "lucide-react";
+import { ChevronsDown, FileText, Settings2, Mic2, Globe2, TrendingDown, ShieldCheck } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import GradientText from "@/components/GradientText";
 import Navbar from "@/components/Navbar";
@@ -8,45 +8,46 @@ import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import FeatureGridSection from "@/components/FeatureGridSection";
 import VideoPortfolio from "@/components/VideoPortfolio";
-import videoLocalization from "@/assets/video-localization.jpg";
+import voiceoverImgSrc from "@/assets/voiceover.jpg";
+const voiceoverImg = typeof voiceoverImgSrc === "string" ? voiceoverImgSrc : (voiceoverImgSrc as { src: string }).src;
 
 const sections = [
   {
-    id: "formacion-elearning",
-    title: "Soluciones de vídeo para formación y e-learning multilingüe",
-    navLabel: "Soluciones de vídeo para formación y e-learning multilingüe",
+    id: "locucion-multilingue",
+    title: "Locución multilingüe con IA: escalabilidad con coherencia global",
+    navLabel: "Locución multilingüe con IA: escalabilidad y coherencia",
     intro:
-      "La localización permite que un solo curso de formación sea accesible y efectivo en múltiples regiones simultáneamente. La automatización se encarga del volumen, mientras que la supervisión humana garantiza que el aprendizaje sea pedagógicamente correcto.",
+      "Centralizamos tu comunicación internacional eliminando la compleja coordinación de locutores en distintos países. Diseñamos procesos que aseguran una alineación rigurosa de tono y calidad técnica en todos los idiomas de forma simultánea.",
     subsections: [
       {
-        heading: "Casos de éxito y aplicaciones prácticas en el sector",
-        text: "Hoy en día, las multinacionales más avanzadas generan cientos de vídeos formativos al mes asegurando una coherencia total en cada mercado. Gracias a la implementación de flujos asistidos por IA, estas empresas logran reducir hasta un 40% el tiempo dedicado a la edición manual. Esta gestión centralizada permite que, independientemente del país, todos los equipos reciban la misma visión de empresa mediante una integración perfecta de doblaje y subtítulos multilingües.",
+        heading: "Adaptación cultural profunda",
+        text: "Mediante una adaptación cultural profunda, garantizamos precisión lingüística y una identidad de marca reconocible en cualquier mercado. El resultado es una comunicación global eficiente, profesional y libre de las fricciones logísticas de la producción tradicional.",
       },
     ],
   },
   {
-    id: "optimizacion-costes",
-    title: "Optimización de costes en la producción de vídeo",
-    navLabel: "Optimización de costes en la producción de vídeo",
+    id: "metodologia-hibrida",
+    title: "Metodología híbrida: el equilibrio entre IA y locutores profesionales",
+    navLabel: "El equilibrio entre IA y locutores profesionales",
     intro:
-      "Centralizar la producción y usar herramientas de IA permite eliminar redundancias y reducir drásticamente el presupuesto por minuto de vídeo producido, sin sacrificar la excelencia.",
+      "Las voces generadas por IA son la solución óptima para contenidos de alto volumen y frecuencia, como e-learning y comunicación interna, donde la agilidad y el control de costes son prioritarios.",
     subsections: [
       {
-        heading: "Estrategias para maximizar el retorno de inversión",
-        text: "Para lograr una optimización real, es fundamental automatizar procesos base como el doblaje y el subtitulado, permitiendo entregas mucho más ágiles. Al establecer un centro de producción centralizado, las compañías evitan la duplicidad de gastos entre departamentos y países. La clave del éxito reside en combinar estas herramientas tecnológicas con una revisión humana que certifique que el contenido final mantiene el estándar de calidad y el tono de marca deseado.",
+        heading: "Combinación estratégica",
+        text: "Para campañas de alto impacto o storytelling con carga emocional, integramos locutores profesionales. No sustituimos la voz humana; la combinamos estratégicamente con la tecnología para ofrecer expresividad y eficiencia en un mismo modelo de producción.",
       },
     ],
   },
   {
-    id: "avatares-ia",
-    title: "Avatares IA: El futuro de la comunicación interna",
-    navLabel: "Avatares IA: El futuro de la comunicación interna",
+    id: "externalizar-produccion",
+    title: "Externalizar la producción de voces con IA simplifica los procesos",
+    navLabel: "Externalizar la producción de voces simplifica procesos",
     intro:
-      'Los avatares de IA son la solución ideal para mensajes recurrentes y formación continua, permitiendo "grabar" en decenas de idiomas sin necesidad de cámaras ni sets de rodaje físicos.',
+      "Delegar la producción de voces permite a tu equipo centrarse en la estrategia mientras expertos gestionan la ejecución, edición y control de calidad. Este modelo garantiza entregas estructuradas y un resultado profesional bajo estándares certificados.",
     subsections: [
       {
-        heading: "Claves para una implementación corporativa efectiva",
-        text: "La adopción de esta tecnología requiere identificar con precisión qué mensajes se benefician de un avatar y cuáles requieren un presentador real para mantener la cercanía. Es vital adaptar la estética y el lenguaje de estos personajes según el mercado de destino para asegurar la relevancia local. Además, una supervisión humana constante garantiza que cada intervención del avatar cumpla estrictamente con los protocolos de seguridad y el tono de voz corporativo.",
+        heading: "Partner especializado",
+        text: "Al confiar en un partner especializado, accedes a tecnología de vanguardia y transformas costes variables en presupuestos predecibles. La producción de voz deja de ser una carga operativa para convertirse en un activo estratégico de comunicación para tu empresa.",
       },
     ],
   },
@@ -54,28 +55,69 @@ const sections = [
 
 const faqs = [
   {
-    q: "¿Qué son los avatares IA y cómo se usan en comunicación corporativa?",
-    a: "Los avatares IA son presentadores virtuales generados por inteligencia artificial que pueden comunicar mensajes en múltiples idiomas sin necesidad de grabaciones presenciales. Se utilizan para formación interna, comunicados corporativos y contenido recurrente, reduciendo costes y tiempos de producción.",
+    q: "¿Cuál es la diferencia entre un generador de IA y nuestros servicio de voces IA?",
+    a: "El generador es automático; el servicio incluye supervisión, tratamiento humano y masterización.",
   },
   {
-    q: "¿Es necesario el doblaje en la formación corporativa multilingüe?",
-    a: "Sí. El doblaje profesional mejora significativamente la retención y comprensión del contenido formativo, ya que los empleados procesan mejor la información en su idioma nativo. Nuestro enfoque híbrido de IA y revisión humana garantiza un doblaje natural y preciso a escala.",
+    q: "¿Se editan las voces?",
+    a: "Sí, ajustamos ritmo y entonación para lograr un resultado natural y estrictamente corporativo.",
   },
   {
-    q: "¿Cómo se automatiza el e-learning con revisión humana?",
-    a: "La IA se encarga de las tareas repetitivas como transcripción, traducción inicial y sincronización de subtítulos, mientras que lingüistas y pedagogos revisan cada entrega para asegurar la precisión terminológica, la coherencia pedagógica y la adecuación cultural del contenido.",
+    q: "¿Ofrecéis locutores humanos?",
+    a: "Sí, los integramos cuando el proyecto requiere una carga emocional o storytelling de alto impacto.",
   },
   {
-    q: "¿Cuántos idiomas se pueden gestionar simultáneamente?",
-    a: "Nuestros flujos de localización permiten gestionar decenas de idiomas en paralelo. La automatización con IA escala la producción, mientras que revisores nativos especializados validan cada versión lingüística.",
-  },
-  {
-    q: "¿Qué ventajas tiene centralizar la producción de vídeo?",
-    a: "Centralizar elimina la duplicidad de costes entre departamentos y países, asegura coherencia de marca global y reduce el time-to-market gracias a workflows estandarizados y automatizados.",
+    q: "¿Hacéis clonación de voz?",
+    a: "No, nuestro enfoque es exclusivamente B2B para comunicación, formación y marketing corporativo.",
   },
 ];
 
-const LocalizacionVideoPage = () => {
+const featureCards = [
+  {
+    icon: FileText,
+    iconBg: "bg-blue-500/20",
+    iconColor: "text-blue-400",
+    title: "Supervisión de Guion",
+    text: "Revisamos y optimizamos el ritmo y la claridad del texto antes de generar la voz para asegurar la coherencia corporativa.",
+  },
+  {
+    icon: Settings2,
+    iconBg: "bg-purple-500/20",
+    iconColor: "text-purple-400",
+    title: "Refinamiento de Voz",
+    text: "Ajustamos manualmente entonación, pausas y énfasis para eliminar la rigidez artificial y lograr una naturalidad absoluta.",
+  },
+  {
+    icon: Mic2,
+    iconBg: "bg-emerald-500/20",
+    iconColor: "text-emerald-400",
+    title: "Masterización Pro",
+    text: "Aplicamos ecualización y limpieza profesional para que el audio sea impecable en cualquier soporte: web, e-learning o anuncios.",
+  },
+  {
+    icon: Globe2,
+    iconBg: "bg-orange-500/20",
+    iconColor: "text-orange-400",
+    title: "Escala Multilingüe",
+    text: "Mantén una identidad sonora reconocible en todos los idiomas con una gestión centralizada que elimina la fricción de proveedores locales.",
+  },
+  {
+    icon: TrendingDown,
+    iconBg: "bg-red-500/20",
+    iconColor: "text-red-400",
+    title: "Eficiencia en Costes",
+    text: "Reduce drásticamente los tiempos de producción y la carga operativa interna sin sacrificar la calidad profesional del entregable.",
+  },
+  {
+    icon: ShieldCheck,
+    iconBg: "bg-violet-500/20",
+    iconColor: "text-violet-400",
+    title: "Control de Calidad",
+    text: "Cada pieza de audio pasa por un filtro experto que certifica el cumplimiento de tus estándares técnicos y terminológicos.",
+  },
+];
+
+const VocesIAPage = () => {
   const [activeSection, setActiveSection] = useState(sections[0].id);
 
   useEffect(() => {
@@ -117,7 +159,7 @@ const LocalizacionVideoPage = () => {
               transition={{ duration: 0.7 }}
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-extrabold leading-[1.05] uppercase tracking-tight text-foreground mb-8"
             >
-              Localización de vídeo para empresas
+              Voces IA con supervisión experta
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -125,10 +167,10 @@ const LocalizacionVideoPage = () => {
               transition={{ duration: 0.6, delay: 0.15 }}
               className="text-lg md:text-xl text-muted-foreground max-w-4xl mx-auto mb-10 leading-relaxed"
             >
-              La localización de vídeo permite a las compañías internacionales adaptar sus activos, desde formación
-              corporativa hasta comunicación interna, a cualquier idioma y región. Al combinar doblaje, subtítulos y
-              adaptación cultural con workflows asistidos por IA, las organizaciones logran una expansión eficiente,
-              manteniendo la calidad y el tono de voz original en cada mercado.
+              Escalamos tu producción de contenido sin perder calidad ni coherencia de marca. No somos un generador
+              automático: gestionamos todo el proceso, desde la revisión estratégica del guion hasta la masterización
+              final. El resultado es una locución profesional, eficiente y totalmente alineada con tu identidad
+              corporativa.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -171,7 +213,7 @@ const LocalizacionVideoPage = () => {
         </div>
       </section>
 
-      {/* Intro */}
+      {/* Section 2 – Intro */}
       <section className="py-20 lg:py-28 bg-secondary/50">
         <div className="container px-4 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-start max-w-6xl mx-auto">
@@ -182,7 +224,7 @@ const LocalizacionVideoPage = () => {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight">
-                LOCALIZACIÓN DE VÍDEO PARA <GradientText>FORMACIÓN y ELEARNING</GradientText>
+                Nosotros nos encargamos de que <GradientText>tu voz suene perfecta.</GradientText>
               </h2>
             </motion.div>
             <motion.div
@@ -192,17 +234,18 @@ const LocalizacionVideoPage = () => {
               transition={{ duration: 0.6, delay: 0.15 }}
             >
               <p className="text-lg text-muted-foreground leading-relaxed">
-                The Voice Clone optimiza el ciclo completo de localización: desde el doblaje de cursos de e-learning
-                hasta el subtitulado inteligente y la producción asistida por IA. Centraliza tus procesos para reducir
-                costes, garantizar la coherencia de marca y distribuir contenido multilingüe a gran escala para equipos
-                globales de alto rendimiento.
+                Olvídate de configurar parámetros. Muchas compañías confunden los generadores automáticos con un
+                servicio profesional. Mientras un software solo produce un archivo de audio, nuestro flujo híbrido
+                adapta, refina e integra cada voz dentro de tu estrategia global. En The Voice Clone unificamos
+                tecnología avanzada con edición humana para garantizar credibilidad, naturalidad y un ahorro operativo
+                real.
               </p>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* IA + Human Section – Full Width Split */}
+      {/* Section 3 – IA + Human Split */}
       <section className="py-20 lg:py-28 overflow-hidden">
         <div className="grid lg:grid-cols-2 gap-0">
           <motion.div
@@ -214,13 +257,14 @@ const LocalizacionVideoPage = () => {
           >
             <div className="max-w-2xl">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight text-foreground mb-8">
-                ¿Qué es la localización de vídeo y por qué es clave?
+                Velocidad IA con rigor humano. Máxima eficiencia en tus locuciones
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                La localización de vídeo va más allá de la traducción: adapta voces, subtítulos y elementos visuales
-                para conectar culturalmente con cada región. Mediante un modelo híbrido de{" "}
-                <strong>IA y revisión humana</strong>, garantiza una expansión global rápida sin sacrificar la identidad
-                de marca ni la precisión cultural.
+                Escala tu producción audiovisual con una solución que optimiza tiempos y presupuestos en vídeos
+                corporativos, explicaciones de producto y comunicación internacional. Nuestra tecnología de síntesis de
+                voz, validada por expertos, permite reducir drásticamente los costes de estudio en contenido para
+                e-learning y formación interna, garantizando una coherencia de marca absoluta sin inversión inicial en
+                infraestructura.
               </p>
               <div
                 className="h-[4px] w-full mb-10 rounded-full"
@@ -246,8 +290,8 @@ const LocalizacionVideoPage = () => {
             className="h-[400px] lg:h-[600px]"
           >
             <img
-              src={videoLocalization}
-              alt="Proceso de localización de vídeo con tecnología de inteligencia artificial y supervisión humana"
+              src={voiceoverImg}
+              alt="Producción profesional de voces con inteligencia artificial y supervisión humana"
               className="w-full h-full object-cover"
             />
           </motion.div>
@@ -256,52 +300,9 @@ const LocalizacionVideoPage = () => {
 
       {/* Feature Cards Grid */}
       <FeatureGridSection
-        heading="Tu estrategia de vídeo a la velocidad de tu negocio."
-        description="La localización tradicional ya no es suficiente para un mercado global en tiempo real. Hemos rediseñado el flujo de trabajo audiovisual combinando IA generativa con supervisión experta para que puedas adaptar, doblar y distribuir tus contenidos formativos en decenas de idiomas de forma simultánea, eliminando los cuellos de botella y maximizando el impacto de cada minuto producido."
-        cards={[
-          {
-            icon: Languages,
-            iconBg: "bg-blue-500/20",
-            iconColor: "text-blue-400",
-            title: "Elearning multilingüe",
-            text: "La localización permite que un solo curso sea efectivo en múltiples regiones. Combinamos la automatización para gestionar grandes volúmenes de contenido con la supervisión humana para garantizar el rigor pedagógico.",
-          },
-          {
-            icon: TrendingUp,
-            iconBg: "bg-purple-500/20",
-            iconColor: "text-purple-400",
-            title: "Casos de éxito",
-            text: "Las multinacionales líderes ya generan cientos de vídeos al mes con flujos asistidos por IA. Esto reduce hasta un 40% el tiempo de edición manual y asegura una visión de empresa coherente.",
-          },
-          {
-            icon: Zap,
-            iconBg: "bg-emerald-500/20",
-            iconColor: "text-emerald-400",
-            title: "Optimización de costes",
-            text: "Centralizar la producción y aplicar herramientas de IA permite eliminar redundancias operativas. El resultado es una reducción drástica del presupuesto por minuto de vídeo producido.",
-          },
-          {
-            icon: DollarSign,
-            iconBg: "bg-pink-500/20",
-            iconColor: "text-pink-400",
-            title: "Maximización del ROI",
-            text: "La clave del retorno de inversión reside en automatizar procesos base como el doblaje y evitar duplicidades entre departamentos. La revisión humana final certifica la calidad.",
-          },
-          {
-            icon: UserSquare2,
-            iconBg: "bg-rose-500/20",
-            iconColor: "text-rose-400",
-            title: "Avatares IA",
-            text: 'Los avatares son la solución ideal para mensajes recurrentes y formación continua. Permiten "grabar" en decenas de idiomas de forma instantánea, sin necesidad de sets de rodaje.',
-          },
-          {
-            icon: Settings2,
-            iconBg: "bg-violet-500/20",
-            iconColor: "text-violet-400",
-            title: "Implementación efectiva",
-            text: "Es vital identificar qué mensajes requieren un avatar y cuáles un presentador real. Adaptar la estética al mercado local garantiza la relevancia y el tono corporativo.",
-          },
-        ]}
+        heading="El ecosistema definitivo para tus voces IA"
+        description="Nuestro workflow asegura que la IA trabaje para tu marca, no al revés. Combinamos precisión técnica y tratamiento experto para ofrecer una solución de audio escalable."
+        cards={featureCards}
       />
 
       {/* Services – Editorial Two-Column Layout */}
@@ -312,7 +313,7 @@ const LocalizacionVideoPage = () => {
             <div className="hidden lg:block">
               <div className="sticky top-40 self-start">
                 <h2 className="text-4xl font-heading font-extrabold uppercase leading-tight text-foreground mb-12">
-                  ADAPTACIÓN GLOBAL DE VÍDEO: ESCALA CON IA
+                  Innovación tecnológica y talento humano
                 </h2>
                 <nav className="flex flex-col gap-6">
                   {sections.map((section) => (
@@ -369,7 +370,7 @@ const LocalizacionVideoPage = () => {
         </div>
       </section>
 
-      {/* Visibilidad */}
+      {/* CTA Section */}
       <section className="py-20 lg:py-28 bg-secondary/50">
         <div className="container px-4 lg:px-8 max-w-4xl mx-auto text-center">
           <motion.div
@@ -379,12 +380,13 @@ const LocalizacionVideoPage = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight mb-8">
-              Localización de vídeo asistida por IA con <GradientText>supervisión humana</GradientText>
+              The Voice Clone: Donde la IA se convierte en <GradientText>locución profesional.</GradientText>
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-              El equilibrio perfecto para escalar: la tecnología aporta la velocidad para globalizar contenidos,
-              mientras que el experto humano asegura la coherencia de marca y la relevancia cultural necesaria para que
-              el mensaje impacte de verdad.
+              Gestionar voces internamente implica curvas de aprendizaje y costes técnicos. Al confiar en nuestro
+              servicio gestionado, accedes a tecnología de vanguardia y flujos estructurados con costes predecibles.
+              Transformamos la producción de audio en una ventaja competitiva: escalarás tu comunicación rápidamente,
+              reducirás la complejidad operativa y obtendrás siempre un resultado profesional certificado.
             </p>
           </motion.div>
         </div>
@@ -438,4 +440,4 @@ const LocalizacionVideoPage = () => {
   );
 };
 
-export default LocalizacionVideoPage;
+export default VocesIAPage;

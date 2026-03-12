@@ -1,5 +1,6 @@
 import { Youtube, Linkedin } from "lucide-react";
-import logo from "@/assets/logo_transparente.png";
+import logoSrc from "@/assets/logo_transparente.png";
+const logo = typeof logoSrc === 'string' ? logoSrc : (logoSrc as { src: string }).src;
 
 const Footer = () => (
   <footer className="py-12 border-t border-border">

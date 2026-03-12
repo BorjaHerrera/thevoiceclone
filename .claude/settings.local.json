@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(git -C /Users/macbook/Desktop/thevoiceclone push -u origin main)",
+      "Bash(npm install:*)"
     ]
   }
 }

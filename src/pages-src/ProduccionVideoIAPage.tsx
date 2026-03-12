@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { ChevronsDown, Globe, Zap, Video, Timer, ShieldCheck, Cpu } from "lucide-react";
+import { ChevronsDown, Layout, Layers, Workflow, UserSquare2, ShieldCheck, RefreshCw } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import GradientText from "@/components/GradientText";
 import Navbar from "@/components/Navbar";
@@ -8,86 +8,105 @@ import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import FeatureGridSection from "@/components/FeatureGridSection";
 import VideoPortfolio from "@/components/VideoPortfolio";
-import humanAiCollaboration from "@/assets/human-ai-collaboration.jpg";
+import videoProduccionIASrc from "@/assets/video-produccion-ia.jpg";
+const videoProduccionIA = typeof videoProduccionIASrc === "string" ? videoProduccionIASrc : (videoProduccionIASrc as { src: string }).src;
 
-const sections = [
+const featureCards = [
   {
-    id: "localizacion",
-    title: "Localización de vídeo para empresas globales",
-    navLabel: "Localización de vídeo para empresas globales",
-    intro:
-      "Adaptamos tu contenido audiovisual a cualquier mercado internacional con un enfoque híbrido que combina inteligencia artificial y supervisión humana experta. Subtítulos, doblaje profesional y adaptación cultural completa para que tu mensaje conecte con cada audiencia como si fuera local.",
-    subsections: [
-      {
-        heading: "Impacto local con precisión global",
-        text: "Cada mercado tiene sus propios códigos culturales, matices lingüísticos y expectativas de calidad. Nuestro equipo de revisores nativos, apoyado por herramientas de IA de última generación, garantiza que cada vídeo localizado mantenga la intención original y resuene con la audiencia de destino. Ya sea para onboarding internacional, cursos e-learning o vídeos corporativos multilingües, el resultado es siempre un contenido que se siente auténtico.",
-      },
-      {
-        heading: "Expansión internacional sin multiplicar costes",
-        text: "La automatización inteligente de transcripción, traducción y sincronización reduce drásticamente los tiempos de entrega y los costes operativos. Esto te permite escalar tu presencia audiovisual a decenas de idiomas de forma simultánea sin comprometer la calidad ni la coherencia de marca en ningún mercado.",
-      },
-    ],
+    icon: Layout,
+    iconBg: "bg-blue-100",
+    iconColor: "text-blue-600",
+    title: "Formatos de Alto Impacto",
+    text: "Optimizamos vídeos explicativos, testimoniales y anuncios digitales adaptados por IA según el canal y público objetivo.",
   },
   {
-    id: "produccion",
-    title: "Producción de vídeo escalable y corporativa",
-    navLabel: "Producción de vídeo escalable y corporativa",
-    intro:
-      "Producción audiovisual asistida por IA que reduce costes y tiempos automatizando tareas repetitivas, con validación experta de marca en cada entrega. Desde marketing multilingüe hasta comunicación interna y formación corporativa.",
-    subsections: [
-      {
-        heading: "Contenido que escala al ritmo de tu negocio",
-        text: "Las empresas globales necesitan producir contenido audiovisual a un ritmo que los métodos tradicionales no pueden seguir. Nuestra integración de IA en los flujos de producción permite generar, editar y adaptar vídeos con una velocidad y eficiencia sin precedentes, optimizando el time-to-market en cada campaña global.",
-      },
-      {
-        heading: "El estándar de oro en consistencia audiovisual",
-        text: "Cada entrega cumple con los más altos estándares de calidad gracias a plantillas estandarizadas, flujos de revisión automatizados y supervisión humana en los puntos críticos. El resultado es una producción audiovisual uniforme y profesional que refuerza tu identidad de marca en cualquier formato y canal.",
-      },
-    ],
+    icon: Layers,
+    iconBg: "bg-purple-100",
+    iconColor: "text-purple-600",
+    title: "Escalabilidad Corporativa",
+    text: "Aceleramos la producción automatizando vídeos explicativos y versionados para redes sociales sin empezar de cero.",
   },
   {
-    id: "contenido-ia",
-    title: "Contenido multilingüe y generación con IA",
-    navLabel: "Contenido multilingüe y generación con IA",
+    icon: Workflow,
+    iconBg: "bg-green-100",
+    iconColor: "text-green-600",
+    title: "Workflows Híbridos",
+    text: "Combinamos automatización con criterio creativo humano para reutilizar plantillas narrativas con máxima calidad visual.",
+  },
+  {
+    icon: UserSquare2,
+    iconBg: "bg-orange-100",
+    iconColor: "text-orange-600",
+    title: "Avatares Profesionales",
+    text: "Ideal para mensajes recurrentes y contenido multilingüe, manteniendo una presencia visual constante y profesional.",
+  },
+  {
+    icon: ShieldCheck,
+    iconBg: "bg-red-100",
+    iconColor: "text-red-600",
+    title: "Garantía de Calidad",
+    text: "Aplicamos una revisión humana final a cada vídeo generado por IA para asegurar que el tono y la estética cumplen tus estándares.",
+  },
+  {
+    icon: RefreshCw,
+    iconBg: "bg-violet-100",
+    iconColor: "text-violet-600",
+    title: "Actualización Rápida",
+    text: "Facilitamos la edición y actualización de contenidos en alta frecuencia, eliminando la dependencia de grabaciones físicas.",
+  },
+];
+
+const sections: { id: string; title: string; navLabel: string; intro: string; subsections: { heading: string; text: string }[] }[] = [
+  {
+    id: "videos-ia-revision",
+    title: "Vídeos generados con IA y revisión humana final",
+    navLabel: "Vídeos generados con IA y revisión humana final",
     intro:
-      "Genera contenido audiovisual multilingüe a gran escala con tecnología de IA avanzada y supervisión humana que garantiza calidad y coherencia de marca. Avatares IA para presentaciones corporativas, vídeos formativos escalables y mucho más.",
-    subsections: [
-      {
-        heading: "Innovación audiovisual: IA con criterio humano",
-        text: "La generación automática de contenido con IA acelera la producción, pero es la supervisión humana la que asegura que cada pieza mantenga el tono, la precisión y la coherencia que tu marca exige. Nuestro enfoque híbrido combina lo mejor de ambos mundos: velocidad digital con criterio experto.",
-      },
-      {
-        heading: "Control total, calidad global y rapidez digital",
-        text: "Workflows automatizados con puntos de control humano en cada fase eliminan errores y garantizan entregas impecables. Desde avatares inteligentes que presentan en cualquier idioma hasta vídeos formativos adaptados a cada mercado, tienes el control total sobre tu producción audiovisual global.",
-      },
-    ],
+      "Los formatos con mejor rendimiento suelen ser los vídeos explicativos cortos, testimoniales, anuncios digitales y presentaciones de marca. La IA permite crear versiones adaptadas de un mismo vídeo según el canal, el público o el idioma sin necesidad de empezar la producción desde cero cada vez.",
+    subsections: [],
+  },
+  {
+    id: "contenido-escalable",
+    title: "Generación de contenido corporativo escalable",
+    navLabel: "Generación de contenido corporativo escalable",
+    intro:
+      "La generación de vídeos con IA acelera la producción automatizando la creación de vídeos explicativos y el versionado para redes sociales. Gracias a workflows híbridos que combinan automatización y criterio creativo humano, es posible reutilizar plantillas narrativas y reducir tiempos manteniendo siempre la máxima calidad visual.",
+    subsections: [],
+  },
+  {
+    id: "avatares-ia-web",
+    title: "Avatares IA para web, social y anuncios",
+    navLabel: "Avatares IA para web, social y anuncios",
+    intro:
+      "La producción con avatares IA es ideal para mensajes corporativos recurrentes y contenido multilingüe. Permiten mantener una presencia visual constante, profesional y controlada en entornos de alta frecuencia de publicación, eliminando la dependencia de grabaciones físicas constantes y facilitando actualizaciones rápidas.",
+    subsections: [],
   },
 ];
 
 const faqs = [
   {
-    q: "¿Cómo funciona la localización de vídeo con IA?",
-    a: "Nuestro flujo combina herramientas de IA para transcripción, traducción y doblaje con revisión humana especializada. Esto permite escalar la producción sin sacrificar calidad ni coherencia cultural.",
+    q: "¿Qué tipo de vídeos se pueden producir con IA?",
+    a: "Se pueden producir vídeos explicativos, testimoniales, anuncios digitales, presentaciones de marca, contenido para redes sociales y vídeos formativos. La IA permite generar versiones adaptadas a cada canal y audiencia de forma automatizada.",
   },
   {
-    q: "¿Cómo garantizáis la coherencia de marca en múltiples idiomas?",
-    a: "Trabajamos con glosarios de marca, guías de estilo y revisores nativos especializados en cada mercado. La IA asegura consistencia terminológica y el equipo humano valida tono y contexto.",
+    q: "¿La IA sustituye al equipo creativo humano?",
+    a: "No. La IA acelera tareas repetitivas como edición base, versionado y adaptación de formatos, pero siempre con supervisión y criterio creativo humano para garantizar calidad, coherencia de marca y relevancia del mensaje.",
   },
   {
-    q: "¿Ofrecéis avatares o presentadores generados con IA?",
-    a: "Sí. Podemos generar presentadores virtuales con IA para vídeos corporativos, formativos o de marketing, adaptando su aspecto e idioma a cada mercado objetivo.",
+    q: "¿Cómo funcionan los avatares IA para vídeo corporativo?",
+    a: "Los avatares IA son presentadores virtuales que pueden comunicar mensajes en múltiples idiomas sin necesidad de grabaciones presenciales. Son ideales para comunicación interna recurrente, formación y contenido multilingüe a gran escala.",
   },
   {
-    q: "¿Qué volúmenes de producción podéis gestionar?",
-    a: "Nuestros flujos están diseñados para escalar desde proyectos puntuales hasta producción continua de +20 vídeos mensuales en múltiples idiomas de forma simultánea.",
+    q: "¿Cuánto se puede ahorrar con producción asistida por IA?",
+    a: "La centralización y automatización pueden reducir hasta un 60% los costes operativos y acortar significativamente los tiempos de entrega, permitiendo producir más contenido con menos recursos.",
   },
   {
-    q: "¿Cuánto tiempo tarda un proyecto de localización típico?",
-    a: "Depende del volumen y complejidad, pero gracias a la automatización con IA, los tiempos de entrega se reducen hasta un 60% respecto a procesos tradicionales.",
+    q: "¿Qué formatos y plataformas soportáis?",
+    a: "Producimos contenido optimizado para web corporativa, redes sociales (LinkedIn, Instagram, YouTube, TikTok), campañas de anuncios digitales y plataformas internas de comunicación y formación.",
   },
 ];
 
-const VideoEmpresasPage = () => {
+const ProduccionVideoIAPage = () => {
   const [activeSection, setActiveSection] = useState(sections[0].id);
 
   useEffect(() => {
@@ -111,9 +130,8 @@ const VideoEmpresasPage = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      {/* Hero – white bg + bottom glow */}
+      {/* Hero */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
-        {/* Bottom glow effect */}
         <div
           className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[140%] h-[55%] pointer-events-none"
           style={{
@@ -130,7 +148,7 @@ const VideoEmpresasPage = () => {
               transition={{ duration: 0.7 }}
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-extrabold leading-[1.05] uppercase tracking-tight text-foreground mb-8"
             >
-              Servicios de vídeo para empresas
+              Producción de vídeo con IA para empresas
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -138,10 +156,10 @@ const VideoEmpresasPage = () => {
               transition={{ duration: 0.6, delay: 0.15 }}
               className="text-lg md:text-xl text-muted-foreground max-w-4xl mx-auto mb-10 leading-relaxed"
             >
-              Con The Voice Clone descubrirás cómo nuestro hub centraliza la creación, localización y distribución de
-              contenido audiovisual global. Cada servicio —desde vídeos corporativos y de formación hasta cursos
-              e-learning, generación de vídeos con IA y contenido multilingüe— está diseñado para optimizar flujos de
-              trabajo, mantener coherencia de marca y acelerar la expansión internacional de tu contenido audiovisual.
+              Creamos vídeos corporativos y publicitarios con IA combinando tecnología avanzada y supervisión humana
+              para escalar contenido en web, redes sociales y anuncios sin perder calidad ni coherencia de marca. La
+              producción de vídeo es hoy uno de los activos más eficaces para generar confianza y aumentar la
+              conversión; al integrarse con IA, logramos mayor velocidad, más versiones y un menor coste operativo.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -195,7 +213,7 @@ const VideoEmpresasPage = () => {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight">
-                EL NUEVO PARADIGMA EN <GradientText>PRODUCCIÓN Y LOCALIZACIÓN DE VÍDEO.</GradientText>
+                PRODUCCIÓN DE VÍDEO CORPORATIVO PARA <GradientText>WEB, REDES SOCIALES Y ANUNCIOS</GradientText>
               </h2>
             </motion.div>
             <motion.div
@@ -205,11 +223,10 @@ const VideoEmpresasPage = () => {
               transition={{ duration: 0.6, delay: 0.15 }}
             >
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Transforma la manera en que tu empresa comunica globalmente. En The Voice Clone, combinamos tecnología
-                de IA avanzada con supervisión humana para producir y localizar contenido audiovisual a escala. Ya sea
-                mediante la adaptación de cursos de formación o la creación de vídeos con avatares inteligentes, nuestro
-                hub garantiza procesos eficientes, entregas rápidas y una presencia multilingüe sin fricciones ni fallos
-                de coherencia.
+                La producción audiovisual mejora la presencia digital en todos los puntos de contacto, desde la web
+                corporativa hasta las campañas publicitarias. Gracias a la IA, es posible comunicar mensajes complejos
+                de forma clara, adaptar contenidos a diferentes formatos sin rehacer la producción y mantener una
+                identidad visual homogénea incluso con un alto volumen de contenido.
               </p>
             </motion.div>
           </div>
@@ -219,7 +236,6 @@ const VideoEmpresasPage = () => {
       {/* IA + Human Section – Full Width Split */}
       <section className="py-20 lg:py-28 overflow-hidden">
         <div className="grid lg:grid-cols-2 gap-0">
-          {/* Text Column */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -229,14 +245,14 @@ const VideoEmpresasPage = () => {
           >
             <div className="max-w-2xl">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight text-foreground mb-8">
-                IA supervisada por editores de vídeo: La mejor estrategia audiovisual.
+                Producción audiovisual con IA: Tecnología de vanguardia con supervisión experta
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                Generamos contenido audiovisual eficiente, coherente y multilingüe. Al unir tecnología de avatares con
-                localización experta, permitimos que tu marca escale su comunicación corporativa y formativa con máxima
-                agilidad y un control de calidad riguroso en cada paso del proceso.
+                Nuestra producción combina narrativa visual estratégica, motion graphics y elementos generados con IA,
+                como avatares o escenas automatizadas. El objetivo es construir una presencia visual consistente y
+                reconocible en todos los mercados, traduciendo la identidad de marca en un lenguaje visual adaptable a
+                múltiples plataformas.
               </p>
-              {/* Gradient line */}
               <div
                 className="h-[4px] w-full mb-10 rounded-full"
                 style={{
@@ -253,7 +269,6 @@ const VideoEmpresasPage = () => {
             </div>
           </motion.div>
 
-          {/* Image Column – Edge to Edge Right */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -262,73 +277,30 @@ const VideoEmpresasPage = () => {
             className="h-[400px] lg:h-[600px]"
           >
             <img
-              src={humanAiCollaboration}
-              alt="Equipo profesional colaborando con tecnología de inteligencia artificial en producción audiovisual"
+              src={videoProduccionIA}
+              alt="Entorno de producción de vídeo profesional con tecnología de inteligencia artificial"
               className="w-full h-full object-cover"
             />
           </motion.div>
         </div>
       </section>
 
-      {/* Feature Cards Grid */}
+      {/* Feature Grid */}
       <FeatureGridSection
-        heading="El nuevo estándar en producción y localización de vídeo"
-        description="Adaptamos tu contenido audiovisual a cualquier mercado internacional con un enfoque híbrido que combina inteligencia artificial y supervisión humana experta. Subtítulos, doblaje profesional y adaptación cultural completa para que tu mensaje conecte con cada audiencia como si fuera local."
-        cards={[
-          {
-            icon: Globe,
-            iconBg: "bg-blue-500/20",
-            iconColor: "text-blue-400",
-            title: "Impacto Local",
-            text: "Garantizamos que cada vídeo localizado mantenga la intención original y resuene con la audiencia de destino mediante revisores nativos y tecnología de IA.",
-          },
-          {
-            icon: Zap,
-            iconBg: "bg-purple-500/20",
-            iconColor: "text-purple-400",
-            title: "Escalabilidad Real",
-            text: "La automatización inteligente permite escalar tu presencia audiovisual a decenas de idiomas de forma simultánea sin multiplicar los costes operativos.",
-          },
-          {
-            icon: Video,
-            iconBg: "bg-emerald-500/20",
-            iconColor: "text-emerald-400",
-            title: "Producción IA",
-            text: "Producción asistida por IA que reduce tiempos automatizando tareas repetitivas, con validación experta de marca en cada fase del proyecto.",
-          },
-          {
-            icon: Timer,
-            iconBg: "bg-orange-500/20",
-            iconColor: "text-orange-400",
-            title: "Velocidad Digital",
-            text: "Nuestra integración de IA permite generar y adaptar vídeos con una rapidez sin precedentes, optimizando el time-to-market en cada campaña.",
-          },
-          {
-            icon: ShieldCheck,
-            iconBg: "bg-red-500/20",
-            iconColor: "text-red-400",
-            title: "Garantía de Calidad",
-            text: "Producción uniforme y profesional mediante flujos de revisión automatizados y supervisión humana que refuerzan tu identidad de marca.",
-          },
-          {
-            icon: Cpu,
-            iconBg: "bg-violet-500/20",
-            iconColor: "text-violet-400",
-            title: "Precisión Humana",
-            text: "Combinamos la velocidad de la generación digital con el criterio experto humano para asegurar que cada pieza mantenga el tono y la precisión exigidos.",
-          },
-        ]}
+        heading="Arquitectura de vídeo inteligente para empresas"
+        description="La IA permite crear versiones adaptadas de un mismo vídeo según el canal, el público o el idioma sin necesidad de empezar la producción desde cero cada vez. Gracias a workflows híbridos, mantenemos siempre la máxima calidad visual y el criterio creativo."
+        cards={featureCards}
       />
 
       {/* Services – Editorial Two-Column Layout */}
       <section className="py-20 lg:py-28">
         <div className="px-6 md:px-12 lg:px-20 xl:px-32">
           <div className="grid lg:grid-cols-[1fr_2fr] gap-12 lg:gap-24">
-            {/* Left Column – Sticky Navigation (1/3) */}
+            {/* Left Column – Sticky Navigation */}
             <div className="hidden lg:block">
               <div className="sticky top-40 self-start">
                 <h2 className="text-4xl font-heading font-extrabold uppercase leading-tight text-foreground mb-12">
-                  NUESTRAS SOLUCIONES AUDIOVISUALES PARA EMPRESAS
+                  ESTRATEGIAS DE PRODUCCIÓN DE VÍDEO CON IA
                 </h2>
                 <nav className="flex flex-col gap-6">
                   {sections.map((section) => (
@@ -354,7 +326,7 @@ const VideoEmpresasPage = () => {
               </div>
             </div>
 
-            {/* Right Column – Narrative Content (2/3) */}
+            {/* Right Column – Narrative Content */}
             <div className="flex flex-col">
               {sections.map((section, i) => (
                 <motion.div
@@ -385,7 +357,7 @@ const VideoEmpresasPage = () => {
         </div>
       </section>
 
-      {/* Estrategias / Visibilidad */}
+      {/* Valor añadido */}
       <section className="py-20 lg:py-28 bg-secondary/50">
         <div className="container px-4 lg:px-8 max-w-4xl mx-auto text-center">
           <motion.div
@@ -395,12 +367,16 @@ const VideoEmpresasPage = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight mb-8">
-              Visibilidad absoluta en <GradientText>todo momento</GradientText>
+              Máxima eficiencia en tu estrategia audiovisual:{" "}
+              <GradientText>Escalabilidad, ahorro y calidad certificada</GradientText>
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-              Estrategias de escalabilidad: Workflows centralizados que permiten control total sobre cada versión de
-              vídeo. Plantillas y automatización de IA para mantener consistencia y rapidez. Monitoreo de KPIs de
-              producción e integración con localización para optimizar costes.
+              Centralizar tu producción con nosotros permite acceder a tecnología de IA avanzada sin inversión inicial,
+              liberando recursos internos mientras garantizas una coherencia de marca absoluta en todos tus canales. Al
+              combinar una gestión centralizada con soluciones de localización y contenido multilingüe, transformamos la
+              producción de vídeo en una ventaja competitiva real: escalarás tu comunicación rápidamente, reducirás
+              drásticamente los costes operativos y obtendrás siempre un resultado profesional adaptado a cualquier
+              mercado internacional.
             </p>
           </motion.div>
         </div>
@@ -446,6 +422,7 @@ const VideoEmpresasPage = () => {
         </div>
       </section>
 
+
       {/* Contact Form */}
       <ContactForm />
 
@@ -454,4 +431,4 @@ const VideoEmpresasPage = () => {
   );
 };
 
-export default VideoEmpresasPage;
+export default ProduccionVideoIAPage;

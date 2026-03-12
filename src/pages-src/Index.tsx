@@ -11,10 +11,14 @@ import FAQ from "@/components/FAQ";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 
-import videoImg from "@/assets/video-localization.jpg";
-import voiceoverImg from "@/assets/voiceover.jpg";
-import subtitlingImg from "@/assets/subtitling.jpg";
-import translationImg from "@/assets/translation.jpg";
+import videoImgSrc from "@/assets/video-localization.jpg";
+import voiceoverImgSrc from "@/assets/voiceover.jpg";
+import subtitlingImgSrc from "@/assets/subtitling.jpg";
+import translationImgSrc from "@/assets/translation.jpg";
+const videoImg = typeof videoImgSrc === "string" ? videoImgSrc : (videoImgSrc as { src: string }).src;
+const voiceoverImg = typeof voiceoverImgSrc === "string" ? voiceoverImgSrc : (voiceoverImgSrc as { src: string }).src;
+const subtitlingImg = typeof subtitlingImgSrc === "string" ? subtitlingImgSrc : (subtitlingImgSrc as { src: string }).src;
+const translationImg = typeof translationImgSrc === "string" ? translationImgSrc : (translationImgSrc as { src: string }).src;
 
 const Index = () => (
   <div className="min-h-screen bg-background">

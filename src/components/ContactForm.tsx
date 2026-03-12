@@ -2,15 +2,10 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
 
-// ─── Configura estas credenciales en EmailJS (emailjs.com) ───────────────────
-// 1. Crea una cuenta gratuita en https://www.emailjs.com
-// 2. Crea un servicio (p.ej. Gmail) y apunta el Service ID aquí
-// 3. Crea una plantilla de email y apunta el Template ID aquí
-// 4. Copia tu Public Key desde Account > API Keys
-const EMAILJS_SERVICE_ID  = "service_XXXXXXX";   // ← reemplaza
-const EMAILJS_TEMPLATE_ID = "template_XXXXXXX";  // ← reemplaza
-const EMAILJS_PUBLIC_KEY  = "XXXXXXXXXXXXXXX";    // ← reemplaza
-// ─────────────────────────────────────────────────────────────────────────────
+// Credenciales leídas desde .env (NEXT_PUBLIC_EMAILJS_*)
+const EMAILJS_SERVICE_ID  = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
+const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
+const EMAILJS_PUBLIC_KEY  = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
 
 const projectTypes = ["RECURRENTE / MENSUAL", "PROYECTO ÚNICO", "CONSULTORÍA"];
 const volumeOptions = ["1-5 VÍDEOS/MES", "5-20 VÍDEOS/MES", "+20 VÍDEOS/MES"];
@@ -62,7 +57,8 @@ const ContactForm = () => {
         EMAILJS_PUBLIC_KEY
       );
       setStatus("success");
-    } catch {
+    } catch (err) {
+      console.error("[EmailJS] Error al enviar:", err);
       setStatus("error");
     }
   };

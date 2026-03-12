@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { ChevronsDown, FileText, Settings2, Mic2, Globe2, TrendingDown, ShieldCheck } from "lucide-react";
+import { ChevronsDown, UserCheck, BookMarked, Globe2, Cpu, Sparkles, ClipboardCheck } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import GradientText from "@/components/GradientText";
 import Navbar from "@/components/Navbar";
@@ -8,115 +8,56 @@ import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import FeatureGridSection from "@/components/FeatureGridSection";
 import VideoPortfolio from "@/components/VideoPortfolio";
-import voiceoverImg from "@/assets/voiceover.jpg";
+import humanAiCollaborationSrc from "@/assets/human-ai-collaboration.jpg";
+const humanAiCollaboration = typeof humanAiCollaborationSrc === "string" ? humanAiCollaborationSrc : (humanAiCollaborationSrc as { src: string }).src;
 
-const sections = [
+const sections: { id: string; title: string; navLabel: string; intro: string; subsections: { heading: string; text: string }[] }[] = [
   {
-    id: "locucion-multilingue",
-    title: "Locución multilingüe con IA: escalabilidad con coherencia global",
-    navLabel: "Locución multilingüe con IA: escalabilidad y coherencia",
+    id: "traduccion-corporativa",
+    title: "Traducción profesional: escalabilidad con coherencia terminológica",
+    navLabel: "Traducción corporativa: precisión y consistencia.",
     intro:
-      "Centralizamos tu comunicación internacional eliminando la compleja coordinación de locutores en distintos países. Diseñamos procesos que aseguran una alineación rigurosa de tono y calidad técnica en todos los idiomas de forma simultánea.",
-    subsections: [
-      {
-        heading: "Adaptación cultural profunda",
-        text: "Mediante una adaptación cultural profunda, garantizamos precisión lingüística y una identidad de marca reconocible en cualquier mercado. El resultado es una comunicación global eficiente, profesional y libre de las fricciones logísticas de la producción tradicional.",
-      },
-    ],
+      "Centralizamos la gestión de tus activos textuales para evitar la dispersión de estilo. Diseñamos procesos que aseguran que tus informes, contratos y manuales reflejen fielmente la profesionalidad de tu empresa en cualquier parte del mundo.",
+    subsections: [],
   },
   {
     id: "metodologia-hibrida",
-    title: "Metodología híbrida: el equilibrio entre IA y locutores profesionales",
-    navLabel: "El equilibrio entre IA y locutores profesionales",
+    title: "Metodología híbrida: el equilibrio entre IA y lingüistas nativos",
+    navLabel: "El valor estratégico de la revisión humana asistida.",
     intro:
-      "Las voces generadas por IA son la solución óptima para contenidos de alto volumen y frecuencia, como e-learning y comunicación interna, donde la agilidad y el control de costes son prioritarios.",
-    subsections: [
-      {
-        heading: "Combinación estratégica",
-        text: "Para campañas de alto impacto o storytelling con carga emocional, integramos locutores profesionales. No sustituimos la voz humana; la combinamos estratégicamente con la tecnología para ofrecer expresividad y eficiencia en un mismo modelo de producción.",
-      },
-    ],
+      "La IA nos permite procesar grandes volúmenes de texto en tiempo récord, pero es la supervisión humana la que garantiza la fluidez y el rigor B2B. Este enfoque permite escalar tu comunicación internacional manteniendo un control de calidad certificado.",
+    subsections: [],
   },
   {
-    id: "externalizar-produccion",
-    title: "Externalizar la producción de voces con IA simplifica los procesos",
-    navLabel: "Externalizar la producción de voces simplifica procesos",
+    id: "externalizar-traduccion",
+    title: "Externalizar la traducción simplifica la expansión de tu negocio",
+    navLabel: "Externalizar la localización para simplificar tu operativa.",
     intro:
-      "Delegar la producción de voces permite a tu equipo centrarse en la estrategia mientras expertos gestionan la ejecución, edición y control de calidad. Este modelo garantiza entregas estructuradas y un resultado profesional bajo estándares certificados.",
-    subsections: [
-      {
-        heading: "Partner especializado",
-        text: "Al confiar en un partner especializado, accedes a tecnología de vanguardia y transformas costes variables en presupuestos predecibles. La producción de voz deja de ser una carga operativa para convertirse en un activo estratégico de comunicación para tu empresa.",
-      },
-    ],
+      "Delegar la localización en un partner especializado permite que tu equipo se concentre en el core business. Transformas una tarea operativa compleja en un activo estratégico, obteniendo costes predecibles y una presencia global homogénea.",
+    subsections: [],
   },
 ];
 
 const faqs = [
   {
-    q: "¿Cuál es la diferencia entre un generador de IA y nuestros servicio de voces IA?",
-    a: "El generador es automático; el servicio incluye supervisión, tratamiento humano y masterización.",
+    q: "¿Cuál es la diferencia entre un servicio profesional y un traductor automático?",
+    a: "Los servicios profesionales incluyen revisión humana, control de estilo y adaptación cultural. Los traductores automáticos carecen de supervisión, lo que genera errores de contexto e inconsistencias de marca.",
   },
   {
-    q: "¿Se editan las voces?",
-    a: "Sí, ajustamos ritmo y entonación para lograr un resultado natural y estrictamente corporativo.",
+    q: "¿Qué pasos de revisión humana realizáis tras usar IA?",
+    a: "Realizamos una revisión terminológica exhaustiva, control de tono corporativo, ajuste de estilo y una validación de coherencia final para asegurar que el texto sea natural y preciso.",
   },
   {
-    q: "¿Ofrecéis locutores humanos?",
-    a: "Sí, los integramos cuando el proyecto requiere una carga emocional o storytelling de alto impacto.",
+    q: "¿Cómo garantizáis que se mantenga mi identidad de marca?",
+    a: "Utilizamos glosarios corporativos personalizados y guías de estilo específicas para cada cliente. Esto, sumado a la revisión de expertos nativos, asegura que tu marca hable siempre con la misma voz.",
   },
   {
-    q: "¿Hacéis clonación de voz?",
-    a: "No, nuestro enfoque es exclusivamente B2B para comunicación, formación y marketing corporativo.",
+    q: "¿Qué tipo de contenidos podéis traducir?",
+    a: "Estamos especializados en contenido corporativo B2B: desde documentos técnicos y contratos hasta marketing digital, sitios web y presentaciones corporativas de alto nivel.",
   },
 ];
 
-const featureCards = [
-  {
-    icon: FileText,
-    iconBg: "bg-blue-500/20",
-    iconColor: "text-blue-400",
-    title: "Supervisión de Guion",
-    text: "Revisamos y optimizamos el ritmo y la claridad del texto antes de generar la voz para asegurar la coherencia corporativa.",
-  },
-  {
-    icon: Settings2,
-    iconBg: "bg-purple-500/20",
-    iconColor: "text-purple-400",
-    title: "Refinamiento de Voz",
-    text: "Ajustamos manualmente entonación, pausas y énfasis para eliminar la rigidez artificial y lograr una naturalidad absoluta.",
-  },
-  {
-    icon: Mic2,
-    iconBg: "bg-emerald-500/20",
-    iconColor: "text-emerald-400",
-    title: "Masterización Pro",
-    text: "Aplicamos ecualización y limpieza profesional para que el audio sea impecable en cualquier soporte: web, e-learning o anuncios.",
-  },
-  {
-    icon: Globe2,
-    iconBg: "bg-orange-500/20",
-    iconColor: "text-orange-400",
-    title: "Escala Multilingüe",
-    text: "Mantén una identidad sonora reconocible en todos los idiomas con una gestión centralizada que elimina la fricción de proveedores locales.",
-  },
-  {
-    icon: TrendingDown,
-    iconBg: "bg-red-500/20",
-    iconColor: "text-red-400",
-    title: "Eficiencia en Costes",
-    text: "Reduce drásticamente los tiempos de producción y la carga operativa interna sin sacrificar la calidad profesional del entregable.",
-  },
-  {
-    icon: ShieldCheck,
-    iconBg: "bg-violet-500/20",
-    iconColor: "text-violet-400",
-    title: "Control de Calidad",
-    text: "Cada pieza de audio pasa por un filtro experto que certifica el cumplimiento de tus estándares técnicos y terminológicos.",
-  },
-];
-
-const VocesIAPage = () => {
+const ServicioTraduccionPage = () => {
   const [activeSection, setActiveSection] = useState(sections[0].id);
 
   useEffect(() => {
@@ -158,7 +99,7 @@ const VocesIAPage = () => {
               transition={{ duration: 0.7 }}
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-extrabold leading-[1.05] uppercase tracking-tight text-foreground mb-8"
             >
-              Voces IA con supervisión experta
+              Traducción profesional con IA y rigor humano
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -166,10 +107,9 @@ const VocesIAPage = () => {
               transition={{ duration: 0.6, delay: 0.15 }}
               className="text-lg md:text-xl text-muted-foreground max-w-4xl mx-auto mb-10 leading-relaxed"
             >
-              Escalamos tu producción de contenido sin perder calidad ni coherencia de marca. No somos un generador
-              automático: gestionamos todo el proceso, desde la revisión estratégica del guion hasta la masterización
-              final. El resultado es una locución profesional, eficiente y totalmente alineada con tu identidad
-              corporativa.
+              Garantizamos que tu comunicación global mantenga la precisión y el impacto original en cada mercado. No
+              dependemos de motores automáticos sin control: combinamos tecnología de IA asistida con la revisión de
+              expertos nativos para asegurar una terminología uniforme y una adaptación cultural impecable.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -212,7 +152,7 @@ const VocesIAPage = () => {
         </div>
       </section>
 
-      {/* Section 2 – Intro */}
+      {/* Intro */}
       <section className="py-20 lg:py-28 bg-secondary/50">
         <div className="container px-4 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-start max-w-6xl mx-auto">
@@ -223,7 +163,7 @@ const VocesIAPage = () => {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight">
-                Nosotros nos encargamos de que <GradientText>tu voz suene perfecta.</GradientText>
+                Tu identidad de marca <GradientText>protegida en cada idioma.</GradientText>
               </h2>
             </motion.div>
             <motion.div
@@ -233,18 +173,17 @@ const VocesIAPage = () => {
               transition={{ duration: 0.6, delay: 0.15 }}
             >
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Olvídate de configurar parámetros. Muchas compañías confunden los generadores automáticos con un
-                servicio profesional. Mientras un software solo produce un archivo de audio, nuestro flujo híbrido
-                adapta, refina e integra cada voz dentro de tu estrategia global. En The Voice Clone unificamos
-                tecnología avanzada con edición humana para garantizar credibilidad, naturalidad y un ahorro operativo
-                real.
+                Muchas empresas arriesgan su reputación con traducciones automáticas que carecen de contexto y estilo
+                corporativo. En The Voice Clone, nuestro flujo híbrido unifica la velocidad tecnológica con el criterio
+                humano, logrando un 95% de consistencia terminológica y eliminando los errores comunes que las
+                herramientas genéricas suelen pasar por alto.
               </p>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Section 3 – IA + Human Split */}
+      {/* IA + Human Section – Full Width Split */}
       <section className="py-20 lg:py-28 overflow-hidden">
         <div className="grid lg:grid-cols-2 gap-0">
           <motion.div
@@ -256,14 +195,13 @@ const VocesIAPage = () => {
           >
             <div className="max-w-2xl">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight text-foreground mb-8">
-                Velocidad IA con rigor humano. Máxima eficiencia en tus locuciones
+                Traducción inteligente y revisión humana: Eficiencia máxima sin errores de IA.
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                Escala tu producción audiovisual con una solución que optimiza tiempos y presupuestos en vídeos
-                corporativos, explicaciones de producto y comunicación internacional. Nuestra tecnología de síntesis de
-                voz, validada por expertos, permite reducir drásticamente los costes de estudio en contenido para
-                e-learning y formación interna, garantizando una coherencia de marca absoluta sin inversión inicial en
-                infraestructura.
+                Optimiza tus presupuestos en <strong>documentación técnica, campañas de marketing y contenido web</strong>{" "}
+                internacional. Nuestra metodología reduce hasta un 40% los errores terminológicos mediante el uso de
+                glosarios centralizados y supervisión experta, permitiéndote escalar tu presencia global sin comprometer
+                la calidad ni los plazos de entrega.
               </p>
               <div
                 className="h-[4px] w-full mb-10 rounded-full"
@@ -289,8 +227,8 @@ const VocesIAPage = () => {
             className="h-[400px] lg:h-[600px]"
           >
             <img
-              src={voiceoverImg}
-              alt="Producción profesional de voces con inteligencia artificial y supervisión humana"
+              src={humanAiCollaboration}
+              alt="Traducción profesional con tecnología IA y revisión humana"
               className="w-full h-full object-cover"
             />
           </motion.div>
@@ -299,20 +237,62 @@ const VocesIAPage = () => {
 
       {/* Feature Cards Grid */}
       <FeatureGridSection
-        heading="El ecosistema definitivo para tus voces IA"
-        description="Nuestro workflow asegura que la IA trabaje para tu marca, no al revés. Combinamos precisión técnica y tratamiento experto para ofrecer una solución de audio escalable."
-        cards={featureCards}
+        heading="El ecosistema definitivo para tu traducción B2B"
+        description="Un flujo de trabajo diseñado para empresas que buscan rigor, escalabilidad y una identidad sonora y textual unificada."
+        cards={[
+          {
+            icon: UserCheck,
+            iconBg: "bg-blue-500/20",
+            iconColor: "text-blue-400",
+            title: "Revisión Experta",
+            text: "Cada proyecto es supervisado por lingüistas profesionales que aseguran el tono, el estilo y la intención comunicativa.",
+          },
+          {
+            icon: BookMarked,
+            iconBg: "bg-purple-500/20",
+            iconColor: "text-purple-400",
+            title: "Glosarios Centralizados",
+            text: "Implementamos bases terminológicas propias para garantizar que tu vocabulario técnico sea idéntico en todos los idiomas.",
+          },
+          {
+            icon: Globe2,
+            iconBg: "bg-emerald-500/20",
+            iconColor: "text-emerald-400",
+            title: "Adaptación Cultural",
+            text: "Más allá de traducir palabras, localizamos el mensaje para que conecte con el contexto social y comercial de cada mercado.",
+          },
+          {
+            icon: Cpu,
+            iconBg: "bg-orange-500/20",
+            iconColor: "text-orange-400",
+            title: "IA Asistida",
+            text: "Utilizamos tecnología de vanguardia para acelerar procesos repetitivos, optimizando tiempos de entrega y costes operativos.",
+          },
+          {
+            icon: Sparkles,
+            iconBg: "bg-red-500/20",
+            iconColor: "text-red-400",
+            title: "Marketing y Estilo",
+            text: "Adaptamos el \"copy\" publicitario para que mantenga su fuerza comercial y emocional en cualquier lengua.",
+          },
+          {
+            icon: ClipboardCheck,
+            iconBg: "bg-violet-500/20",
+            iconColor: "text-violet-400",
+            title: "Control de Calidad",
+            text: "Aplicamos estándares rigurosos de validación final para certificar que cada entregable es apto para su publicación global.",
+          },
+        ]}
       />
 
       {/* Services – Editorial Two-Column Layout */}
       <section className="py-20 lg:py-28">
         <div className="px-6 md:px-12 lg:px-20 xl:px-32">
           <div className="grid lg:grid-cols-[1fr_2fr] gap-12 lg:gap-24">
-            {/* Left Column – Sticky Navigation */}
             <div className="hidden lg:block">
               <div className="sticky top-40 self-start">
                 <h2 className="text-4xl font-heading font-extrabold uppercase leading-tight text-foreground mb-12">
-                  Innovación tecnológica y talento humano
+                  Un modelo de traducción que protege y potencia tu marca
                 </h2>
                 <nav className="flex flex-col gap-6">
                   {sections.map((section) => (
@@ -338,7 +318,6 @@ const VocesIAPage = () => {
               </div>
             </div>
 
-            {/* Right Column – Narrative Content */}
             <div className="flex flex-col">
               {sections.map((section, i) => (
                 <motion.div
@@ -354,7 +333,7 @@ const VocesIAPage = () => {
                     {section.title}
                   </h2>
                   <p className="text-lg text-foreground/70 leading-relaxed mb-12 max-w-3xl">{section.intro}</p>
-                  {section.subsections.map((sub, j) => (
+                  {section.subsections.map((sub: { heading: string; text: string }, j: number) => (
                     <div key={j} className="mb-10 last:mb-0">
                       <h3 className="text-3xl md:text-4xl font-heading font-extrabold uppercase text-foreground mt-8 mb-4">
                         {sub.heading}
@@ -369,7 +348,7 @@ const VocesIAPage = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Estrategias / Visibilidad */}
       <section className="py-20 lg:py-28 bg-secondary/50">
         <div className="container px-4 lg:px-8 max-w-4xl mx-auto text-center">
           <motion.div
@@ -379,13 +358,13 @@ const VocesIAPage = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight mb-8">
-              The Voice Clone: Donde la IA se convierte en <GradientText>locución profesional.</GradientText>
+              Donde la traducción se convierte en un <GradientText>activo de confianza.</GradientText>
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-              Gestionar voces internamente implica curvas de aprendizaje y costes técnicos. Al confiar en nuestro
-              servicio gestionado, accedes a tecnología de vanguardia y flujos estructurados con costes predecibles.
-              Transformamos la producción de audio en una ventaja competitiva: escalarás tu comunicación rápidamente,
-              reducirás la complejidad operativa y obtendrás siempre un resultado profesional certificado.
+              La gestión interna de traducciones suele derivar en inconsistencias que dañan la imagen de marca. Al confiar
+              en nuestro servicio gestionado, accedes a una infraestructura de traducción profesional que garantiza
+              coherencia, rapidez y ahorro operativo. Escalamos tu comunicación rápidamente para que tu mensaje llegue a
+              cualquier mercado con la máxima fiabilidad.
             </p>
           </motion.div>
         </div>
@@ -439,4 +418,4 @@ const VocesIAPage = () => {
   );
 };
 
-export default VocesIAPage;
+export default ServicioTraduccionPage;

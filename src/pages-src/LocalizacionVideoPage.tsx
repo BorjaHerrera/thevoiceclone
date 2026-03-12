@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { ChevronsDown, UserCheck, BookMarked, Globe2, Cpu, Sparkles, ClipboardCheck } from "lucide-react";
+import { ChevronsDown, Languages, TrendingUp, Zap, DollarSign, UserSquare2, Settings2 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import GradientText from "@/components/GradientText";
 import Navbar from "@/components/Navbar";
@@ -8,55 +8,75 @@ import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import FeatureGridSection from "@/components/FeatureGridSection";
 import VideoPortfolio from "@/components/VideoPortfolio";
-import humanAiCollaboration from "@/assets/human-ai-collaboration.jpg";
+import videoLocalizationSrc from "@/assets/video-localization.jpg";
+const videoLocalization = typeof videoLocalizationSrc === "string" ? videoLocalizationSrc : (videoLocalizationSrc as { src: string }).src;
 
 const sections = [
   {
-    id: "traduccion-corporativa",
-    title: "Traducción profesional: escalabilidad con coherencia terminológica",
-    navLabel: "Traducción corporativa: precisión y consistencia.",
+    id: "formacion-elearning",
+    title: "Soluciones de vídeo para formación y e-learning multilingüe",
+    navLabel: "Soluciones de vídeo para formación y e-learning multilingüe",
     intro:
-      "Centralizamos la gestión de tus activos textuales para evitar la dispersión de estilo. Diseñamos procesos que aseguran que tus informes, contratos y manuales reflejen fielmente la profesionalidad de tu empresa en cualquier parte del mundo.",
-    subsections: [],
+      "La localización permite que un solo curso de formación sea accesible y efectivo en múltiples regiones simultáneamente. La automatización se encarga del volumen, mientras que la supervisión humana garantiza que el aprendizaje sea pedagógicamente correcto.",
+    subsections: [
+      {
+        heading: "Casos de éxito y aplicaciones prácticas en el sector",
+        text: "Hoy en día, las multinacionales más avanzadas generan cientos de vídeos formativos al mes asegurando una coherencia total en cada mercado. Gracias a la implementación de flujos asistidos por IA, estas empresas logran reducir hasta un 40% el tiempo dedicado a la edición manual. Esta gestión centralizada permite que, independientemente del país, todos los equipos reciban la misma visión de empresa mediante una integración perfecta de doblaje y subtítulos multilingües.",
+      },
+    ],
   },
   {
-    id: "metodologia-hibrida",
-    title: "Metodología híbrida: el equilibrio entre IA y lingüistas nativos",
-    navLabel: "El valor estratégico de la revisión humana asistida.",
+    id: "optimizacion-costes",
+    title: "Optimización de costes en la producción de vídeo",
+    navLabel: "Optimización de costes en la producción de vídeo",
     intro:
-      "La IA nos permite procesar grandes volúmenes de texto en tiempo récord, pero es la supervisión humana la que garantiza la fluidez y el rigor B2B. Este enfoque permite escalar tu comunicación internacional manteniendo un control de calidad certificado.",
-    subsections: [],
+      "Centralizar la producción y usar herramientas de IA permite eliminar redundancias y reducir drásticamente el presupuesto por minuto de vídeo producido, sin sacrificar la excelencia.",
+    subsections: [
+      {
+        heading: "Estrategias para maximizar el retorno de inversión",
+        text: "Para lograr una optimización real, es fundamental automatizar procesos base como el doblaje y el subtitulado, permitiendo entregas mucho más ágiles. Al establecer un centro de producción centralizado, las compañías evitan la duplicidad de gastos entre departamentos y países. La clave del éxito reside en combinar estas herramientas tecnológicas con una revisión humana que certifique que el contenido final mantiene el estándar de calidad y el tono de marca deseado.",
+      },
+    ],
   },
   {
-    id: "externalizar-traduccion",
-    title: "Externalizar la traducción simplifica la expansión de tu negocio",
-    navLabel: "Externalizar la localización para simplificar tu operativa.",
+    id: "avatares-ia",
+    title: "Avatares IA: El futuro de la comunicación interna",
+    navLabel: "Avatares IA: El futuro de la comunicación interna",
     intro:
-      "Delegar la localización en un partner especializado permite que tu equipo se concentre en el core business. Transformas una tarea operativa compleja en un activo estratégico, obteniendo costes predecibles y una presencia global homogénea.",
-    subsections: [],
+      'Los avatares de IA son la solución ideal para mensajes recurrentes y formación continua, permitiendo "grabar" en decenas de idiomas sin necesidad de cámaras ni sets de rodaje físicos.',
+    subsections: [
+      {
+        heading: "Claves para una implementación corporativa efectiva",
+        text: "La adopción de esta tecnología requiere identificar con precisión qué mensajes se benefician de un avatar y cuáles requieren un presentador real para mantener la cercanía. Es vital adaptar la estética y el lenguaje de estos personajes según el mercado de destino para asegurar la relevancia local. Además, una supervisión humana constante garantiza que cada intervención del avatar cumpla estrictamente con los protocolos de seguridad y el tono de voz corporativo.",
+      },
+    ],
   },
 ];
 
 const faqs = [
   {
-    q: "¿Cuál es la diferencia entre un servicio profesional y un traductor automático?",
-    a: "Los servicios profesionales incluyen revisión humana, control de estilo y adaptación cultural. Los traductores automáticos carecen de supervisión, lo que genera errores de contexto e inconsistencias de marca.",
+    q: "¿Qué son los avatares IA y cómo se usan en comunicación corporativa?",
+    a: "Los avatares IA son presentadores virtuales generados por inteligencia artificial que pueden comunicar mensajes en múltiples idiomas sin necesidad de grabaciones presenciales. Se utilizan para formación interna, comunicados corporativos y contenido recurrente, reduciendo costes y tiempos de producción.",
   },
   {
-    q: "¿Qué pasos de revisión humana realizáis tras usar IA?",
-    a: "Realizamos una revisión terminológica exhaustiva, control de tono corporativo, ajuste de estilo y una validación de coherencia final para asegurar que el texto sea natural y preciso.",
+    q: "¿Es necesario el doblaje en la formación corporativa multilingüe?",
+    a: "Sí. El doblaje profesional mejora significativamente la retención y comprensión del contenido formativo, ya que los empleados procesan mejor la información en su idioma nativo. Nuestro enfoque híbrido de IA y revisión humana garantiza un doblaje natural y preciso a escala.",
   },
   {
-    q: "¿Cómo garantizáis que se mantenga mi identidad de marca?",
-    a: "Utilizamos glosarios corporativos personalizados y guías de estilo específicas para cada cliente. Esto, sumado a la revisión de expertos nativos, asegura que tu marca hable siempre con la misma voz.",
+    q: "¿Cómo se automatiza el e-learning con revisión humana?",
+    a: "La IA se encarga de las tareas repetitivas como transcripción, traducción inicial y sincronización de subtítulos, mientras que lingüistas y pedagogos revisan cada entrega para asegurar la precisión terminológica, la coherencia pedagógica y la adecuación cultural del contenido.",
   },
   {
-    q: "¿Qué tipo de contenidos podéis traducir?",
-    a: "Estamos especializados en contenido corporativo B2B: desde documentos técnicos y contratos hasta marketing digital, sitios web y presentaciones corporativas de alto nivel.",
+    q: "¿Cuántos idiomas se pueden gestionar simultáneamente?",
+    a: "Nuestros flujos de localización permiten gestionar decenas de idiomas en paralelo. La automatización con IA escala la producción, mientras que revisores nativos especializados validan cada versión lingüística.",
+  },
+  {
+    q: "¿Qué ventajas tiene centralizar la producción de vídeo?",
+    a: "Centralizar elimina la duplicidad de costes entre departamentos y países, asegura coherencia de marca global y reduce el time-to-market gracias a workflows estandarizados y automatizados.",
   },
 ];
 
-const ServicioTraduccionPage = () => {
+const LocalizacionVideoPage = () => {
   const [activeSection, setActiveSection] = useState(sections[0].id);
 
   useEffect(() => {
@@ -98,7 +118,7 @@ const ServicioTraduccionPage = () => {
               transition={{ duration: 0.7 }}
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-extrabold leading-[1.05] uppercase tracking-tight text-foreground mb-8"
             >
-              Traducción profesional con IA y rigor humano
+              Localización de vídeo para empresas
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -106,9 +126,10 @@ const ServicioTraduccionPage = () => {
               transition={{ duration: 0.6, delay: 0.15 }}
               className="text-lg md:text-xl text-muted-foreground max-w-4xl mx-auto mb-10 leading-relaxed"
             >
-              Garantizamos que tu comunicación global mantenga la precisión y el impacto original en cada mercado. No
-              dependemos de motores automáticos sin control: combinamos tecnología de IA asistida con la revisión de
-              expertos nativos para asegurar una terminología uniforme y una adaptación cultural impecable.
+              La localización de vídeo permite a las compañías internacionales adaptar sus activos, desde formación
+              corporativa hasta comunicación interna, a cualquier idioma y región. Al combinar doblaje, subtítulos y
+              adaptación cultural con workflows asistidos por IA, las organizaciones logran una expansión eficiente,
+              manteniendo la calidad y el tono de voz original en cada mercado.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -162,7 +183,7 @@ const ServicioTraduccionPage = () => {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight">
-                Tu identidad de marca <GradientText>protegida en cada idioma.</GradientText>
+                LOCALIZACIÓN DE VÍDEO PARA <GradientText>FORMACIÓN y ELEARNING</GradientText>
               </h2>
             </motion.div>
             <motion.div
@@ -172,10 +193,10 @@ const ServicioTraduccionPage = () => {
               transition={{ duration: 0.6, delay: 0.15 }}
             >
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Muchas empresas arriesgan su reputación con traducciones automáticas que carecen de contexto y estilo
-                corporativo. En The Voice Clone, nuestro flujo híbrido unifica la velocidad tecnológica con el criterio
-                humano, logrando un 95% de consistencia terminológica y eliminando los errores comunes que las
-                herramientas genéricas suelen pasar por alto.
+                The Voice Clone optimiza el ciclo completo de localización: desde el doblaje de cursos de e-learning
+                hasta el subtitulado inteligente y la producción asistida por IA. Centraliza tus procesos para reducir
+                costes, garantizar la coherencia de marca y distribuir contenido multilingüe a gran escala para equipos
+                globales de alto rendimiento.
               </p>
             </motion.div>
           </div>
@@ -194,13 +215,13 @@ const ServicioTraduccionPage = () => {
           >
             <div className="max-w-2xl">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight text-foreground mb-8">
-                Traducción inteligente y revisión humana: Eficiencia máxima sin errores de IA.
+                ¿Qué es la localización de vídeo y por qué es clave?
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                Optimiza tus presupuestos en <strong>documentación técnica, campañas de marketing y contenido web</strong>{" "}
-                internacional. Nuestra metodología reduce hasta un 40% los errores terminológicos mediante el uso de
-                glosarios centralizados y supervisión experta, permitiéndote escalar tu presencia global sin comprometer
-                la calidad ni los plazos de entrega.
+                La localización de vídeo va más allá de la traducción: adapta voces, subtítulos y elementos visuales
+                para conectar culturalmente con cada región. Mediante un modelo híbrido de{" "}
+                <strong>IA y revisión humana</strong>, garantiza una expansión global rápida sin sacrificar la identidad
+                de marca ni la precisión cultural.
               </p>
               <div
                 className="h-[4px] w-full mb-10 rounded-full"
@@ -226,8 +247,8 @@ const ServicioTraduccionPage = () => {
             className="h-[400px] lg:h-[600px]"
           >
             <img
-              src={humanAiCollaboration}
-              alt="Traducción profesional con tecnología IA y revisión humana"
+              src={videoLocalization}
+              alt="Proceso de localización de vídeo con tecnología de inteligencia artificial y supervisión humana"
               className="w-full h-full object-cover"
             />
           </motion.div>
@@ -236,50 +257,50 @@ const ServicioTraduccionPage = () => {
 
       {/* Feature Cards Grid */}
       <FeatureGridSection
-        heading="El ecosistema definitivo para tu traducción B2B"
-        description="Un flujo de trabajo diseñado para empresas que buscan rigor, escalabilidad y una identidad sonora y textual unificada."
+        heading="Tu estrategia de vídeo a la velocidad de tu negocio."
+        description="La localización tradicional ya no es suficiente para un mercado global en tiempo real. Hemos rediseñado el flujo de trabajo audiovisual combinando IA generativa con supervisión experta para que puedas adaptar, doblar y distribuir tus contenidos formativos en decenas de idiomas de forma simultánea, eliminando los cuellos de botella y maximizando el impacto de cada minuto producido."
         cards={[
           {
-            icon: UserCheck,
+            icon: Languages,
             iconBg: "bg-blue-500/20",
             iconColor: "text-blue-400",
-            title: "Revisión Experta",
-            text: "Cada proyecto es supervisado por lingüistas profesionales que aseguran el tono, el estilo y la intención comunicativa.",
+            title: "Elearning multilingüe",
+            text: "La localización permite que un solo curso sea efectivo en múltiples regiones. Combinamos la automatización para gestionar grandes volúmenes de contenido con la supervisión humana para garantizar el rigor pedagógico.",
           },
           {
-            icon: BookMarked,
+            icon: TrendingUp,
             iconBg: "bg-purple-500/20",
             iconColor: "text-purple-400",
-            title: "Glosarios Centralizados",
-            text: "Implementamos bases terminológicas propias para garantizar que tu vocabulario técnico sea idéntico en todos los idiomas.",
+            title: "Casos de éxito",
+            text: "Las multinacionales líderes ya generan cientos de vídeos al mes con flujos asistidos por IA. Esto reduce hasta un 40% el tiempo de edición manual y asegura una visión de empresa coherente.",
           },
           {
-            icon: Globe2,
+            icon: Zap,
             iconBg: "bg-emerald-500/20",
             iconColor: "text-emerald-400",
-            title: "Adaptación Cultural",
-            text: "Más allá de traducir palabras, localizamos el mensaje para que conecte con el contexto social y comercial de cada mercado.",
+            title: "Optimización de costes",
+            text: "Centralizar la producción y aplicar herramientas de IA permite eliminar redundancias operativas. El resultado es una reducción drástica del presupuesto por minuto de vídeo producido.",
           },
           {
-            icon: Cpu,
-            iconBg: "bg-orange-500/20",
-            iconColor: "text-orange-400",
-            title: "IA Asistida",
-            text: "Utilizamos tecnología de vanguardia para acelerar procesos repetitivos, optimizando tiempos de entrega y costes operativos.",
+            icon: DollarSign,
+            iconBg: "bg-pink-500/20",
+            iconColor: "text-pink-400",
+            title: "Maximización del ROI",
+            text: "La clave del retorno de inversión reside en automatizar procesos base como el doblaje y evitar duplicidades entre departamentos. La revisión humana final certifica la calidad.",
           },
           {
-            icon: Sparkles,
-            iconBg: "bg-red-500/20",
-            iconColor: "text-red-400",
-            title: "Marketing y Estilo",
-            text: "Adaptamos el \"copy\" publicitario para que mantenga su fuerza comercial y emocional en cualquier lengua.",
+            icon: UserSquare2,
+            iconBg: "bg-rose-500/20",
+            iconColor: "text-rose-400",
+            title: "Avatares IA",
+            text: 'Los avatares son la solución ideal para mensajes recurrentes y formación continua. Permiten "grabar" en decenas de idiomas de forma instantánea, sin necesidad de sets de rodaje.',
           },
           {
-            icon: ClipboardCheck,
+            icon: Settings2,
             iconBg: "bg-violet-500/20",
             iconColor: "text-violet-400",
-            title: "Control de Calidad",
-            text: "Aplicamos estándares rigurosos de validación final para certificar que cada entregable es apto para su publicación global.",
+            title: "Implementación efectiva",
+            text: "Es vital identificar qué mensajes requieren un avatar y cuáles un presentador real. Adaptar la estética al mercado local garantiza la relevancia y el tono corporativo.",
           },
         ]}
       />
@@ -288,10 +309,11 @@ const ServicioTraduccionPage = () => {
       <section className="py-20 lg:py-28">
         <div className="px-6 md:px-12 lg:px-20 xl:px-32">
           <div className="grid lg:grid-cols-[1fr_2fr] gap-12 lg:gap-24">
+            {/* Left Column – Sticky Navigation */}
             <div className="hidden lg:block">
               <div className="sticky top-40 self-start">
                 <h2 className="text-4xl font-heading font-extrabold uppercase leading-tight text-foreground mb-12">
-                  Un modelo de traducción que protege y potencia tu marca
+                  ADAPTACIÓN GLOBAL DE VÍDEO: ESCALA CON IA
                 </h2>
                 <nav className="flex flex-col gap-6">
                   {sections.map((section) => (
@@ -317,6 +339,7 @@ const ServicioTraduccionPage = () => {
               </div>
             </div>
 
+            {/* Right Column – Narrative Content */}
             <div className="flex flex-col">
               {sections.map((section, i) => (
                 <motion.div
@@ -332,7 +355,7 @@ const ServicioTraduccionPage = () => {
                     {section.title}
                   </h2>
                   <p className="text-lg text-foreground/70 leading-relaxed mb-12 max-w-3xl">{section.intro}</p>
-                  {section.subsections.map((sub: { heading: string; text: string }, j: number) => (
+                  {section.subsections.map((sub, j) => (
                     <div key={j} className="mb-10 last:mb-0">
                       <h3 className="text-3xl md:text-4xl font-heading font-extrabold uppercase text-foreground mt-8 mb-4">
                         {sub.heading}
@@ -347,7 +370,7 @@ const ServicioTraduccionPage = () => {
         </div>
       </section>
 
-      {/* Estrategias / Visibilidad */}
+      {/* Visibilidad */}
       <section className="py-20 lg:py-28 bg-secondary/50">
         <div className="container px-4 lg:px-8 max-w-4xl mx-auto text-center">
           <motion.div
@@ -357,13 +380,12 @@ const ServicioTraduccionPage = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight mb-8">
-              Donde la traducción se convierte en un <GradientText>activo de confianza.</GradientText>
+              Localización de vídeo asistida por IA con <GradientText>supervisión humana</GradientText>
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-              La gestión interna de traducciones suele derivar en inconsistencias que dañan la imagen de marca. Al confiar
-              en nuestro servicio gestionado, accedes a una infraestructura de traducción profesional que garantiza
-              coherencia, rapidez y ahorro operativo. Escalamos tu comunicación rápidamente para que tu mensaje llegue a
-              cualquier mercado con la máxima fiabilidad.
+              El equilibrio perfecto para escalar: la tecnología aporta la velocidad para globalizar contenidos,
+              mientras que el experto humano asegura la coherencia de marca y la relevancia cultural necesaria para que
+              el mensaje impacte de verdad.
             </p>
           </motion.div>
         </div>
@@ -417,4 +439,4 @@ const ServicioTraduccionPage = () => {
   );
 };
 
-export default ServicioTraduccionPage;
+export default LocalizacionVideoPage;

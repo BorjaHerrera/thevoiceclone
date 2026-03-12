@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { ChevronsDown, Globe, Timer, Type, Users, Languages, ShieldCheck } from "lucide-react";
+import { ChevronsDown, Globe, Zap, Video, Timer, ShieldCheck, Cpu } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import GradientText from "@/components/GradientText";
 import Navbar from "@/components/Navbar";
@@ -8,55 +8,87 @@ import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import FeatureGridSection from "@/components/FeatureGridSection";
 import VideoPortfolio from "@/components/VideoPortfolio";
-import humanAiCollaboration from "@/assets/human-ai-collaboration.jpg";
+import humanAiCollaborationSrc from "@/assets/human-ai-collaboration.jpg";
+const humanAiCollaboration = typeof humanAiCollaborationSrc === "string" ? humanAiCollaborationSrc : (humanAiCollaborationSrc as { src: string }).src;
 
 const sections = [
   {
-    id: "subtitulado-multilingue",
-    title: "Subtitulado multilingüe: escalabilidad con coherencia global",
-    navLabel: "Subtitulado multilingüe: escalabilidad y rigor.",
+    id: "localizacion",
+    title: "Localización de vídeo para empresas globales",
+    navLabel: "Localización de vídeo para empresas globales",
     intro:
-      "Centralizamos la traducción y el subtitulado de tus vídeos eliminando la gestión dispersa de proveedores locales. Diseñamos procesos que aseguran la fidelidad del mensaje original y una calidad técnica homogénea en todos los idiomas de forma simultánea.",
-    subsections: [],
+      "Adaptamos tu contenido audiovisual a cualquier mercado internacional con un enfoque híbrido que combina inteligencia artificial y supervisión humana experta. Subtítulos, doblaje profesional y adaptación cultural completa para que tu mensaje conecte con cada audiencia como si fuera local.",
+    subsections: [
+      {
+        heading: "Impacto local con precisión global",
+        text: "Cada mercado tiene sus propios códigos culturales, matices lingüísticos y expectativas de calidad. Nuestro equipo de revisores nativos, apoyado por herramientas de IA de última generación, garantiza que cada vídeo localizado mantenga la intención original y resuene con la audiencia de destino. Ya sea para onboarding internacional, cursos e-learning o vídeos corporativos multilingües, el resultado es siempre un contenido que se siente auténtico.",
+      },
+      {
+        heading: "Expansión internacional sin multiplicar costes",
+        text: "La automatización inteligente de transcripción, traducción y sincronización reduce drásticamente los tiempos de entrega y los costes operativos. Esto te permite escalar tu presencia audiovisual a decenas de idiomas de forma simultánea sin comprometer la calidad ni la coherencia de marca en ningún mercado.",
+      },
+    ],
   },
   {
-    id: "metodologia-hibrida",
-    title: "Metodología híbrida: el equilibrio entre IA y revisión humana",
-    navLabel: "El equilibrio entre automatización y revisión experta.",
+    id: "produccion",
+    title: "Producción de vídeo escalable y corporativa",
+    navLabel: "Producción de vídeo escalable y corporativa",
     intro:
-      "La IA acelera la generación inicial de subtítulos en proyectos de alto volumen como e-learning corporativo. Sin embargo, aplicamos revisión humana estratégica para asegurar que la terminología técnica y el contexto cultural sean perfectos, logrando una eficiencia inalcanzable de forma manual.",
-    subsections: [],
+      "Producción audiovisual asistida por IA que reduce costes y tiempos automatizando tareas repetitivas, con validación experta de marca en cada entrega. Desde marketing multilingüe hasta comunicación interna y formación corporativa.",
+    subsections: [
+      {
+        heading: "Contenido que escala al ritmo de tu negocio",
+        text: "Las empresas globales necesitan producir contenido audiovisual a un ritmo que los métodos tradicionales no pueden seguir. Nuestra integración de IA en los flujos de producción permite generar, editar y adaptar vídeos con una velocidad y eficiencia sin precedentes, optimizando el time-to-market en cada campaña global.",
+      },
+      {
+        heading: "El estándar de oro en consistencia audiovisual",
+        text: "Cada entrega cumple con los más altos estándares de calidad gracias a plantillas estandarizadas, flujos de revisión automatizados y supervisión humana en los puntos críticos. El resultado es una producción audiovisual uniforme y profesional que refuerza tu identidad de marca en cualquier formato y canal.",
+      },
+    ],
   },
   {
-    id: "externalizar-subtitulado",
-    title: "Externalizar el subtitulado simplifica los procesos corporativos",
-    navLabel: "Externalizar el subtitulado simplifica tu expansión.",
+    id: "contenido-ia",
+    title: "Contenido multilingüe y generación con IA",
+    navLabel: "Contenido multilingüe y generación con IA",
     intro:
-      "Delegar la gestión de subtítulos permite que tu equipo se centre en la estrategia mientras nosotros garantizamos la precisión y los tiempos de entrega. Accedes a tecnología avanzada y transformas la complejidad logística en un flujo de trabajo predecible y profesional.",
-    subsections: [],
+      "Genera contenido audiovisual multilingüe a gran escala con tecnología de IA avanzada y supervisión humana que garantiza calidad y coherencia de marca. Avatares IA para presentaciones corporativas, vídeos formativos escalables y mucho más.",
+    subsections: [
+      {
+        heading: "Innovación audiovisual: IA con criterio humano",
+        text: "La generación automática de contenido con IA acelera la producción, pero es la supervisión humana la que asegura que cada pieza mantenga el tono, la precisión y la coherencia que tu marca exige. Nuestro enfoque híbrido combina lo mejor de ambos mundos: velocidad digital con criterio experto.",
+      },
+      {
+        heading: "Control total, calidad global y rapidez digital",
+        text: "Workflows automatizados con puntos de control humano en cada fase eliminan errores y garantizan entregas impecables. Desde avatares inteligentes que presentan en cualquier idioma hasta vídeos formativos adaptados a cada mercado, tienes el control total sobre tu producción audiovisual global.",
+      },
+    ],
   },
 ];
 
 const faqs = [
   {
-    q: "¿Cuál es la diferencia entre subtitulado automático y profesional?",
-    a: "El automático es generado por software sin supervisión, lo que conlleva errores de contexto y sincronización. El profesional incluye revisión humana, adaptación cultural y control de calidad lingüístico.",
+    q: "¿Cómo funciona la localización de vídeo con IA?",
+    a: "Nuestro flujo combina herramientas de IA para transcripción, traducción y doblaje con revisión humana especializada. Esto permite escalar la producción sin sacrificar calidad ni coherencia cultural.",
   },
   {
-    q: "¿Por qué es necesaria la revisión humana en los subtítulos?",
-    a: "La IA a menudo falla en detectar matices culturales, terminología técnica de empresa o desajustes temporales sutiles. Los expertos aseguran que el mensaje sea exacto y coherente con la marca.",
+    q: "¿Cómo garantizáis la coherencia de marca en múltiples idiomas?",
+    a: "Trabajamos con glosarios de marca, guías de estilo y revisores nativos especializados en cada mercado. La IA asegura consistencia terminológica y el equipo humano valida tono y contexto.",
   },
   {
-    q: "¿Cuándo es recomendable usar un workflow híbrido?",
-    a: "Es ideal para lanzamientos internacionales, formación global y proyectos con gran volumen de vídeo donde se requiere la velocidad de la IA pero la precisión certificada de un humano.",
+    q: "¿Ofrecéis avatares o presentadores generados con IA?",
+    a: "Sí. Podemos generar presentadores virtuales con IA para vídeos corporativos, formativos o de marketing, adaptando su aspecto e idioma a cada mercado objetivo.",
   },
   {
-    q: "¿Pueden adaptar los subtítulos a mi manual de marca?",
-    a: "Sí. Aseguramos que el estilo, la terminología y el tono sean consistentes con tu identidad corporativa en todos los mercados.",
+    q: "¿Qué volúmenes de producción podéis gestionar?",
+    a: "Nuestros flujos están diseñados para escalar desde proyectos puntuales hasta producción continua de +20 vídeos mensuales en múltiples idiomas de forma simultánea.",
+  },
+  {
+    q: "¿Cuánto tiempo tarda un proyecto de localización típico?",
+    a: "Depende del volumen y complejidad, pero gracias a la automatización con IA, los tiempos de entrega se reducen hasta un 60% respecto a procesos tradicionales.",
   },
 ];
 
-const SubtituladoProfesionalVideoPage = () => {
+const VideoEmpresasPage = () => {
   const [activeSection, setActiveSection] = useState(sections[0].id);
 
   useEffect(() => {
@@ -80,8 +112,9 @@ const SubtituladoProfesionalVideoPage = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      {/* Hero */}
+      {/* Hero – white bg + bottom glow */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
+        {/* Bottom glow effect */}
         <div
           className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[140%] h-[55%] pointer-events-none"
           style={{
@@ -98,7 +131,7 @@ const SubtituladoProfesionalVideoPage = () => {
               transition={{ duration: 0.7 }}
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-extrabold leading-[1.05] uppercase tracking-tight text-foreground mb-8"
             >
-              Subtitulado de vídeo con revisión humana
+              Servicios de vídeo para empresas
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -106,9 +139,10 @@ const SubtituladoProfesionalVideoPage = () => {
               transition={{ duration: 0.6, delay: 0.15 }}
               className="text-lg md:text-xl text-muted-foreground max-w-4xl mx-auto mb-10 leading-relaxed"
             >
-              Impulsa la accesibilidad y la internacionalización de tus vídeos corporativos. No utilizamos herramientas
-              automáticas sin control: gestionamos un proceso integral que combina precisión lingüística, adaptación
-              cultural y revisión experta para proteger la identidad de tu marca en cada mercado.
+              Con The Voice Clone descubrirás cómo nuestro hub centraliza la creación, localización y distribución de
+              contenido audiovisual global. Cada servicio —desde vídeos corporativos y de formación hasta cursos
+              e-learning, generación de vídeos con IA y contenido multilingüe— está diseñado para optimizar flujos de
+              trabajo, mantener coherencia de marca y acelerar la expansión internacional de tu contenido audiovisual.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -162,7 +196,7 @@ const SubtituladoProfesionalVideoPage = () => {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight">
-                Calidad profesional en cada línea: <GradientText>Olvídate de los errores de la automatización pura.</GradientText>
+                EL NUEVO PARADIGMA EN <GradientText>PRODUCCIÓN Y LOCALIZACIÓN DE VÍDEO.</GradientText>
               </h2>
             </motion.div>
             <motion.div
@@ -172,10 +206,11 @@ const SubtituladoProfesionalVideoPage = () => {
               transition={{ duration: 0.6, delay: 0.15 }}
             >
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Muchas empresas dependen de generadores automáticos que producen errores de sincronización y terminología.
-                En The Voice Clone, nuestro flujo híbrido asegura que el subtitulado no sea solo un proceso técnico, sino
-                una adaptación fiel que respeta el contexto cultural y los estándares internacionales de comunicación
-                corporativa.
+                Transforma la manera en que tu empresa comunica globalmente. En The Voice Clone, combinamos tecnología
+                de IA avanzada con supervisión humana para producir y localizar contenido audiovisual a escala. Ya sea
+                mediante la adaptación de cursos de formación o la creación de vídeos con avatares inteligentes, nuestro
+                hub garantiza procesos eficientes, entregas rápidas y una presencia multilingüe sin fricciones ni fallos
+                de coherencia.
               </p>
             </motion.div>
           </div>
@@ -185,6 +220,7 @@ const SubtituladoProfesionalVideoPage = () => {
       {/* IA + Human Section – Full Width Split */}
       <section className="py-20 lg:py-28 overflow-hidden">
         <div className="grid lg:grid-cols-2 gap-0">
+          {/* Text Column */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -194,14 +230,14 @@ const SubtituladoProfesionalVideoPage = () => {
           >
             <div className="max-w-2xl">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight text-foreground mb-8">
-                Precisión lingüística con rapidez IA. Máxima eficiencia en tu contenido global.
+                IA supervisada por editores de vídeo: La mejor estrategia audiovisual.
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                Escala tu comunicación audiovisual con una solución que optimiza tiempos y presupuestos en{" "}
-                <strong>vídeos corporativos, e-learning y campañas de marketing</strong>. Nuestra metodología permite
-                reducir drásticamente los costes de producción manteniendo una precisión milimétrica en los tiempos y el
-                lenguaje, sin necesidad de inversión inicial en infraestructura.
+                Generamos contenido audiovisual eficiente, coherente y multilingüe. Al unir tecnología de avatares con
+                localización experta, permitimos que tu marca escale su comunicación corporativa y formativa con máxima
+                agilidad y un control de calidad riguroso en cada paso del proceso.
               </p>
+              {/* Gradient line */}
               <div
                 className="h-[4px] w-full mb-10 rounded-full"
                 style={{
@@ -218,6 +254,7 @@ const SubtituladoProfesionalVideoPage = () => {
             </div>
           </motion.div>
 
+          {/* Image Column – Edge to Edge Right */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -227,7 +264,7 @@ const SubtituladoProfesionalVideoPage = () => {
           >
             <img
               src={humanAiCollaboration}
-              alt="Subtitulado profesional con tecnología IA y revisión humana"
+              alt="Equipo profesional colaborando con tecnología de inteligencia artificial en producción audiovisual"
               className="w-full h-full object-cover"
             />
           </motion.div>
@@ -236,50 +273,50 @@ const SubtituladoProfesionalVideoPage = () => {
 
       {/* Feature Cards Grid */}
       <FeatureGridSection
-        heading="El ecosistema definitivo para tu subtitulado profesional"
-        description="Combinamos eficiencia tecnológica y revisión humana para ofrecer subtítulos impecables en cualquier formato."
+        heading="El nuevo estándar en producción y localización de vídeo"
+        description="Adaptamos tu contenido audiovisual a cualquier mercado internacional con un enfoque híbrido que combina inteligencia artificial y supervisión humana experta. Subtítulos, doblaje profesional y adaptación cultural completa para que tu mensaje conecte con cada audiencia como si fuera local."
         cards={[
           {
-            icon: Timer,
+            icon: Globe,
             iconBg: "bg-blue-500/20",
             iconColor: "text-blue-400",
-            title: "Precisión en Tiempos",
-            text: "Ajustamos la sincronización de cada frase para garantizar una legibilidad perfecta y una experiencia de usuario fluida.",
+            title: "Impacto Local",
+            text: "Garantizamos que cada vídeo localizado mantenga la intención original y resuene con la audiencia de destino mediante revisores nativos y tecnología de IA.",
           },
           {
-            icon: Globe,
+            icon: Zap,
             iconBg: "bg-purple-500/20",
             iconColor: "text-purple-400",
-            title: "Adaptación Cultural",
-            text: "Expertos nativos adaptan el mensaje para asegurar que los matices y modismos locales sean culturalmente relevantes.",
+            title: "Escalabilidad Real",
+            text: "La automatización inteligente permite escalar tu presencia audiovisual a decenas de idiomas de forma simultánea sin multiplicar los costes operativos.",
           },
           {
-            icon: Type,
+            icon: Video,
             iconBg: "bg-emerald-500/20",
             iconColor: "text-emerald-400",
-            title: "Coherencia de Estilo",
-            text: "Mantenemos el tono y la terminología corporativa en todos los idiomas, protegiendo la integridad de tu marca.",
+            title: "Producción IA",
+            text: "Producción asistida por IA que reduce tiempos automatizando tareas repetitivas, con validación experta de marca en cada fase del proyecto.",
           },
           {
-            icon: Users,
+            icon: Timer,
             iconBg: "bg-orange-500/20",
             iconColor: "text-orange-400",
-            title: "Accesibilidad Global",
-            text: "Cumplimos con los estándares internacionales para asegurar que tu contenido sea inclusivo y accesible para todas las audiencias.",
-          },
-          {
-            icon: Languages,
-            iconBg: "bg-red-500/20",
-            iconColor: "text-red-400",
-            title: "Escalabilidad Multilingüe",
-            text: "Gestión centralizada que permite traducir y subtitular grandes volúmenes de vídeo en tiempo récord.",
+            title: "Velocidad Digital",
+            text: "Nuestra integración de IA permite generar y adaptar vídeos con una rapidez sin precedentes, optimizando el time-to-market en cada campaña.",
           },
           {
             icon: ShieldCheck,
+            iconBg: "bg-red-500/20",
+            iconColor: "text-red-400",
+            title: "Garantía de Calidad",
+            text: "Producción uniforme y profesional mediante flujos de revisión automatizados y supervisión humana que refuerzan tu identidad de marca.",
+          },
+          {
+            icon: Cpu,
             iconBg: "bg-violet-500/20",
             iconColor: "text-violet-400",
-            title: "Control de Calidad",
-            text: "Revisión humana final para detectar y corregir errores de contexto o gramática que la IA suele omitir.",
+            title: "Precisión Humana",
+            text: "Combinamos la velocidad de la generación digital con el criterio experto humano para asegurar que cada pieza mantenga el tono y la precisión exigidos.",
           },
         ]}
       />
@@ -288,10 +325,11 @@ const SubtituladoProfesionalVideoPage = () => {
       <section className="py-20 lg:py-28">
         <div className="px-6 md:px-12 lg:px-20 xl:px-32">
           <div className="grid lg:grid-cols-[1fr_2fr] gap-12 lg:gap-24">
+            {/* Left Column – Sticky Navigation (1/3) */}
             <div className="hidden lg:block">
               <div className="sticky top-40 self-start">
                 <h2 className="text-4xl font-heading font-extrabold uppercase leading-tight text-foreground mb-12">
-                  Un modelo que une tecnología de vanguardia y rigor lingüístico.
+                  NUESTRAS SOLUCIONES AUDIOVISUALES PARA EMPRESAS
                 </h2>
                 <nav className="flex flex-col gap-6">
                   {sections.map((section) => (
@@ -317,6 +355,7 @@ const SubtituladoProfesionalVideoPage = () => {
               </div>
             </div>
 
+            {/* Right Column – Narrative Content (2/3) */}
             <div className="flex flex-col">
               {sections.map((section, i) => (
                 <motion.div
@@ -357,13 +396,12 @@ const SubtituladoProfesionalVideoPage = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight mb-8">
-              The Voice Clone: Donde el subtitulado se convierte en una <GradientText>ventaja estratégica.</GradientText>
+              Visibilidad absoluta en <GradientText>todo momento</GradientText>
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-              Producir subtítulos internamente implica errores técnicos y costes ocultos. Al confiar en nuestro servicio
-              gestionado, obtienes activos de vídeo listos para su publicación global con costes optimizados.
-              Transformamos el subtitulado en una herramienta de internacionalización potente, eliminando la fricción
-              operativa y asegurando resultados profesionales certificados.
+              Estrategias de escalabilidad: Workflows centralizados que permiten control total sobre cada versión de
+              vídeo. Plantillas y automatización de IA para mantener consistencia y rapidez. Monitoreo de KPIs de
+              producción e integración con localización para optimizar costes.
             </p>
           </motion.div>
         </div>
@@ -417,4 +455,4 @@ const SubtituladoProfesionalVideoPage = () => {
   );
 };
 
-export default SubtituladoProfesionalVideoPage;
+export default VideoEmpresasPage;

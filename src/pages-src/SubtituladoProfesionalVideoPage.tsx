@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { ChevronsDown, Languages, Video, Workflow, Mic, Subtitles, FileText } from "lucide-react";
+import { ChevronsDown, Globe, Timer, Type, Users, Languages, ShieldCheck } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import GradientText from "@/components/GradientText";
 import Navbar from "@/components/Navbar";
@@ -8,134 +8,56 @@ import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import FeatureGridSection from "@/components/FeatureGridSection";
 import VideoPortfolio from "@/components/VideoPortfolio";
-import type { FeatureCard } from "@/components/FeatureGridSection";
-import localizacionAudiovisual from "@/assets/localizacion-audiovisual.jpg";
+import humanAiCollaborationSrc from "@/assets/human-ai-collaboration.jpg";
+const humanAiCollaboration = typeof humanAiCollaborationSrc === "string" ? humanAiCollaborationSrc : (humanAiCollaborationSrc as { src: string }).src;
 
-const featureCards: FeatureCard[] = [
+const sections: { id: string; title: string; navLabel: string; intro: string; subsections: { heading: string; text: string }[] }[] = [
   {
-    icon: Languages,
-    iconBg: "bg-blue-100",
-    iconColor: "text-blue-600",
-    title: "Localización de Vídeo",
-    text: "Procesos híbridos con IA y revisión humana que aceleran la distribución internacional manteniendo tono, terminología y consistencia cultural.",
-  },
-  {
-    icon: Video,
-    iconBg: "bg-purple-100",
-    iconColor: "text-purple-600",
-    title: "Producción de Vídeo",
-    text: "Producción asistida por IA que reduce costes y tiempos automatizando tareas repetitivas con validación experta de marca.",
-  },
-  {
-    icon: Workflow,
-    iconBg: "bg-green-100",
-    iconColor: "text-green-600",
-    title: "Localización End-to-End",
-    text: "Flujo único que unifica vídeo, locución, subtítulos y traducción evitando errores y asegurando consistencia con un único partner estratégico.",
-  },
-  {
-    icon: Mic,
-    iconBg: "bg-orange-100",
-    iconColor: "text-orange-600",
-    title: "Locución",
-    text: "Tecnologías de voz avanzadas con validación humana que llevan tu narrativa a cualquier idioma manteniendo una identidad de marca coherente y natural.",
-  },
-  {
-    icon: Subtitles,
-    iconBg: "bg-red-100",
-    iconColor: "text-red-600",
-    title: "Subtitulado",
-    text: "Legibilidad y sincronización perfecta mediante IA y revisores expertos que garantizan la adaptación cultural y mejoran el engagement global.",
-  },
-  {
-    icon: FileText,
-    iconBg: "bg-violet-100",
-    iconColor: "text-violet-600",
-    title: "Traducción",
-    text: "Modelo de IA supervisada que adapta guiones y textos con rigor terminológico y estilo corporativo, optimizando velocidad y coste a gran escala.",
-  },
-];
-
-const sections = [
-  {
-    id: "localizacion-hibrida",
-    title: "El valor de la localización híbrida: La potencia de la IA con garantía humana",
-    navLabel: "El valor de la localización híbrida",
+    id: "subtitulado-multilingue",
+    title: "Subtitulado multilingüe: escalabilidad con coherencia global",
+    navLabel: "Subtitulado multilingüe: escalabilidad y rigor.",
     intro:
-      "Nuestro servicio combina la eficiencia tecnológica con la revisión experta para ofrecer una solución integral a empresas multinacionales. Este modelo híbrido garantiza que la localización no sea solo un proceso técnico, sino una adaptación cultural precisa que protege la identidad de la marca en cada mercado.",
-    subsections: [
-      {
-        heading: "Workflow híbrido: La unión de velocidad y precisión",
-        text: "Al integrar inteligencia artificial con supervisión humana, logramos una escalabilidad sin precedentes en la traducción y sincronización de contenidos. Mientras la tecnología acelera los tiempos de entrega, nuestros especialistas aseguran que el tono, la terminología corporativa y las referencias locales sean exactos y culturalmente relevantes.",
-      },
-      {
-        heading: "Ventajas estratégicas frente a la automatización pura",
-        text: "A diferencia de las herramientas automáticas sin control, nuestro servicio gestionado minimiza las revisiones constantes y garantiza un control total sobre la reputación de la marca. Esta combinación optimiza la seguridad del proceso y asegura una experiencia de usuario superior, superando cualquier solución que carezca de supervisión profesional.",
-      },
-      {
-        heading: "Eficiencia operativa y optimización de presupuestos",
-        text: "Centralizar la localización con un partner único elimina los costes ocultos derivados de gestionar múltiples proveedores y evita errores técnicos recurrentes. Este enfoque permite a las empresas escalar su contenido globalmente utilizando menos recursos internos y reduciendo drásticamente la fricción en la cadena de producción.",
-      },
-    ],
+      "Centralizamos la traducción y el subtitulado de tus vídeos eliminando la gestión dispersa de proveedores locales. Diseñamos procesos que aseguran la fidelidad del mensaje original y una calidad técnica homogénea en todos los idiomas de forma simultánea.",
+    subsections: [],
   },
   {
-    id: "aplicaciones-end-to-end",
-    title: "Aplicaciones estratégicas de localización end-to-end",
-    navLabel: "Aplicaciones estratégicas de localización end-to-end",
-    intro: "Para que una estrategia multimedia sea efectiva a escala internacional, debe cubrir todos los puntos de contacto del usuario de forma impecable. Nuestras soluciones integrales cubren todo el ciclo de vida del contenido, desde el análisis del guion original hasta la entrega del activo final listo para su publicación, garantizando que no existan brechas de calidad en las áreas más críticas de la compañía.",
-    subsections: [
-      {
-        heading: "Excelencia en formación corporativa y e-learning",
-        text: "La localización para el sector educativo garantiza que la experiencia pedagógica sea consistente y clara en cualquier idioma. Gracias al modelo híbrido, es posible adaptar el tono educativo y los ejemplos locales en programas de formación global sin perder la calidad técnica ni el impacto formativo original.",
-      },
-      {
-        heading: "Impacto en comunicación y marketing internacional",
-        text: "Para las campañas de marketing y la comunicación interna, aseguramos que la coherencia de marca sea absoluta en todos los canales. La gestión centralizada permite un control de calidad riguroso que adapta el mensaje a la cultura local mientras se mantiene la visión global de la compañía.",
-      },
-    ],
+    id: "metodologia-hibrida",
+    title: "Metodología híbrida: el equilibrio entre IA y revisión humana",
+    navLabel: "El equilibrio entre automatización y revisión experta.",
+    intro:
+      "La IA acelera la generación inicial de subtítulos en proyectos de alto volumen como e-learning corporativo. Sin embargo, aplicamos revisión humana estratégica para asegurar que la terminología técnica y el contexto cultural sean perfectos, logrando una eficiencia inalcanzable de forma manual.",
+    subsections: [],
   },
   {
-    id: "calidad-certificada",
-    title: "Localización profesional certificada: Calidad humana y eficiencia IA",
-    navLabel: "Localización profesional certificada: Calidad humana y eficiencia IA",
-    intro: "La confianza es el pilar de cualquier proyecto de externalización audiovisual. Entendemos que la precisión técnica y la seguridad de la información son prioridades innegociables para las grandes organizaciones; por ello, nuestro flujo de trabajo está diseñado para ofrecer garantías sólidas en cuanto a retorno de inversión, fidelidad terminológica y protección de activos digitales.",
-    subsections: [
-      {
-        heading: "Rentabilidad e inversión inteligente",
-        text: "Aunque un servicio gestionado requiere una inversión inicial clara, su valor reside en evitar las costosas retraducciones y errores de coherencia. El uso de modelos híbridos optimiza el retorno de inversión al acelerar los lanzamientos y eliminar gastos imprevistos.",
-      },
-      {
-        heading: "Calidad y consistencia profesional",
-        text: "La precisión del contenido está garantizada por un flujo donde la IA potencia la ejecución y los humanos certifican el cumplimiento de los estándares corporativos. Este equilibrio asegura que el resultado final sea impecable tanto en forma como en fondo terminológico.",
-      },
-      {
-        heading: "Máxima seguridad y confidencialidad del contenido",
-        text: "Entendemos la sensibilidad de la información corporativa, por lo que aplicamos protocolos estrictos y normativas internacionales de protección de datos. Los flujos de trabajo gestionados aseguran que cada archivo se trate con total confidencialidad, ofreciendo un entorno seguro para los activos de la empresa.",
-      },
-    ],
+    id: "externalizar-subtitulado",
+    title: "Externalizar el subtitulado simplifica los procesos corporativos",
+    navLabel: "Externalizar el subtitulado simplifica tu expansión.",
+    intro:
+      "Delegar la gestión de subtítulos permite que tu equipo se centre en la estrategia mientras nosotros garantizamos la precisión y los tiempos de entrega. Accedes a tecnología avanzada y transformas la complejidad logística en un flujo de trabajo predecible y profesional.",
+    subsections: [],
   },
 ];
 
 const faqs = [
   {
-    q: "¿Se puede escalar a más de 10 idiomas?",
-    a: "Sí, un workflow gestionado permite expandir contenido corporativo a múltiples idiomas manteniendo coherencia y calidad absoluta.",
+    q: "¿Cuál es la diferencia entre subtitulado automático y profesional?",
+    a: "El automático es generado por software sin supervisión, lo que conlleva errores de contexto y sincronización. El profesional incluye revisión humana, adaptación cultural y control de calidad lingüístico.",
   },
   {
-    q: "¿Pueden integrarse subtítulos con voice-over?",
-    a: "Sí, la integración es parte nativa del workflow, garantizando sincronización perfecta y estándares de accesibilidad.",
+    q: "¿Por qué es necesaria la revisión humana en los subtítulos?",
+    a: "La IA a menudo falla en detectar matices culturales, terminología técnica de empresa o desajustes temporales sutiles. Los expertos aseguran que el mensaje sea exacto y coherente con la marca.",
   },
   {
-    q: "¿Las voces IA son naturales?",
-    a: "Con nuestra supervisión humana constante, las voces IA mantienen el tono, la entonación y la coherencia de marca necesaria para un entorno profesional.",
+    q: "¿Cuándo es recomendable usar un workflow híbrido?",
+    a: "Es ideal para lanzamientos internacionales, formación global y proyectos con gran volumen de vídeo donde se requiere la velocidad de la IA pero la precisión certificada de un humano.",
   },
   {
-    q: "¿Qué ventajas tiene frente a herramientas automáticas?",
-    a: "A diferencia de las apps automáticas, ofrecemos control integral, QA lingüístico y una adaptación cultural profesional que protege tu reputación de marca.",
+    q: "¿Pueden adaptar los subtítulos a mi manual de marca?",
+    a: "Sí. Aseguramos que el estilo, la terminología y el tono sean consistentes con tu identidad corporativa en todos los mercados.",
   },
 ];
 
-const LocalizacionAudiovisualPage = () => {
+const SubtituladoProfesionalVideoPage = () => {
   const [activeSection, setActiveSection] = useState(sections[0].id);
 
   useEffect(() => {
@@ -177,7 +99,7 @@ const LocalizacionAudiovisualPage = () => {
               transition={{ duration: 0.7 }}
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-extrabold leading-[1.05] uppercase tracking-tight text-foreground mb-8"
             >
-              Servicio de localización audiovisual
+              Subtitulado de vídeo con revisión humana
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -185,10 +107,9 @@ const LocalizacionAudiovisualPage = () => {
               transition={{ duration: 0.6, delay: 0.15 }}
               className="text-lg md:text-xl text-muted-foreground max-w-4xl mx-auto mb-10 leading-relaxed"
             >
-              Integramos traducción, subtitulado, doblaje y adaptación cultural bajo un único workflow gestionado.
-              Permitimos a las empresas globales adaptar su contenido multimedia a múltiples idiomas sin perder
-              coherencia de marca ni eficiencia operativa, combinando IA asistida y revisión humana para garantizar
-              calidad y rapidez en proyectos críticos.
+              Impulsa la accesibilidad y la internacionalización de tus vídeos corporativos. No utilizamos herramientas
+              automáticas sin control: gestionamos un proceso integral que combina precisión lingüística, adaptación
+              cultural y revisión experta para proteger la identidad de tu marca en cada mercado.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -242,7 +163,7 @@ const LocalizacionAudiovisualPage = () => {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight">
-                GESTIÓN INTEGRAL DE <GradientText>LOCALIZACIÓN AUDIOVISUAL Y E-LEARNING</GradientText>
+                Calidad profesional en cada línea: <GradientText>Olvídate de los errores de la automatización pura.</GradientText>
               </h2>
             </motion.div>
             <motion.div
@@ -252,10 +173,10 @@ const LocalizacionAudiovisualPage = () => {
               transition={{ duration: 0.6, delay: 0.15 }}
             >
               <p className="text-lg text-muted-foreground leading-relaxed">
-                En The Voice Clone gestionamos de manera integral la localización de vídeos corporativos, formación
-                e-learning, voice-over y subtítulos, evitando errores de consistencia y reduciendo costes. Implementamos
-                beneficios de workflows end-to-end y soluciones híbridas IA + humanos para transformar tu comunicación
-                global y generar resultados B2B calificados con total claridad y control profesional.
+                Muchas empresas dependen de generadores automáticos que producen errores de sincronización y terminología.
+                En The Voice Clone, nuestro flujo híbrido asegura que el subtitulado no sea solo un proceso técnico, sino
+                una adaptación fiel que respeta el contexto cultural y los estándares internacionales de comunicación
+                corporativa.
               </p>
             </motion.div>
           </div>
@@ -274,15 +195,13 @@ const LocalizacionAudiovisualPage = () => {
           >
             <div className="max-w-2xl">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight text-foreground mb-8">
-                Soluciones Multimedia con IA: Vídeo, audio, subtitulado y traducción
+                Precisión lingüística con rapidez IA. Máxima eficiencia en tu contenido global.
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                La localización multimedia inteligente transforma la comunicación corporativa al integrar vídeo, audio y
-                texto en un flujo de trabajo adaptado culturalmente que supera con creces la traducción tradicional.
-                Mediante el uso de soluciones híbridas que combinan la agilidad de la IA con la precisión de la
-                supervisión humana, las empresas logran una consistencia de marca impecable en marketing y formación,
-                garantizando subtítulos y doblajes profesionales que cumplen con estándares de accesibilidad y mantienen
-                la máxima coherencia tonal en cada mercado.
+                Escala tu comunicación audiovisual con una solución que optimiza tiempos y presupuestos en{" "}
+                <strong>vídeos corporativos, e-learning y campañas de marketing</strong>. Nuestra metodología permite
+                reducir drásticamente los costes de producción manteniendo una precisión milimétrica en los tiempos y el
+                lenguaje, sin necesidad de inversión inicial en infraestructura.
               </p>
               <div
                 className="h-[4px] w-full mb-10 rounded-full"
@@ -308,30 +227,72 @@ const LocalizacionAudiovisualPage = () => {
             className="h-[400px] lg:h-[600px]"
           >
             <img
-              src={localizacionAudiovisual}
-              alt="Interfaz profesional de localización audiovisual con edición de subtítulos y traducción digital"
+              src={humanAiCollaboration}
+              alt="Subtitulado profesional con tecnología IA y revisión humana"
               className="w-full h-full object-cover"
             />
           </motion.div>
         </div>
       </section>
 
-      {/* Feature Grid */}
+      {/* Feature Cards Grid */}
       <FeatureGridSection
-        heading="El ecosistema definitivo para tu contenido audiovisual"
-        description="Ofrecemos un despliegue completo de capacidades audiovisuales diseñadas para eliminar las barreras de idioma y coste. Nuestra metodología híbrida garantiza que cada pieza, desde el guion hasta la entrega final, mantenga la excelencia técnica y cultural que tu marca requiere."
-        cards={featureCards}
+        heading="El ecosistema definitivo para tu subtitulado profesional"
+        description="Combinamos eficiencia tecnológica y revisión humana para ofrecer subtítulos impecables en cualquier formato."
+        cards={[
+          {
+            icon: Timer,
+            iconBg: "bg-blue-500/20",
+            iconColor: "text-blue-400",
+            title: "Precisión en Tiempos",
+            text: "Ajustamos la sincronización de cada frase para garantizar una legibilidad perfecta y una experiencia de usuario fluida.",
+          },
+          {
+            icon: Globe,
+            iconBg: "bg-purple-500/20",
+            iconColor: "text-purple-400",
+            title: "Adaptación Cultural",
+            text: "Expertos nativos adaptan el mensaje para asegurar que los matices y modismos locales sean culturalmente relevantes.",
+          },
+          {
+            icon: Type,
+            iconBg: "bg-emerald-500/20",
+            iconColor: "text-emerald-400",
+            title: "Coherencia de Estilo",
+            text: "Mantenemos el tono y la terminología corporativa en todos los idiomas, protegiendo la integridad de tu marca.",
+          },
+          {
+            icon: Users,
+            iconBg: "bg-orange-500/20",
+            iconColor: "text-orange-400",
+            title: "Accesibilidad Global",
+            text: "Cumplimos con los estándares internacionales para asegurar que tu contenido sea inclusivo y accesible para todas las audiencias.",
+          },
+          {
+            icon: Languages,
+            iconBg: "bg-red-500/20",
+            iconColor: "text-red-400",
+            title: "Escalabilidad Multilingüe",
+            text: "Gestión centralizada que permite traducir y subtitular grandes volúmenes de vídeo en tiempo récord.",
+          },
+          {
+            icon: ShieldCheck,
+            iconBg: "bg-violet-500/20",
+            iconColor: "text-violet-400",
+            title: "Control de Calidad",
+            text: "Revisión humana final para detectar y corregir errores de contexto o gramática que la IA suele omitir.",
+          },
+        ]}
       />
 
       {/* Services – Editorial Two-Column Layout */}
       <section className="py-20 lg:py-28">
         <div className="px-6 md:px-12 lg:px-20 xl:px-32">
           <div className="grid lg:grid-cols-[1fr_2fr] gap-12 lg:gap-24">
-            {/* Left Column – Sticky Navigation */}
             <div className="hidden lg:block">
               <div className="sticky top-40 self-start">
                 <h2 className="text-4xl font-heading font-extrabold uppercase leading-tight text-foreground mb-12">
-                  ESTRATEGIAS DE LOCALIZACIÓN PROFESIONAL
+                  Un modelo que une tecnología de vanguardia y rigor lingüístico.
                 </h2>
                 <nav className="flex flex-col gap-6">
                   {sections.map((section) => (
@@ -357,7 +318,6 @@ const LocalizacionAudiovisualPage = () => {
               </div>
             </div>
 
-            {/* Right Column – Narrative Content */}
             <div className="flex flex-col">
               {sections.map((section, i) => (
                 <motion.div
@@ -372,9 +332,7 @@ const LocalizacionAudiovisualPage = () => {
                   <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold uppercase leading-tight tracking-tight text-foreground mb-8">
                     {section.title}
                   </h2>
-                  {section.intro && (
-                    <p className="text-lg text-foreground/70 leading-relaxed mb-12 max-w-3xl">{section.intro}</p>
-                  )}
+                  <p className="text-lg text-foreground/70 leading-relaxed mb-12 max-w-3xl">{section.intro}</p>
                   {section.subsections.map((sub, j) => (
                     <div key={j} className="mb-10 last:mb-0">
                       <h3 className="text-3xl md:text-4xl font-heading font-extrabold uppercase text-foreground mt-8 mb-4">
@@ -390,10 +348,7 @@ const LocalizacionAudiovisualPage = () => {
         </div>
       </section>
 
-
-
-
-      {/* Valor añadido */}
+      {/* Estrategias / Visibilidad */}
       <section className="py-20 lg:py-28 bg-secondary/50">
         <div className="container px-4 lg:px-8 max-w-4xl mx-auto text-center">
           <motion.div
@@ -403,14 +358,13 @@ const LocalizacionAudiovisualPage = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight mb-8">
-              Localización audiovisual integral con{" "}
-              <GradientText>IA asistida y revisión humana</GradientText>
+              The Voice Clone: Donde el subtitulado se convierte en una <GradientText>ventaja estratégica.</GradientText>
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-              Ofrecemos el control total para adaptar tus activos a múltiples idiomas y culturas. Al centralizar los
-              workflows, no solo reduces costes y fricción operativa, sino que aseguras una coherencia de marca
-              profesional. Es la solución ideal para empresas que necesitan escalar programas de formación y
-              comunicación global con la máxima confianza y acabado profesional.
+              Producir subtítulos internamente implica errores técnicos y costes ocultos. Al confiar en nuestro servicio
+              gestionado, obtienes activos de vídeo listos para su publicación global con costes optimizados.
+              Transformamos el subtitulado en una herramienta de internacionalización potente, eliminando la fricción
+              operativa y asegurando resultados profesionales certificados.
             </p>
           </motion.div>
         </div>
@@ -464,4 +418,4 @@ const LocalizacionAudiovisualPage = () => {
   );
 };
 
-export default LocalizacionAudiovisualPage;
+export default SubtituladoProfesionalVideoPage;

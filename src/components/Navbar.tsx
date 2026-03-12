@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from "@/assets/logo_transparente.png";
+import { useRouter } from "next/router";
+import logoSrc from "@/assets/logo_transparente.png";
+const logo = typeof logoSrc === 'string' ? logoSrc : (logoSrc as { src: string }).src;
 
 const navLinks = [
   { label: "Servicios", href: "/#servicios" },
@@ -25,7 +27,8 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const isHome = window.location.pathname === "/" || window.location.pathname === "";
+  const router = useRouter();
+  const isHome = router.pathname === "/" || router.pathname === "";
   const isOpaque = !isHome || scrolled;
 
   useEffect(() => {

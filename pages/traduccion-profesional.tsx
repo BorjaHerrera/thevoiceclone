@@ -1,6 +1,7 @@
-import Head from 'next/head'
+import { NextSeo } from 'next-seo'
 import { GetServerSideProps } from 'next'
-import { getSeoByUri, defaultSeo, type RankMathSeo } from '@/lib/seo'
+import { getSeoByUri, type RankMathSeo } from '@/lib/seo'
+import { pageSeoDefaults } from '@/lib/seo-defaults'
 import ServicioTraduccionPage from '@/pages-src/ServicioTraduccionPage'
 
 interface Props {
@@ -8,23 +9,23 @@ interface Props {
 }
 
 export default function Page({ seo }: Props) {
-  const title = seo?.title || defaultSeo.title
-  const description = seo?.metaDesc || defaultSeo.metaDesc
+  const defaults = pageSeoDefaults['/traduccion-profesional']
+  const title = seo?.title || defaults.title
+  const description = seo?.metaDesc || defaults.description
 
   return (
     <>
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        {seo?.canonical && <link rel="canonical" href={seo.canonical} />}
-        <meta property="og:title" content={seo?.opengraphTitle || title} />
-        <meta property="og:description" content={seo?.opengraphDescription || description} />
-        {seo?.opengraphImage && <meta property="og:image" content={seo.opengraphImage.sourceUrl} />}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={seo?.twitterTitle || title} />
-        <meta name="twitter:description" content={seo?.twitterDescription || description} />
-        {seo?.twitterImage && <meta name="twitter:image" content={seo.twitterImage.sourceUrl} />}
-      </Head>
+      <NextSeo
+        title={title}
+        description={description}
+        canonical={seo?.canonical}
+        openGraph={{
+          title: seo?.opengraphTitle || title,
+          description: seo?.opengraphDescription || description,
+          ...(seo?.opengraphImage && { images: [{ url: seo.opengraphImage.sourceUrl }] }),
+        }}
+        twitter={{ cardType: 'summary_large_image' }}
+      />
       <ServicioTraduccionPage />
     </>
   )

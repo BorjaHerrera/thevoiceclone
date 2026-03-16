@@ -104,6 +104,31 @@ const Navbar = () => {
               </a>
             ),
           )}
+
+          {/* Language switcher */}
+          <div className={`flex items-center gap-0.5 text-sm font-medium border rounded-full px-1 py-0.5 ${isOpaque ? "border-border" : "border-white/30"}`}>
+            <button
+              onClick={() => router.push(router.asPath, router.asPath, { locale: 'es' })}
+              className={`px-2 py-0.5 rounded-full transition-colors ${
+                router.locale !== 'en'
+                  ? isOpaque ? "bg-foreground text-background" : "bg-white text-foreground"
+                  : isOpaque ? "text-muted-foreground hover:text-foreground" : "text-white/60 hover:text-white"
+              }`}
+            >
+              ES
+            </button>
+            <button
+              onClick={() => router.push(router.asPath, router.asPath, { locale: 'en' })}
+              className={`px-2 py-0.5 rounded-full transition-colors ${
+                router.locale === 'en'
+                  ? isOpaque ? "bg-foreground text-background" : "bg-white text-foreground"
+                  : isOpaque ? "text-muted-foreground hover:text-foreground" : "text-white/60 hover:text-white"
+              }`}
+            >
+              EN
+            </button>
+          </div>
+
           <a
             href="/contacto"
             className={`px-5 py-2 rounded-full text-sm font-semibold transition-colors hover:bg-yellow-400 hover:text-foreground ${isOpaque ? "bg-foreground text-background" : "bg-white text-foreground"}`}
@@ -164,6 +189,22 @@ const Navbar = () => {
               >
                 Contacto
               </a>
+
+              {/* Language switcher mobile */}
+              <div className="flex items-center gap-2 pt-1">
+                <button
+                  onClick={() => { router.push(router.asPath, router.asPath, { locale: 'es' }); setOpen(false) }}
+                  className={`text-sm font-semibold px-3 py-1.5 rounded-full transition-colors ${router.locale !== 'en' ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"}`}
+                >
+                  ES
+                </button>
+                <button
+                  onClick={() => { router.push(router.asPath, router.asPath, { locale: 'en' }); setOpen(false) }}
+                  className={`text-sm font-semibold px-3 py-1.5 rounded-full transition-colors ${router.locale === 'en' ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"}`}
+                >
+                  EN
+                </button>
+              </div>
             </div>
           </motion.div>
         )}

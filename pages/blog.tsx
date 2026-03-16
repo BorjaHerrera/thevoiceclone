@@ -1,4 +1,5 @@
 import { NextSeo } from 'next-seo'
+import Head from 'next/head'
 import { GetServerSideProps } from 'next'
 import { getSeoByUri, type RankMathSeo } from '@/lib/seo'
 import { pageSeoDefaults } from '@/lib/seo-defaults'
@@ -26,6 +27,22 @@ export default function Page({ seo }: Props) {
         }}
         twitter={{ cardType: 'summary_large_image' }}
       />
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Blog',
+              '@id': 'https://thevoiceclone.com/blog/#blog',
+              name: 'Blog — The Voice Clone',
+              description: defaults.description,
+              url: 'https://thevoiceclone.com/blog',
+              publisher: { '@id': 'https://thevoiceclone.com/#organization' },
+            }),
+          }}
+        />
+      </Head>
       <BlogPage />
     </>
   )

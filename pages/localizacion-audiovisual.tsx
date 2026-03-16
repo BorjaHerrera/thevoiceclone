@@ -1,4 +1,5 @@
 import { NextSeo } from 'next-seo'
+import Head from 'next/head'
 import { GetServerSideProps } from 'next'
 import { getSeoByUri, type RankMathSeo } from '@/lib/seo'
 import { pageSeoDefaults } from '@/lib/seo-defaults'
@@ -26,6 +27,25 @@ export default function Page({ seo }: Props) {
         }}
         twitter={{ cardType: 'summary_large_image' }}
       />
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Service',
+              '@id': 'https://thevoiceclone.com/localizacion-audiovisual/#service',
+              name: 'Localización Audiovisual End-to-End',
+              description: defaults.description,
+              url: 'https://thevoiceclone.com/localizacion-audiovisual',
+              serviceType: 'Audiovisual Localization',
+              provider: { '@id': 'https://thevoiceclone.com/#organization' },
+              areaServed: { '@type': 'Place', name: 'Worldwide' },
+              availableLanguage: ['Spanish', 'English', 'French', 'German', 'Italian', 'Portuguese'],
+            }),
+          }}
+        />
+      </Head>
       <LocalizacionAudiovisualPage />
     </>
   )

@@ -5,66 +5,68 @@ export interface PageSeoDefault {
 
 export const pageSeoDefaults: Record<string, PageSeoDefault> = {
   '/': {
-    title: 'The Voice Clone | Localización y Doblaje de Vídeo con IA',
+    title: 'Localización Multimedia con IA | The Voice Clone',
     description:
-      'Agencia especializada en localización audiovisual, doblaje con IA y producción de vídeo para empresas que quieren llegar a audiencias globales.',
+      'Agencia de localización audiovisual con IA y supervisión humana. Subtitulado multilingüe, doblaje, localización de vídeo y e-learning para empresas globales. +15 años de experiencia.',
   },
   '/voces-ia': {
-    title: 'Voces IA para Vídeos | The Voice Clone',
+    title: 'Voces IA con Locutores Profesionales | Voice Over Multilingüe | The Voice Clone',
     description:
-      'Genera locuciones profesionales con voces sintéticas de alta calidad. Ideal para doblaje, vídeos corporativos y contenido en múltiples idiomas.',
+      'Producción de voice over corporativo con IA y revisión experta. Locución multilingüe, masterización profesional y escalabilidad global. IA + locutores profesionales.',
   },
   '/video-para-empresas': {
-    title: 'Vídeo para Empresas | The Voice Clone',
+    title: 'Servicio de Vídeo para Empresas | Corporativo y Formación | The Voice Clone',
     description:
-      'Producción y localización de vídeo profesional para empresas. Llega a audiencias globales con contenido audiovisual de alta calidad.',
+      'Hub centralizado de vídeo corporativo y formación para empresas. Localización, producción, e-learning multilingüe y generación de vídeos con IA. Solución global integral.',
   },
   '/localizacion-de-video': {
-    title: 'Localización de Vídeo | The Voice Clone',
+    title: 'Localización de Vídeo para Empresas | Avatares IA | The Voice Clone',
     description:
-      'Servicio de localización de vídeo profesional: doblaje, subtitulado y adaptación cultural para mercados internacionales.',
+      'Localización de vídeo asistida por IA para formación y e-learning multilingüe. Avatares IA, adaptación cultural y reducción del 40% en tiempos de edición.',
   },
   '/produccion-video-con-ia': {
-    title: 'Producción de Vídeo con IA | The Voice Clone',
+    title: 'Producción de Vídeo con IA para Empresas | The Voice Clone',
     description:
-      'Produce vídeos corporativos con inteligencia artificial. Mayor velocidad, menor coste y calidad profesional.',
+      'Vídeos corporativos y publicitarios con IA. Avatares, generación de contenido escalable y ahorro de hasta el 60% en costes operativos. Revisión humana garantizada.',
   },
   '/localizacion-audiovisual': {
-    title: 'Localización Audiovisual End-to-End | The Voice Clone',
+    title: 'Servicio de Localización Audiovisual | IA + Revisión Humana | The Voice Clone',
     description:
-      'Servicio completo de localización audiovisual: traducción, doblaje, subtitulado y distribución para contenido en múltiples idiomas.',
+      'Traducción, subtitulado, doblaje y adaptación cultural bajo un único workflow gestionado. Localización audiovisual profesional certificada con IA y supervisión experta.',
   },
   '/subtitulado-video': {
-    title: 'Subtitulado de Vídeo Profesional | The Voice Clone',
+    title: 'Subtitulado Profesional con Revisión Humana | Multilingüe | The Voice Clone',
     description:
-      'Añade subtítulos profesionales a tus vídeos de forma rápida y precisa. Compatible con todos los formatos y plataformas.',
+      'Subtítulos multilingües con workflow híbrido de IA y revisión humana. Externaliza el subtitulado profesional de vídeos corporativos con precisión lingüística y adaptación cultural.',
   },
   '/traduccion-profesional': {
-    title: 'Traducción Profesional de Vídeo | The Voice Clone',
+    title: 'Traducción Profesional para Empresas | IA + Expertos Nativos | The Voice Clone',
     description:
-      'Servicio de traducción profesional para contenido audiovisual. Traductores especializados y revisión nativa para cada idioma.',
+      'Servicio de traducción corporativa multilingüe con IA y revisión humana. 95% consistencia terminológica y reducción del 40% en errores. Traducción profesional con IA.',
   },
   '/preguntas-frecuentes': {
-    title: 'Preguntas Frecuentes | The Voice Clone',
+    title: 'Preguntas Frecuentes sobre Localización y Producción Audiovisual | The Voice Clone',
     description:
-      'Encuentra respuestas a las dudas más comunes sobre nuestros servicios de localización audiovisual, doblaje y producción de vídeo.',
+      'Resuelve tus dudas sobre localización multimedia, voces IA, subtitulado profesional y producción de vídeo con IA. Todo sobre nuestros servicios y metodología híbrida.',
   },
   '/contacto': {
-    title: 'Contacto | The Voice Clone',
+    title: 'Contacto | The Voice Clone — Agencia de Localización Multimedia',
     description:
-      'Contacta con The Voice Clone y cuéntanos tu proyecto. Te respondemos en menos de 24 horas.',
+      'Contacta con The Voice Clone para servicios de localización audiovisual, vídeo corporativo, subtitulado y traducción profesional. Respondemos en menos de 24h.',
   },
   '/blog': {
-    title: 'Blog | The Voice Clone',
+    title: 'Blog de Localización Multimedia e IA | The Voice Clone',
     description:
-      'Artículos sobre localización audiovisual, doblaje con IA, producción de vídeo y estrategias para llegar a audiencias globales.',
+      'Artículos sobre localización audiovisual, producción de vídeo con IA, subtitulado profesional y tendencias en contenido multilingüe para empresas globales.',
   },
   '/aviso-legal': {
     title: 'Aviso Legal | The Voice Clone',
-    description: 'Aviso legal y condiciones de uso del sitio web de The Voice Clone.',
+    description:
+      'Aviso legal de The Voice Clone, agencia de localización multimedia. DANI VOICE OVERS, S.L. CIF B87267878.',
   },
   '/politica-cookies': {
     title: 'Política de Cookies | The Voice Clone',
-    description: 'Información sobre el uso de cookies en el sitio web de The Voice Clone.',
+    description:
+      'Información sobre el uso de cookies en thevoiceclone.com. Conoce qué cookies utilizamos y cómo gestionarlas.',
   },
 }

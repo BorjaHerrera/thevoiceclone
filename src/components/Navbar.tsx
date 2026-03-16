@@ -105,8 +105,15 @@ const Navbar = () => {
             ),
           )}
 
+          <a
+            href="/contacto"
+            className={`px-5 py-2 rounded-full text-sm font-semibold transition-colors hover:bg-yellow-400 hover:text-foreground ${isOpaque ? "bg-foreground text-background" : "bg-white text-foreground"}`}
+          >
+            Contacto
+          </a>
+
           {/* Language switcher */}
-          <div className={`flex items-center gap-0.5 text-sm font-medium border rounded-full px-1 py-0.5 ${isOpaque ? "border-border" : "border-white/30"}`}>
+          <div className={`ml-4 flex items-center gap-0.5 text-sm font-medium border rounded-full px-1 py-0.5 ${isOpaque ? "border-border" : "border-white/30"}`}>
             <button
               onClick={() => router.push(router.asPath, router.asPath, { locale: 'es' })}
               className={`px-2 py-0.5 rounded-full transition-colors ${
@@ -128,13 +135,6 @@ const Navbar = () => {
               EN
             </button>
           </div>
-
-          <a
-            href="/contacto"
-            className={`px-5 py-2 rounded-full text-sm font-semibold transition-colors hover:bg-yellow-400 hover:text-foreground ${isOpaque ? "bg-foreground text-background" : "bg-white text-foreground"}`}
-          >
-            Contacto
-          </a>
         </div>
 
         {/* Mobile toggle */}

@@ -7,7 +7,7 @@ import { Toaster } from '@/components/ui/toaster'
 import { Toaster as Sonner } from '@/components/ui/sonner'
 import '@/index.css'
 
-const GTM_ID = 'GTM-XXXXXXX'
+const GTM_ID = 'GTM-PTRQJ6V8'
 
 const queryClient = new QueryClient()
 

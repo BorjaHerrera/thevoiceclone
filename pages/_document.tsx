@@ -1,6 +1,6 @@
 import { Html, Head, Main, NextScript } from 'next/document'
 
-const GTM_ID = 'GTM-XXXXXXX'
+const GTM_ID = 'GTM-PTRQJ6V8'
 
 export default function Document() {
   return (

@@ -15,7 +15,9 @@ const SKIP_HEADERS = new Set([
   'keep-alive',
 ])
 
-export async function middleware(request: NextRequest) {
+const WP_PATHS = ['/wp-admin', '/wp-login.php', '/wp-content', '/wp-json', '/graphql']
+
+async function proxyToWordPress(request: NextRequest): Promise<NextResponse> {
   const { pathname, search } = request.nextUrl
   const upstreamUrl = `${WP_ORIGIN}${pathname}${search}`
 
@@ -92,6 +94,23 @@ export async function middleware(request: NextRequest) {
   }
 
   return response
+}
+
+export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl
+
+  // Guard: only proxy explicit WP paths — pass everything else through
+  const isWpPath = WP_PATHS.some(
+    (p) => pathname === p || pathname.startsWith(p + '/')
+  )
+  if (!isWpPath) return NextResponse.next()
+
+  try {
+    return await proxyToWordPress(request)
+  } catch {
+    // On any unexpected error let the request pass rather than returning 500
+    return NextResponse.next()
+  }
 }
 
 export const config = {

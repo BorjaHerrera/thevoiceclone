@@ -39,8 +39,8 @@ const navLinksEn = [
   { label: "Blog", href: "/en/blog" },
 ];
 
-// Map ES pathname → EN absolute URL
-const ES_TO_EN: Record<string, string> = {
+// Unified bidirectional route map (ES pathname ↔ EN pathname)
+const ROUTE_MAP: Record<string, string> = {
   "/": "/en",
   "/video-para-empresas": "/en/video-for-business",
   "/localizacion-de-video": "/en/video-localization",
@@ -54,21 +54,20 @@ const ES_TO_EN: Record<string, string> = {
   "/blog": "/en/blog",
   "/aviso-legal": "/en/legal-notice",
   "/politica-cookies": "/en/cookie-policy",
-};
-
-// Map EN pathname → ES absolute URL
-const EN_TO_ES: Record<string, string> = {
-  "/video-for-business": "/video-para-empresas",
-  "/video-localization": "/localizacion-de-video",
-  "/ai-video-production": "/produccion-video-con-ia",
-  "/audiovisual-localization": "/localizacion-audiovisual",
-  "/ai-voices": "/voces-ia",
-  "/video-subtitling": "/subtitulado-video",
-  "/professional-translation": "/traduccion-profesional",
-  "/faq": "/preguntas-frecuentes",
-  "/contact": "/contacto",
-  "/legal-notice": "/aviso-legal",
-  "/cookie-policy": "/politica-cookies",
+  // EN → ES (reverse entries)
+  "/en": "/",
+  "/en/video-for-business": "/video-para-empresas",
+  "/en/video-localization": "/localizacion-de-video",
+  "/en/ai-video-production": "/produccion-video-con-ia",
+  "/en/audiovisual-localization": "/localizacion-audiovisual",
+  "/en/ai-voices": "/voces-ia",
+  "/en/video-subtitling": "/subtitulado-video",
+  "/en/professional-translation": "/traduccion-profesional",
+  "/en/faq": "/preguntas-frecuentes",
+  "/en/contact": "/contacto",
+  "/en/blog": "/blog",
+  "/en/legal-notice": "/aviso-legal",
+  "/en/cookie-policy": "/politica-cookies",
 };
 
 const Navbar = () => {
@@ -77,12 +76,14 @@ const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const router = useRouter();
-  const isEn = router.asPath.startsWith("/en/") || router.asPath === "/en";
+
+  // Language detection based solely on pathname — no router.locale
+  const isEn = router.pathname.startsWith("/en/") || router.pathname === "/en";
   const navLinks = isEn ? navLinksEn : navLinksEs;
   const contactHref = isEn ? "/en/contact" : "/contacto";
   const contactLabel = isEn ? "Contact" : "Contacto";
 
-  const isHome = router.pathname === "/" || router.pathname === "";
+  const isHome = router.pathname === "/" || router.pathname === "/en";
   const isOpaque = !isHome || scrolled;
 
   useEffect(() => {
@@ -101,13 +102,13 @@ const Navbar = () => {
   };
 
   const switchToEn = () => {
-    const target = ES_TO_EN[router.pathname];
-    router.push(target ?? "/en");
+    if (isEn) return;
+    router.push(ROUTE_MAP[router.pathname] ?? "/en");
   };
 
   const switchToEs = () => {
-    const target = EN_TO_ES[router.pathname];
-    router.push(target ?? "/");
+    if (!isEn) return;
+    router.push(ROUTE_MAP[router.pathname] ?? "/");
   };
 
   return (

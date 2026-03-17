@@ -4,18 +4,29 @@ const WP_ORIGIN = 'https://cms.thevoiceclone.com'
 const WP_HOST = 'cms.thevoiceclone.com'
 const PUBLIC_HOST = 'thevoiceclone.com'
 
+// Headers unsafe to forward as-is (fetch auto-decodes body; proxying these breaks clients)
+const SKIP_HEADERS = new Set([
+  'set-cookie',
+  'location',
+  'content-encoding',
+  'content-length',
+  'transfer-encoding',
+  'connection',
+  'keep-alive',
+])
+
 export async function middleware(request: NextRequest) {
   const { pathname, search } = request.nextUrl
   const upstreamUrl = `${WP_ORIGIN}${pathname}${search}`
 
-  const headers = new Headers(request.headers)
-  headers.set('host', WP_HOST)
-  headers.set('x-forwarded-host', WP_HOST)
-  headers.set('x-forwarded-proto', 'https')
+  const reqHeaders = new Headers(request.headers)
+  reqHeaders.set('host', WP_HOST)
+  reqHeaders.set('x-forwarded-host', WP_HOST)
+  reqHeaders.set('x-forwarded-proto', 'https')
 
   const init: RequestInit & { duplex?: string } = {
     method: request.method,
-    headers,
+    headers: reqHeaders,
     redirect: 'manual',
   }
 
@@ -24,19 +35,23 @@ export async function middleware(request: NextRequest) {
     init.duplex = 'half'
   }
 
-  const upstream = await fetch(upstreamUrl, init)
+  let upstream: Response
+  try {
+    upstream = await fetch(upstreamUrl, init)
+  } catch {
+    return new NextResponse('Bad Gateway', { status: 502 })
+  }
 
   const response = new NextResponse(upstream.body, { status: upstream.status })
 
-  // Copy all response headers except set-cookie and location (handled below)
+  // Copy safe response headers
   upstream.headers.forEach((value, key) => {
-    const k = key.toLowerCase()
-    if (k !== 'set-cookie' && k !== 'location') {
-      try { response.headers.set(key, value) } catch { /* skip immutable headers */ }
+    if (!SKIP_HEADERS.has(key.toLowerCase())) {
+      try { response.headers.set(key, value) } catch { /* immutable — skip */ }
     }
   })
 
-  // Rewrite Location: strip WP origin so the browser follows through the proxy
+  // Rewrite Location so post-login redirects go through the proxy
   const location = upstream.headers.get('location')
   if (location) {
     const rewritten = location
@@ -45,17 +60,34 @@ export async function middleware(request: NextRequest) {
     response.headers.set('location', rewritten || '/')
   }
 
-  // Forward each Set-Cookie header individually (Headers API merges them otherwise)
-  // and rewrite Domain so cookies are valid on the public host
-  const setCookies: string[] =
-    typeof (upstream.headers as any).getSetCookie === 'function'
-      ? (upstream.headers as any).getSetCookie()
-      : []
+  // Forward Set-Cookie headers with domain rewrite.
+  // getSetCookie() keeps each Set-Cookie separate; the standard Headers API
+  // merges them which breaks WordPress session cookies.
+  // We wrap in try/catch as a safety net for edge runtimes that lack the method.
+  let cookies: string[] = []
+  try {
+    const h = upstream.headers as Headers & { getSetCookie?: () => string[] }
+    if (typeof h.getSetCookie === 'function') {
+      cookies = h.getSetCookie()
+    }
+  } catch { /* getSetCookie not available — fall through to combined fallback */ }
 
-  for (const cookie of setCookies) {
-    const rewritten = cookie
-      .replace(new RegExp(`[Dd]omain=${WP_HOST}`, 'g'), `Domain=${PUBLIC_HOST}`)
-      // Remove Secure flag is NOT needed — thevoiceclone.com is HTTPS
+  // Fallback: if getSetCookie() unavailable, parse the combined value.
+  // Split on ", " only where the next token looks like name=value (not a cookie attribute).
+  if (cookies.length === 0) {
+    const combined = upstream.headers.get('set-cookie')
+    if (combined) {
+      // Cookies are separated by ", " but attributes also use ", " in Expires dates.
+      // Split conservatively on ", " followed by a word-char and "=".
+      cookies = combined.split(/,\s*(?=[^\s,;=]+=)/)
+    }
+  }
+
+  for (const cookie of cookies) {
+    const rewritten = cookie.replace(
+      /([Dd]omain=)cms\.thevoiceclone\.com/g,
+      `$1${PUBLIC_HOST}`
+    )
     response.headers.append('set-cookie', rewritten)
   }
 

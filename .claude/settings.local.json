@@ -3,7 +3,8 @@
     "allow": [
       "Bash(npm run:*)",
       "Bash(git -C /Users/macbook/Desktop/thevoiceclone push -u origin main)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(node -e \"const seo = require\\(''next-seo''\\); console.log\\(Object.keys\\(seo\\).filter\\(k => k.includes\\(''Seo''\\)\\)\\)\")"
     ]
   }
 }

@@ -77,7 +77,7 @@ const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const router = useRouter();
-  const isEn = router.locale === "en";
+  const isEn = router.asPath.startsWith("/en/") || router.asPath === "/en";
   const navLinks = isEn ? navLinksEn : navLinksEs;
   const contactHref = isEn ? "/en/contact" : "/contacto";
   const contactLabel = isEn ? "Contact" : "Contacto";
@@ -101,13 +101,11 @@ const Navbar = () => {
   };
 
   const switchToEn = () => {
-    if (isEn) return;
     const target = ES_TO_EN[router.pathname];
     router.push(target ?? "/en");
   };
 
   const switchToEs = () => {
-    if (!isEn) return;
     const target = EN_TO_ES[router.pathname];
     router.push(target ?? "/");
   };

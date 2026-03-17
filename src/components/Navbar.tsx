@@ -39,35 +39,37 @@ const navLinksEn = [
   { label: "Blog", href: "/en/blog" },
 ];
 
-// Unified bidirectional route map (ES pathname ↔ EN pathname)
-const ROUTE_MAP: Record<string, string> = {
-  "/": "/en",
-  "/video-para-empresas": "/en/video-for-business",
-  "/localizacion-de-video": "/en/video-localization",
-  "/produccion-video-con-ia": "/en/ai-video-production",
-  "/localizacion-audiovisual": "/en/audiovisual-localization",
-  "/voces-ia": "/en/ai-voices",
-  "/subtitulado-video": "/en/video-subtitling",
-  "/traduccion-profesional": "/en/professional-translation",
-  "/preguntas-frecuentes": "/en/faq",
-  "/contacto": "/en/contact",
-  "/blog": "/en/blog",
-  "/aviso-legal": "/en/legal-notice",
-  "/politica-cookies": "/en/cookie-policy",
-  // EN → ES (reverse entries)
-  "/en": "/",
-  "/en/video-for-business": "/video-para-empresas",
-  "/en/video-localization": "/localizacion-de-video",
-  "/en/ai-video-production": "/produccion-video-con-ia",
-  "/en/audiovisual-localization": "/localizacion-audiovisual",
-  "/en/ai-voices": "/voces-ia",
-  "/en/video-subtitling": "/subtitulado-video",
-  "/en/professional-translation": "/traduccion-profesional",
-  "/en/faq": "/preguntas-frecuentes",
-  "/en/contact": "/contacto",
-  "/en/blog": "/blog",
-  "/en/legal-notice": "/aviso-legal",
-  "/en/cookie-policy": "/politica-cookies",
+// Slug-only maps (without locale prefix — router.pathname strips it)
+const ES_TO_EN: Record<string, string> = {
+  "/": "/",
+  "/video-para-empresas": "/video-for-business",
+  "/localizacion-de-video": "/video-localization",
+  "/produccion-video-con-ia": "/ai-video-production",
+  "/localizacion-audiovisual": "/audiovisual-localization",
+  "/voces-ia": "/ai-voices",
+  "/subtitulado-video": "/video-subtitling",
+  "/traduccion-profesional": "/professional-translation",
+  "/preguntas-frecuentes": "/faq",
+  "/contacto": "/contact",
+  "/blog": "/blog",
+  "/aviso-legal": "/legal-notice",
+  "/politica-cookies": "/cookie-policy",
+};
+
+const EN_TO_ES: Record<string, string> = {
+  "/": "/",
+  "/video-for-business": "/video-para-empresas",
+  "/video-localization": "/localizacion-de-video",
+  "/ai-video-production": "/produccion-video-con-ia",
+  "/audiovisual-localization": "/localizacion-audiovisual",
+  "/ai-voices": "/voces-ia",
+  "/video-subtitling": "/subtitulado-video",
+  "/professional-translation": "/traduccion-profesional",
+  "/faq": "/preguntas-frecuentes",
+  "/contact": "/contacto",
+  "/blog": "/blog",
+  "/legal-notice": "/aviso-legal",
+  "/cookie-policy": "/politica-cookies",
 };
 
 const Navbar = () => {
@@ -77,13 +79,13 @@ const Navbar = () => {
   const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const router = useRouter();
 
-  // Language detection based solely on pathname — no router.locale
-  const isEn = router.pathname.startsWith("/en/") || router.pathname === "/en";
+  // router.locale is reliable when navigating with { locale } option
+  const isEn = router.locale === "en";
   const navLinks = isEn ? navLinksEn : navLinksEs;
   const contactHref = isEn ? "/en/contact" : "/contacto";
   const contactLabel = isEn ? "Contact" : "Contacto";
 
-  const isHome = router.pathname === "/" || router.pathname === "/en";
+  const isHome = router.pathname === "/";
   const isOpaque = !isHome || scrolled;
 
   useEffect(() => {
@@ -103,12 +105,16 @@ const Navbar = () => {
 
   const switchToEn = () => {
     if (isEn) return;
-    router.push(ROUTE_MAP[router.pathname] ?? "/en");
+    // router.pathname has no locale prefix — look up EN equivalent slug
+    const target = ES_TO_EN[router.pathname] ?? "/";
+    router.push(target, undefined, { locale: "en" });
   };
 
   const switchToEs = () => {
     if (!isEn) return;
-    router.push(ROUTE_MAP[router.pathname] ?? "/");
+    // router.pathname has no locale prefix — look up ES equivalent slug
+    const target = EN_TO_ES[router.pathname] ?? "/";
+    router.push(target, undefined, { locale: "es" });
   };
 
   return (

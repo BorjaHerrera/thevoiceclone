@@ -99,7 +99,7 @@ const ProfessionalTranslationPage = () => {
               transition={{ duration: 0.7 }}
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-extrabold leading-[1.05] uppercase tracking-tight text-foreground mb-8"
             >
-              Professional translation with AI and human rigour
+              Professional translation. AI driven. Human-led.
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}

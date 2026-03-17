@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { LucideIcon } from "lucide-react";
+import Link from "next/link";
 
 export interface FeatureCard {
   icon: LucideIcon;
@@ -7,6 +8,7 @@ export interface FeatureCard {
   iconColor: string;
   title: string;
   text: string;
+  href?: string;
 }
 
 interface FeatureGridSectionProps {
@@ -46,13 +48,27 @@ const FeatureGridSection = ({ heading, description, cards }: FeatureGridSectionP
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: i * 0.08 }}
-            className="rounded-2xl border border-black/8 p-10 text-left bg-blue-50 hover:scale-[1.03] hover:-translate-y-1 hover:shadow-lg transition-all duration-300 ease-in-out cursor-default"
           >
-            <div className={`w-12 h-12 rounded-xl ${card.iconBg} flex items-center justify-center mb-8`}>
-              <card.icon className={`w-6 h-6 ${card.iconColor}`} />
-            </div>
-            <h3 className="text-2xl font-heading font-extrabold text-black mb-4">{card.title}</h3>
-            <p className="text-base text-black/65 leading-relaxed">{card.text}</p>
+            {card.href ? (
+              <Link
+                href={card.href}
+                className="block rounded-2xl border border-black/8 p-10 text-left bg-blue-50 hover:scale-[1.03] hover:-translate-y-1 hover:shadow-lg transition-all duration-300 ease-in-out cursor-pointer"
+              >
+                <div className={`w-12 h-12 rounded-xl ${card.iconBg} flex items-center justify-center mb-8`}>
+                  <card.icon className={`w-6 h-6 ${card.iconColor}`} />
+                </div>
+                <h3 className="text-2xl font-heading font-extrabold text-black mb-4">{card.title}</h3>
+                <p className="text-base text-black/65 leading-relaxed">{card.text}</p>
+              </Link>
+            ) : (
+              <div className="rounded-2xl border border-black/8 p-10 text-left bg-blue-50 hover:scale-[1.03] hover:-translate-y-1 hover:shadow-lg transition-all duration-300 ease-in-out cursor-default">
+                <div className={`w-12 h-12 rounded-xl ${card.iconBg} flex items-center justify-center mb-8`}>
+                  <card.icon className={`w-6 h-6 ${card.iconColor}`} />
+                </div>
+                <h3 className="text-2xl font-heading font-extrabold text-black mb-4">{card.title}</h3>
+                <p className="text-base text-black/65 leading-relaxed">{card.text}</p>
+              </div>
+            )}
           </motion.div>
         ))}
       </div>

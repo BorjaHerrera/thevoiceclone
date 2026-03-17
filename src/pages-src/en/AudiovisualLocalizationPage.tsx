@@ -18,6 +18,7 @@ const featureCards: FeatureCard[] = [
     iconBg: "bg-blue-100",
     iconColor: "text-blue-600",
     title: "Video Localization",
+    href: "/en/video-localization",
     text: "Hybrid AI and human review processes that accelerate international distribution while maintaining tone, terminology and cultural consistency.",
   },
   {
@@ -25,6 +26,7 @@ const featureCards: FeatureCard[] = [
     iconBg: "bg-purple-100",
     iconColor: "text-purple-600",
     title: "Video Production",
+    href: "/en/ai-video-production",
     text: "AI-assisted production that reduces costs and delivery times by automating repetitive tasks with expert brand validation.",
   },
   {
@@ -32,6 +34,7 @@ const featureCards: FeatureCard[] = [
     iconBg: "bg-green-100",
     iconColor: "text-green-600",
     title: "End-to-End Localization",
+    href: "/en/audiovisual-localization",
     text: "A single workflow that unifies video, voice over, subtitles and translation, avoiding errors and ensuring consistency with a single strategic partner.",
   },
   {
@@ -39,6 +42,7 @@ const featureCards: FeatureCard[] = [
     iconBg: "bg-orange-100",
     iconColor: "text-orange-600",
     title: "Voice Over",
+    href: "/en/ai-voices",
     text: "Advanced voice technologies with human validation that take your narrative to any language while maintaining a coherent and natural brand identity.",
   },
   {
@@ -46,6 +50,7 @@ const featureCards: FeatureCard[] = [
     iconBg: "bg-red-100",
     iconColor: "text-red-600",
     title: "Subtitling",
+    href: "/en/video-subtitling",
     text: "Perfect readability and synchronisation through AI and expert reviewers that guarantee cultural adaptation and improve global engagement.",
   },
   {
@@ -53,6 +58,7 @@ const featureCards: FeatureCard[] = [
     iconBg: "bg-violet-100",
     iconColor: "text-violet-600",
     title: "Translation",
+    href: "/en/professional-translation",
     text: "AI-supervised model that adapts scripts and texts with terminological rigour and corporate style, optimising speed and cost at scale.",
   },
 ];

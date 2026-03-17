@@ -18,6 +18,7 @@ const featureCards: FeatureCard[] = [
     iconBg: "bg-blue-100",
     iconColor: "text-blue-600",
     title: "Localización de Vídeo",
+    href: "/localizacion-de-video",
     text: "Procesos híbridos con IA y revisión humana que aceleran la distribución internacional manteniendo tono, terminología y consistencia cultural.",
   },
   {
@@ -25,6 +26,7 @@ const featureCards: FeatureCard[] = [
     iconBg: "bg-purple-100",
     iconColor: "text-purple-600",
     title: "Producción de Vídeo",
+    href: "/produccion-video-con-ia",
     text: "Producción asistida por IA que reduce costes y tiempos automatizando tareas repetitivas con validación experta de marca.",
   },
   {
@@ -32,6 +34,7 @@ const featureCards: FeatureCard[] = [
     iconBg: "bg-green-100",
     iconColor: "text-green-600",
     title: "Localización End-to-End",
+    href: "/localizacion-audiovisual",
     text: "Flujo único que unifica vídeo, locución, subtítulos y traducción evitando errores y asegurando consistencia con un único partner estratégico.",
   },
   {
@@ -39,6 +42,7 @@ const featureCards: FeatureCard[] = [
     iconBg: "bg-orange-100",
     iconColor: "text-orange-600",
     title: "Locución",
+    href: "/voces-ia",
     text: "Tecnologías de voz avanzadas con validación humana que llevan tu narrativa a cualquier idioma manteniendo una identidad de marca coherente y natural.",
   },
   {
@@ -46,6 +50,7 @@ const featureCards: FeatureCard[] = [
     iconBg: "bg-red-100",
     iconColor: "text-red-600",
     title: "Subtitulado",
+    href: "/subtitulado-video",
     text: "Legibilidad y sincronización perfecta mediante IA y revisores expertos que garantizan la adaptación cultural y mejoran el engagement global.",
   },
   {
@@ -53,6 +58,7 @@ const featureCards: FeatureCard[] = [
     iconBg: "bg-violet-100",
     iconColor: "text-violet-600",
     title: "Traducción",
+    href: "/traduccion-profesional",
     text: "Modelo de IA supervisada que adapta guiones y textos con rigor terminológico y estilo corporativo, optimizando velocidad y coste a gran escala.",
   },
 ];

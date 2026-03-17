@@ -39,6 +39,38 @@ const navLinksEn = [
   { label: "Blog", href: "/en/blog" },
 ];
 
+// Map ES pathname → EN absolute URL
+const ES_TO_EN: Record<string, string> = {
+  "/": "/en",
+  "/video-para-empresas": "/en/video-for-business",
+  "/localizacion-de-video": "/en/video-localization",
+  "/produccion-video-con-ia": "/en/ai-video-production",
+  "/localizacion-audiovisual": "/en/audiovisual-localization",
+  "/voces-ia": "/en/ai-voices",
+  "/subtitulado-video": "/en/video-subtitling",
+  "/traduccion-profesional": "/en/professional-translation",
+  "/preguntas-frecuentes": "/en/faq",
+  "/contacto": "/en/contact",
+  "/blog": "/en/blog",
+  "/aviso-legal": "/en/legal-notice",
+  "/politica-cookies": "/en/cookie-policy",
+};
+
+// Map EN pathname → ES absolute URL
+const EN_TO_ES: Record<string, string> = {
+  "/video-for-business": "/video-para-empresas",
+  "/video-localization": "/localizacion-de-video",
+  "/ai-video-production": "/produccion-video-con-ia",
+  "/audiovisual-localization": "/localizacion-audiovisual",
+  "/ai-voices": "/voces-ia",
+  "/video-subtitling": "/subtitulado-video",
+  "/professional-translation": "/traduccion-profesional",
+  "/faq": "/preguntas-frecuentes",
+  "/contact": "/contacto",
+  "/legal-notice": "/aviso-legal",
+  "/cookie-policy": "/politica-cookies",
+};
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -66,6 +98,18 @@ const Navbar = () => {
 
   const handleDropdownLeave = () => {
     dropdownTimeout.current = setTimeout(() => setDropdownOpen(false), 200);
+  };
+
+  const switchToEn = () => {
+    if (isEn) return;
+    const target = ES_TO_EN[router.pathname];
+    router.push(target ?? "/en");
+  };
+
+  const switchToEs = () => {
+    if (!isEn) return;
+    const target = EN_TO_ES[router.pathname];
+    router.push(target ?? "/");
   };
 
   return (
@@ -137,9 +181,9 @@ const Navbar = () => {
           {/* Language switcher */}
           <div className={`ml-4 flex items-center gap-0.5 text-sm font-medium border rounded-full px-1 py-0.5 ${isOpaque ? "border-border" : "border-white/30"}`}>
             <button
-              onClick={() => router.push(router.asPath, router.asPath, { locale: 'es' })}
+              onClick={switchToEs}
               className={`px-2 py-0.5 rounded-full transition-colors ${
-                router.locale !== 'en'
+                !isEn
                   ? isOpaque ? "bg-foreground text-background" : "bg-white text-foreground"
                   : isOpaque ? "text-muted-foreground hover:text-foreground" : "text-white/60 hover:text-white"
               }`}
@@ -147,9 +191,9 @@ const Navbar = () => {
               ES
             </button>
             <button
-              onClick={() => router.push(router.asPath, router.asPath, { locale: 'en' })}
+              onClick={switchToEn}
               className={`px-2 py-0.5 rounded-full transition-colors ${
-                router.locale === 'en'
+                isEn
                   ? isOpaque ? "bg-foreground text-background" : "bg-white text-foreground"
                   : isOpaque ? "text-muted-foreground hover:text-foreground" : "text-white/60 hover:text-white"
               }`}
@@ -215,14 +259,14 @@ const Navbar = () => {
               {/* Language switcher mobile */}
               <div className="flex items-center gap-2 pt-1">
                 <button
-                  onClick={() => { router.push(router.asPath, router.asPath, { locale: 'es' }); setOpen(false) }}
-                  className={`text-sm font-semibold px-3 py-1.5 rounded-full transition-colors ${router.locale !== 'en' ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"}`}
+                  onClick={() => { switchToEs(); setOpen(false); }}
+                  className={`text-sm font-semibold px-3 py-1.5 rounded-full transition-colors ${!isEn ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"}`}
                 >
                   ES
                 </button>
                 <button
-                  onClick={() => { router.push(router.asPath, router.asPath, { locale: 'en' }); setOpen(false) }}
-                  className={`text-sm font-semibold px-3 py-1.5 rounded-full transition-colors ${router.locale === 'en' ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"}`}
+                  onClick={() => { switchToEn(); setOpen(false); }}
+                  className={`text-sm font-semibold px-3 py-1.5 rounded-full transition-colors ${isEn ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"}`}
                 >
                   EN
                 </button>

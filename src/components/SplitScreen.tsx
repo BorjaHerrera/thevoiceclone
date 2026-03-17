@@ -28,7 +28,7 @@ const SplitScreen = () => {
           className="relative"
         >
           <div
-            className="h-64 sm:h-80 lg:h-[420px] w-full rounded-r-full"
+            className="h-40 sm:h-80 lg:h-[420px] w-full rounded-r-full"
             style={{
               background:
                 "linear-gradient(135deg, hsl(211 100% 50%), hsl(260 70% 58%), hsl(330 80% 60%))",

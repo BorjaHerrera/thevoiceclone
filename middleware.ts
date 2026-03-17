@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-const WP_ORIGIN = 'http://185.176.8.9'
-const WP_HOST = 'thevoiceclone.com'
+const WP_ORIGIN = 'https://cms.thevoiceclone.com'
+const WP_HOST = 'cms.thevoiceclone.com'
 
 export async function middleware(request: NextRequest) {
   const { pathname, search } = request.nextUrl
@@ -32,7 +32,7 @@ export async function middleware(request: NextRequest) {
     responseHeaders.set(
       'location',
       location.replace(`http://${WP_ORIGIN}`, `https://${WP_HOST}`)
-                .replace(`http://185.176.8.9`, `https://${WP_HOST}`)
+                .replace(`http://cms.thevoiceclone.com`, `https://${WP_HOST}`)
     )
   }
 

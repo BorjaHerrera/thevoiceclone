@@ -1,98 +1,442 @@
 import { motion } from "framer-motion";
-import { ChevronsDown, Users, Zap, Globe2, ShieldCheck, TrendingDown, Star } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ChevronsDown, Languages, TrendingUp, Zap, DollarSign, UserSquare2, Settings2 } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import GradientText from "@/components/GradientText";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import FeatureGridSection from "@/components/FeatureGridSection";
-import videoImgSrc from "@/assets/video-localization.jpg";
-const videoImg = typeof videoImgSrc === "string" ? videoImgSrc : (videoImgSrc as { src: string }).src;
+import VideoPortfolio from "@/components/VideoPortfolio";
+import videoLocalizationSrc from "@/assets/video-localization.jpg";
+const videoLocalization = typeof videoLocalizationSrc === "string" ? videoLocalizationSrc : (videoLocalizationSrc as { src: string }).src;
 
-const featureCards = [
-  { icon: Users, iconBg: "bg-purple-500/20", iconColor: "text-purple-400", title: "AI Avatars", text: "Replace on-screen presenters with AI avatars for any language. No re-shooting, no studio costs — same professional look." },
-  { icon: Globe2, iconBg: "bg-blue-500/20", iconColor: "text-blue-400", title: "Cultural Adaptation", text: "Beyond translation: we adapt visuals, idioms, on-screen text and cultural references so your content feels native in every market." },
-  { icon: Zap, iconBg: "bg-orange-500/20", iconColor: "text-orange-400", title: "40% Faster Editing", text: "AI-assisted timeline editing reduces localization post-production time by up to 40% compared to traditional workflows." },
-  { icon: ShieldCheck, iconBg: "bg-emerald-500/20", iconColor: "text-emerald-400", title: "Human QA on Every File", text: "Each localized video is reviewed by our linguists and video editors before delivery. No automated output ships without human sign-off." },
-  { icon: TrendingDown, iconBg: "bg-red-500/20", iconColor: "text-red-400", title: "Lower Cost per Language", text: "Batch localization and AI-assisted workflows make adding each new language significantly more cost-effective." },
-  { icon: Star, iconBg: "bg-violet-500/20", iconColor: "text-violet-400", title: "E-learning Specialist", text: "Deep experience in SCORM-compatible e-learning localization: voiceover sync, subtitle timing and LMS compatibility." },
+const sections = [
+  {
+    id: "training-elearning",
+    title: "Video solutions for multilingual training and e-learning",
+    navLabel: "Video solutions for multilingual training and e-learning",
+    intro:
+      "Localization allows a single training course to be accessible and effective across multiple regions simultaneously. Automation handles the volume, while human supervision guarantees that learning is pedagogically correct.",
+    subsections: [
+      {
+        heading: "Success stories and practical applications in the sector",
+        text: "Today, the most advanced multinationals generate hundreds of training videos per month ensuring total consistency in every market. Thanks to AI-assisted workflows, these companies reduce by up to 40% the time spent on manual editing. This centralised management ensures that, regardless of country, all teams receive the same company vision through a seamless integration of dubbing and multilingual subtitles.",
+      },
+    ],
+  },
+  {
+    id: "cost-optimisation",
+    title: "Cost optimisation in video production",
+    navLabel: "Cost optimisation in video production",
+    intro:
+      "Centralising production and using AI tools allows eliminating redundancies and dramatically reducing the budget per minute of video produced, without sacrificing excellence.",
+    subsections: [
+      {
+        heading: "Strategies to maximise return on investment",
+        text: "To achieve real optimisation, it is essential to automate base processes such as dubbing and subtitling, enabling much more agile deliveries. By establishing a centralised production hub, companies avoid duplicated expenditure across departments and countries. The key to success lies in combining these technological tools with human review that certifies the final content maintains the desired quality standard and brand tone.",
+      },
+    ],
+  },
+  {
+    id: "ai-avatars",
+    title: "AI avatars: the future of internal communications",
+    navLabel: "AI avatars: the future of internal communications",
+    intro:
+      'AI avatars are the ideal solution for recurring messages and continuous training, allowing you to "record" in dozens of languages without the need for cameras or physical sets.',
+    subsections: [
+      {
+        heading: "Keys to effective corporate implementation",
+        text: "Adopting this technology requires precisely identifying which messages benefit from an avatar and which require a real presenter to maintain closeness. It is vital to adapt the aesthetics and language of these characters according to the target market to ensure local relevance. Furthermore, constant human supervision guarantees that every avatar intervention strictly complies with security protocols and the corporate tone of voice.",
+      },
+    ],
+  },
 ];
 
-const VideoLocalizationPage = () => (
-  <div className="min-h-screen bg-background">
-    <Navbar />
-    <section className="relative min-h-[70vh] flex items-end justify-start overflow-hidden"
-      style={{ background: "linear-gradient(135deg, rgb(237, 94, 166) 0%, rgb(123, 73, 223) 35%, rgb(0, 99, 204) 65%, rgb(21, 28, 40) 100%)" }}>
-      <div className="w-full relative z-10 px-6 md:px-12 lg:px-20 xl:px-32 pb-20 lg:pb-32 pt-40 lg:pt-52">
-        <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-extrabold leading-[1.05] uppercase tracking-tight text-white mb-6 max-w-5xl">
-          Video Localization for Business
-        </motion.h1>
-        <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }}
-          className="text-lg md:text-xl text-white/75 max-w-3xl leading-relaxed mb-10">
-          AI-assisted video localization for corporate training and e-learning. AI avatars, cultural adaptation and up to 40% reduction in editing time. Human-in-the-loop quality guaranteed.
-        </motion.p>
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.5 }} className="flex justify-start">
-          <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}>
-            <ChevronsDown className="w-12 h-12 text-white" strokeWidth={1.5} />
-          </motion.div>
-        </motion.div>
-      </div>
-    </section>
+const faqs = [
+  {
+    q: "What are AI avatars and how are they used in corporate communications?",
+    a: "AI avatars are virtual presenters generated by artificial intelligence that can communicate messages in multiple languages without the need for on-site recordings. They are used for internal training, corporate announcements and recurring content, reducing production costs and times.",
+  },
+  {
+    q: "Is dubbing necessary in multilingual corporate training?",
+    a: "Yes. Professional dubbing significantly improves retention and comprehension of training content, as employees process information better in their native language. Our hybrid AI and human review approach guarantees natural and precise dubbing at scale.",
+  },
+  {
+    q: "How is e-learning automated with human review?",
+    a: "AI handles repetitive tasks such as transcription, initial translation and subtitle synchronisation, while linguists and pedagogues review every delivery to ensure terminological precision, pedagogical consistency and cultural appropriateness of the content.",
+  },
+  {
+    q: "How many languages can be managed simultaneously?",
+    a: "Our localization workflows allow managing dozens of languages in parallel. AI automation scales production, while specialist native reviewers validate each linguistic version.",
+  },
+  {
+    q: "What are the advantages of centralising video production?",
+    a: "Centralising eliminates cost duplication across departments and countries, ensures global brand consistency and reduces time-to-market thanks to standardised and automated workflows.",
+  },
+];
 
-    <section className="py-20 lg:py-28">
-      <div className="px-6 md:px-12 lg:px-20 xl:px-32">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
-          <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight mb-8">
-              Your training videos. <GradientText>Every language. No quality loss.</GradientText>
-            </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-              Re-shooting your corporate videos for every new market is expensive and slow. Our AI-assisted
-              video localization adapts your existing content — dubbing, AI avatars, subtitles, on-screen
-              text and cultural references — so your original investment works globally.
-            </p>
-            <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-              The Human-in-the-loop difference: AI handles the heavy lifting on transcription, translation
-              and lip-sync generation. Our linguists and video editors review every frame before delivery,
-              ensuring your e-learning objectives and brand standards are preserved in every locale.
-            </p>
-            <a href="#contacto" className="inline-block bg-foreground text-background px-10 py-4 rounded-full font-semibold text-base hover:bg-foreground/85 transition-colors">
-              Get a demo
-            </a>
+const VideoLocalizationPage = () => {
+  const [activeSection, setActiveSection] = useState(sections[0].id);
+
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+    sections.forEach((section) => {
+      const el = document.getElementById(section.id);
+      if (!el) return;
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveSection(section.id);
+        },
+        { rootMargin: "-40% 0px -40% 0px" },
+      );
+      observer.observe(el);
+      observers.push(observer);
+    });
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-background">
+      <Navbar />
+
+      {/* Hero */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
+        <div
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[140%] h-[55%] pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 100%, rgba(237, 94, 166, 0.45) 0%, rgba(123, 73, 223, 0.4) 25%, rgba(0, 99, 204, 0.35) 50%, transparent 75%)",
+            filter: "blur(100px)",
+          }}
+        />
+        <div className="container relative z-10 px-4 lg:px-8 py-20 lg:py-32">
+          <div className="max-w-5xl mx-auto text-center">
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-extrabold leading-[1.05] uppercase tracking-tight text-foreground mb-8"
+            >
+              Video localization for companies
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="text-lg md:text-xl text-muted-foreground max-w-4xl mx-auto mb-10 leading-relaxed"
+            >
+              Video localization allows international companies to adapt their assets, from corporate training
+              to internal communications, to any language and region. By combining dubbing, subtitles and
+              cultural adaptation with AI-assisted workflows, organisations achieve efficient expansion while
+              maintaining the original quality and tone of voice in every market.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <a
+                href="#contacto"
+                className="inline-block bg-foreground text-background px-10 py-4 rounded-full font-semibold text-base hover:bg-foreground/85 transition-colors"
+              >
+                Schedule a demo
+              </a>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="mt-12 flex justify-center"
+            >
+              <button
+                onClick={() => {
+                  const firstH2 = document.querySelector("section:nth-of-type(2) h2");
+                  if (firstH2) {
+                    const top = firstH2.getBoundingClientRect().top + window.scrollY - 160;
+                    window.scrollTo({ top, behavior: "smooth" });
+                  }
+                }}
+                className="cursor-pointer bg-transparent border-none p-2"
+                aria-label="Scroll down"
+              >
+                <motion.div
+                  animate={{ y: [0, 8, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <ChevronsDown className="w-12 h-12 text-foreground/70" strokeWidth={1.5} />
+                </motion.div>
+              </button>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Intro */}
+      <section className="py-20 lg:py-28 bg-secondary/50">
+        <div className="container px-4 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-start max-w-6xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight">
+                VIDEO LOCALIZATION FOR <GradientText>TRAINING AND E-LEARNING</GradientText>
+              </h2>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+            >
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                The Voice Clone optimises the complete localization cycle: from e-learning course dubbing to
+                intelligent subtitling and AI-assisted production. Centralise your processes to reduce costs,
+                guarantee brand consistency and distribute multilingual content at scale for high-performance
+                global teams.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* AI + Human Section – Full Width Split */}
+      <section className="py-20 lg:py-28 overflow-hidden">
+        <div className="grid lg:grid-cols-2 gap-0">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="flex items-center px-6 md:px-12 lg:pl-20 xl:pl-32 lg:pr-16 py-12 lg:py-0"
+          >
+            <div className="max-w-2xl">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight text-foreground mb-8">
+                What is video localization and why is it key?
+              </h2>
+              <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                Video localization goes beyond translation: it adapts voices, subtitles and visual elements
+                to connect culturally with each region. Through a hybrid model of{" "}
+                <strong>AI and human review</strong>, it guarantees rapid global expansion without sacrificing
+                brand identity or cultural precision.
+              </p>
+              <div
+                className="h-[4px] w-full mb-10 rounded-full"
+                style={{
+                  background:
+                    "linear-gradient(135deg, hsl(330 80% 65%) 0%, hsl(260 70% 58%) 35%, hsl(211 100% 40%) 65%, hsl(220 30% 12%) 100%)",
+                }}
+              />
+              <a
+                href="#contacto"
+                className="inline-block bg-yellow-400 text-foreground px-10 py-4 rounded-full font-semibold text-base hover:bg-yellow-300 transition-colors text-center min-w-[220px]"
+              >
+                Learn more
+              </a>
+            </div>
           </motion.div>
-          <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.15 }} className="h-[400px] rounded-2xl overflow-hidden">
-            <img src={videoImg} alt="AI-assisted video localization for corporate training" className="w-full h-full object-cover" />
+
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="h-[400px] lg:h-[600px]"
+          >
+            <img
+              src={videoLocalization}
+              alt="Video localization process with artificial intelligence technology and human supervision"
+              className="w-full h-full object-cover"
+            />
           </motion.div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <FeatureGridSection
-      heading="AI-powered localization. Human-guaranteed quality."
-      description="Our hybrid workflow delivers localized video content that meets enterprise quality standards at the speed and cost that only AI can enable."
-      cards={featureCards}
-    />
+      {/* Feature Cards Grid */}
+      <FeatureGridSection
+        heading="Your video strategy at the speed of your business."
+        description="Traditional localization is no longer enough for a real-time global market. We have redesigned the audiovisual workflow combining generative AI with expert supervision so you can adapt, dub and distribute your training content in dozens of languages simultaneously, eliminating bottlenecks and maximising the impact of every minute produced."
+        cards={[
+          {
+            icon: Languages,
+            iconBg: "bg-blue-500/20",
+            iconColor: "text-blue-400",
+            title: "Multilingual e-learning",
+            text: "Localization allows a single course to be effective across multiple regions. We combine automation to handle large volumes of content with human supervision to guarantee pedagogical rigour.",
+          },
+          {
+            icon: TrendingUp,
+            iconBg: "bg-purple-500/20",
+            iconColor: "text-purple-400",
+            title: "Success stories",
+            text: "Leading multinationals already generate hundreds of videos per month with AI-assisted workflows. This reduces by up to 40% manual editing time and ensures a coherent company vision.",
+          },
+          {
+            icon: Zap,
+            iconBg: "bg-emerald-500/20",
+            iconColor: "text-emerald-400",
+            title: "Cost optimisation",
+            text: "Centralising production and applying AI tools allows eliminating operational redundancies. The result is a dramatic reduction in the budget per minute of video produced.",
+          },
+          {
+            icon: DollarSign,
+            iconBg: "bg-pink-500/20",
+            iconColor: "text-pink-400",
+            title: "ROI maximisation",
+            text: "The key to return on investment lies in automating base processes such as dubbing and avoiding duplications between departments. Final human review certifies quality.",
+          },
+          {
+            icon: UserSquare2,
+            iconBg: "bg-rose-500/20",
+            iconColor: "text-rose-400",
+            title: "AI avatars",
+            text: 'Avatars are the ideal solution for recurring messages and continuous training. They allow "recording" in dozens of languages instantly, without the need for filming sets.',
+          },
+          {
+            icon: Settings2,
+            iconBg: "bg-violet-500/20",
+            iconColor: "text-violet-400",
+            title: "Effective implementation",
+            text: "It is vital to identify which messages require an avatar and which require a real presenter. Adapting the aesthetics to the local market guarantees relevance and corporate tone.",
+          },
+        ]}
+      />
 
-    <section className="py-20 lg:py-28 bg-secondary/50">
-      <div className="container px-4 lg:px-8 max-w-4xl mx-auto text-center">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight mb-8">
-            Scale your e-learning and training globally.
-          </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto mb-10">
-            From 2 to 20 languages, from one module to an entire learning library — our managed localization
-            service scales with your programme without compromising instructional quality or brand standards.
-          </p>
-          <a href="#contacto" className="inline-block bg-yellow-400 text-foreground px-12 py-5 rounded-full font-semibold text-base hover:bg-yellow-300 transition-colors">
-            Start your project
-          </a>
-        </motion.div>
-      </div>
-    </section>
+      {/* Services – Editorial Two-Column Layout */}
+      <section className="py-20 lg:py-28">
+        <div className="px-6 md:px-12 lg:px-20 xl:px-32">
+          <div className="grid lg:grid-cols-[1fr_2fr] gap-12 lg:gap-24">
+            {/* Left Column – Sticky Navigation */}
+            <div className="hidden lg:block">
+              <div className="sticky top-40 self-start">
+                <h2 className="text-4xl font-heading font-extrabold uppercase leading-tight text-foreground mb-12">
+                  GLOBAL VIDEO ADAPTATION: SCALE WITH AI
+                </h2>
+                <nav className="flex flex-col gap-6">
+                  {sections.map((section) => (
+                    <a
+                      key={section.id}
+                      href={`#${section.id}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const el = document.getElementById(section.id);
+                        if (el) {
+                          const top = el.getBoundingClientRect().top + window.scrollY - 160;
+                          window.scrollTo({ top, behavior: "smooth" });
+                        }
+                      }}
+                      className={`text-lg font-semibold leading-tight transition-all duration-300 no-underline decoration-transparent text-foreground ${
+                        activeSection === section.id ? "opacity-100" : "opacity-40 hover:opacity-70"
+                      }`}
+                    >
+                      {section.navLabel}
+                    </a>
+                  ))}
+                </nav>
+              </div>
+            </div>
 
-    <ContactForm />
-    <Footer />
-  </div>
-);
+            {/* Right Column – Narrative Content */}
+            <div className="flex flex-col">
+              {sections.map((section, i) => (
+                <motion.div
+                  key={section.id}
+                  id={section.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6, delay: i * 0.05 }}
+                  className="pb-32 last:pb-0 scroll-mt-40"
+                >
+                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold uppercase leading-tight tracking-tight text-foreground mb-8">
+                    {section.title}
+                  </h2>
+                  <p className="text-lg text-foreground/70 leading-relaxed mb-12 max-w-3xl">{section.intro}</p>
+                  {section.subsections.map((sub, j) => (
+                    <div key={j} className="mb-10 last:mb-0">
+                      <h3 className="text-3xl md:text-4xl font-heading font-extrabold uppercase text-foreground mt-8 mb-4">
+                        {sub.heading}
+                      </h3>
+                      <p className="text-base text-foreground/60 leading-relaxed max-w-3xl">{sub.text}</p>
+                    </div>
+                  ))}
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Visibility */}
+      <section className="py-20 lg:py-28 bg-secondary/50">
+        <div className="container px-4 lg:px-8 max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight mb-8">
+              AI-assisted video localization with <GradientText>human supervision</GradientText>
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+              The perfect balance to scale: technology provides the speed to globalise content, while the human
+              expert ensures the brand consistency and cultural relevance needed for the message to truly
+              make an impact.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      <VideoPortfolio />
+
+      {/* FAQ */}
+      <section className="py-20 lg:py-28">
+        <div className="px-6 md:px-12 lg:px-20 xl:px-32">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-12"
+          >
+            <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight">
+              Frequently <GradientText>Asked Questions</GradientText>
+            </h2>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            <Accordion type="single" collapsible className="space-y-3">
+              {faqs.map((faq, i) => (
+                <AccordionItem
+                  key={i}
+                  value={`faq-${i}`}
+                  className="surface-elevated rounded-xl border border-border/50 px-6"
+                >
+                  <AccordionTrigger className="text-left font-heading font-semibold text-base hover:no-underline py-5">
+                    {faq.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground leading-relaxed pb-5">{faq.a}</AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Contact Form */}
+      <ContactForm />
+
+      <Footer />
+    </div>
+  );
+};
 
 export default VideoLocalizationPage;

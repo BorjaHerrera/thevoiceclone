@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import logoSrc from "@/assets/logo_transparente.png";
 const logo = typeof logoSrc === 'string' ? logoSrc : (logoSrc as { src: string }).src;
 
-const navLinks = [
+const navLinksEs = [
   { label: "Servicios", href: "/#servicios" },
   { label: "Localización End-to-End", href: "/localizacion-audiovisual" },
   {
@@ -22,12 +22,34 @@ const navLinks = [
   { label: "Blog", href: "/blog" },
 ];
 
+const navLinksEn = [
+  { label: "Services", href: "/en/#services" },
+  { label: "End-to-End Localization", href: "/en/audiovisual-localization" },
+  {
+    label: "Video",
+    href: "/en/video-for-business",
+    dropdown: [
+      { label: "Video Localization", href: "/en/video-localization" },
+      { label: "AI Video Production", href: "/en/ai-video-production" },
+    ],
+  },
+  { label: "AI Voice Over", href: "/en/ai-voices" },
+  { label: "Subtitling", href: "/en/video-subtitling" },
+  { label: "Translation", href: "/en/professional-translation" },
+  { label: "Blog", href: "/en/blog" },
+];
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const router = useRouter();
+  const isEn = router.locale === "en";
+  const navLinks = isEn ? navLinksEn : navLinksEs;
+  const contactHref = isEn ? "/en/contact" : "/contacto";
+  const contactLabel = isEn ? "Contact" : "Contacto";
+
   const isHome = router.pathname === "/" || router.pathname === "";
   const isOpaque = !isHome || scrolled;
 
@@ -51,7 +73,7 @@ const Navbar = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${isOpaque ? "bg-white shadow-sm" : ""}`}
     >
       <div className="container mx-auto flex items-center justify-between h-20 px-4 lg:px-8">
-        <a href="/" className="flex items-center">
+        <a href={isEn ? "/en/" : "/"} className="flex items-center">
           <img src={logo} alt="The Voice Clone" className="h-12" />
         </a>
 
@@ -106,10 +128,10 @@ const Navbar = () => {
           )}
 
           <a
-            href="/contacto"
+            href={contactHref}
             className={`px-5 py-2 rounded-full text-sm font-semibold transition-colors hover:bg-yellow-400 hover:text-foreground ${isOpaque ? "bg-foreground text-background" : "bg-white text-foreground"}`}
           >
-            Contacto
+            {contactLabel}
           </a>
 
           {/* Language switcher */}
@@ -183,11 +205,11 @@ const Navbar = () => {
                 </div>
               ))}
               <a
-                href="/contacto"
+                href={contactHref}
                 className="gradient-bg text-primary-foreground px-5 py-2.5 rounded-full text-sm font-semibold text-center mt-2"
                 onClick={() => setOpen(false)}
               >
-                Contacto
+                {contactLabel}
               </a>
 
               {/* Language switcher mobile */}

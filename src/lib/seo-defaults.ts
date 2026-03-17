@@ -69,4 +69,65 @@ export const pageSeoDefaults: Record<string, PageSeoDefault> = {
     description:
       'Información sobre el uso de cookies en thevoiceclone.com. Conoce qué cookies utilizamos y cómo gestionarlas.',
   },
+  // English routes
+  '/en': {
+    title: 'AI Multimedia Localization Agency | Human-in-the-Loop | The Voice Clone',
+    description:
+      'Professional AI multimedia localization agency. Human-in-the-loop approach for corporate video, AI voices, multilingual subtitling and e-learning. 15+ years of experience.',
+  },
+  '/ai-voices': {
+    title: 'Professional AI Voice Over | Multilingual & Human-Reviewed | The Voice Clone',
+    description:
+      'Professional AI voice over production with expert human review. Multilingual corporate voice over, scalable and brand-consistent. AI + professional voice artists.',
+  },
+  '/video-for-business': {
+    title: 'Video Services for Companies | Corporate & Training | The Voice Clone',
+    description:
+      'Centralized hub for corporate video production, localization and distribution. Multilingual e-learning, AI-generated videos and human review for global businesses.',
+  },
+  '/video-localization': {
+    title: 'Video Localization for Business | AI-Assisted & Human-Reviewed | The Voice Clone',
+    description:
+      'AI-assisted video localization for corporate training and e-learning. AI avatars, cultural adaptation and up to 40% reduction in editing time. Human-in-the-loop quality.',
+  },
+  '/ai-video-production': {
+    title: 'Professional AI Video Production for Business | The Voice Clone',
+    description:
+      'Corporate and advertising videos with AI. AI avatars, scalable content generation and up to 60% savings in operational costs. Human-in-the-loop quality guaranteed.',
+  },
+  '/audiovisual-localization': {
+    title: 'Professional AI Multimedia Localization | End-to-End | The Voice Clone',
+    description:
+      'Translation, subtitling, dubbing and cultural adaptation under one managed workflow. Human-in-the-loop AI localization for global companies. Certified professional service.',
+  },
+  '/video-subtitling': {
+    title: 'Professional Video Subtitling | Human-Reviewed | Multilingual | The Voice Clone',
+    description:
+      'Multilingual subtitles with hybrid AI and human review workflow. Outsource professional corporate video subtitling with linguistic precision and cultural adaptation.',
+  },
+  '/professional-translation': {
+    title: 'Professional Translation Services for Business | AI + Human Review | The Voice Clone',
+    description:
+      'Corporate multilingual translation with AI and human review. 95% terminological consistency and 40% reduction in errors. Professional AI-assisted translation service.',
+  },
+  '/faq': {
+    title: 'FAQ | AI Multimedia Localization & Production | The Voice Clone',
+    description:
+      'Answers to your questions about AI multimedia localization, professional voice over, subtitling and video production. Learn about our human-in-the-loop approach.',
+  },
+  '/contact': {
+    title: 'Contact | The Voice Clone — AI Multimedia Localization Agency',
+    description:
+      'Contact The Voice Clone for audiovisual localization, corporate video, subtitling and professional translation services. We respond within 24 hours.',
+  },
+  '/legal-notice': {
+    title: 'Legal Notice | The Voice Clone',
+    description:
+      'Legal notice of The Voice Clone, AI multimedia localization agency. DANI VOICE OVERS, S.L. VAT: B87267878.',
+  },
+  '/cookie-policy': {
+    title: 'Cookie Policy | The Voice Clone',
+    description:
+      'Information about the use of cookies on thevoiceclone.com. Learn what cookies we use and how to manage them.',
+  },
 }

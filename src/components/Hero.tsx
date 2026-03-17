@@ -4,14 +4,14 @@ import { useRouter } from "next/router";
 const copy = {
   es: {
     badge: "AGENCIA DE LOCALIZACIÓN MULTIMEDIA CON IA",
-    line1: "IA Escalable.",
-    line2: "Precisión Humana.",
+    line1: "Potencia IA.",
+    line2: "Criterio Humano.",
     cta: "Solicita tu demo",
   },
   en: {
     badge: "AI MULTIMEDIA LOCALISATION AGENCY",
-    line1: "Scalable AI.",
-    line2: "Human Precision.",
+    line1: "AI Power.",
+    line2: "Human Touch.",
     cta: "Request your demo",
   },
 };

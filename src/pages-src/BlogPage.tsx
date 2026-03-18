@@ -83,8 +83,7 @@ const BlogPage = ({ posts }: Props) => (
                     <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3 flex-1">
                       {post.excerpt}
                     </p>
-                    <div className="flex items-center justify-between pt-2 mt-auto">
-                      <span className="text-xs text-muted-foreground">{post.date}</span>
+                    <div className="flex items-center justify-end pt-2 mt-auto">
                       <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary opacity-0 group-hover:opacity-100 transition-opacity">
                         Leer <ArrowRight className="w-4 h-4" />
                       </span>

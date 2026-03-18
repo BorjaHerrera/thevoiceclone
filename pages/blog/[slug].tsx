@@ -26,7 +26,7 @@ export default function BlogPostPage({ post, locale }: Props) {
     return (
       <div className="min-h-screen bg-background">
         <Navbar />
-        <div className="pt-32 pb-24 container px-4 lg:px-8 max-w-3xl mx-auto text-center">
+        <div className="pt-32 pb-24 container px-4 lg:px-8 max-w-4xl mx-auto text-center">
           <h1 className="text-3xl font-heading font-extrabold mb-4">{notFoundLabel}</h1>
           <Link href={blogHref} className="text-primary font-semibold hover:underline">
             {backLabel}
@@ -56,7 +56,7 @@ export default function BlogPostPage({ post, locale }: Props) {
       <Navbar />
 
       <article className="pt-28 pb-24">
-        <div className="container px-4 lg:px-8 max-w-3xl mx-auto">
+        <div className="container px-4 lg:px-8 max-w-4xl mx-auto">
 
           {/* Breadcrumbs */}
           <motion.nav
@@ -106,7 +106,6 @@ export default function BlogPostPage({ post, locale }: Props) {
               <span className="inline-flex items-center gap-1.5">
                 <User className="w-4 h-4" /> {post.author}
               </span>
-              {post.date && <span>{post.date}</span>}
             </motion.div>
           )}
 
@@ -126,13 +125,17 @@ export default function BlogPostPage({ post, locale }: Props) {
             </motion.div>
           )}
 
-          {/* Content — WP HTML rendered directly */}
+          {/* Content — WP HTML rendered directly (images stripped; featured image shown above) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="prose prose-lg max-w-none prose-headings:font-heading prose-headings:font-extrabold prose-headings:uppercase prose-a:text-primary"
-            dangerouslySetInnerHTML={{ __html: post.content }}
+            className="prose prose-lg max-w-none bg-transparent prose-headings:font-heading prose-headings:font-extrabold prose-headings:uppercase prose-a:text-primary [&_figure]:hidden [&_img]:hidden [&_mark]:bg-transparent [&_mark]:text-current"
+            dangerouslySetInnerHTML={{
+              __html: post.content
+                .replace(/<figure[^>]*>[\s\S]*?<\/figure>/gi, '')
+                .replace(/<img[^>]*\/?>/gi, ''),
+            }}
           />
 
           {/* Bottom CTA */}

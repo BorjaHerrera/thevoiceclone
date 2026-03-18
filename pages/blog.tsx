@@ -1,90 +1,71 @@
+import { GetStaticProps } from 'next'
 import { NextSeo } from 'next-seo'
 import Head from 'next/head'
-import { GetServerSideProps } from 'next'
-import { getSeoByUri, type RankMathSeo } from '@/lib/seo'
 import { pageSeoDefaults } from '@/lib/seo-defaults'
+import { getPostList, type WPPost } from '@/lib/wordpress'
 import BlogPage from '@/pages-src/BlogPage'
 import BlogEnPage from '@/pages-src/en/BlogEnPage'
 
 interface Props {
-  seo: RankMathSeo | null
+  posts: WPPost[]
   locale: string
 }
 
-export default function Page({ seo, locale }: Props) {
+export default function Page({ posts, locale }: Props) {
   if (locale === 'en') {
-    const enTitle = 'Blog | AI Multimedia Localisation & Production | The Voice Clone'
-    const enDescription = 'Articles on multimedia localisation, AI and global content production for enterprise teams.'
-
+    const title = 'Blog | AI Multimedia Localisation | The Voice Clone'
+    const description = 'Articles on multimedia localisation, AI and global content production for enterprise teams.'
     return (
       <>
         <NextSeo
-          title={enTitle}
-          description={enDescription}
+          title={title}
+          description={description}
           canonical="https://thevoiceclone.com/en/blog"
-          openGraph={{ title: enTitle, description: enDescription }}
-          twitter={{ cardType: 'summary_large_image' }}
+          openGraph={{ title, description }}
         />
         <Head>
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                '@context': 'https://schema.org',
-                '@type': 'Blog',
-                '@id': 'https://thevoiceclone.com/en/blog/#blog',
-                name: 'Blog — The Voice Clone',
-                description: enDescription,
-                url: 'https://thevoiceclone.com/en/blog',
-                publisher: { '@id': 'https://thevoiceclone.com/#organization' },
-              }),
-            }}
-          />
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Blog',
+            name: 'Blog — The Voice Clone',
+            description,
+            url: 'https://thevoiceclone.com/en/blog',
+            publisher: { '@id': 'https://thevoiceclone.com/#organization' },
+          })}} />
         </Head>
-        <BlogEnPage />
+        <BlogEnPage posts={posts} />
       </>
     )
   }
 
   const defaults = pageSeoDefaults['/blog']
-  const title = seo?.title || defaults.title
-  const description = seo?.metaDesc || defaults.description
-
   return (
     <>
       <NextSeo
-        title={title}
-        description={description}
-        canonical={seo?.canonical}
-        openGraph={{
-          title: seo?.opengraphTitle || title,
-          description: seo?.opengraphDescription || description,
-          ...(seo?.opengraphImage && { images: [{ url: seo.opengraphImage.sourceUrl }] }),
-        }}
-        twitter={{ cardType: 'summary_large_image' }}
+        title={defaults.title}
+        description={defaults.description}
+        canonical="https://thevoiceclone.com/blog"
+        openGraph={{ title: defaults.title, description: defaults.description }}
       />
       <Head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'Blog',
-              '@id': 'https://thevoiceclone.com/blog/#blog',
-              name: 'Blog — The Voice Clone',
-              description: defaults.description,
-              url: 'https://thevoiceclone.com/blog',
-              publisher: { '@id': 'https://thevoiceclone.com/#organization' },
-            }),
-          }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'Blog',
+          name: 'Blog — The Voice Clone',
+          description: defaults.description,
+          url: 'https://thevoiceclone.com/blog',
+          publisher: { '@id': 'https://thevoiceclone.com/#organization' },
+        })}} />
       </Head>
-      <BlogPage />
+      <BlogPage posts={posts} />
     </>
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
-  const seo = locale === 'es' ? await getSeoByUri('/blog/') : null
-  return { props: { seo, locale: locale || 'es' } }
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const posts = await getPostList(locale as 'es' | 'en')
+  return {
+    props: { posts, locale: locale ?? 'es' },
+    revalidate: 60,
+  }
 }

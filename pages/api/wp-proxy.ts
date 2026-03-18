@@ -21,14 +21,14 @@ function rewriteToWp(value: string): string {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  // Reconstruct upstream path from wpPath + remaining query params
-  const { wpPath, ...rest } = req.query
-  const pathSegment = Array.isArray(wpPath) ? wpPath[0] : wpPath ?? ''
-  const qs = new URLSearchParams(
-    Object.entries(rest).flatMap(([k, v]) =>
-      Array.isArray(v) ? v.map((val) => [k, val]) : [[k, v ?? '']]
-    )
-  ).toString()
+  // Read the full query string directly from req.url (the rewritten URL) so that
+  // all original query params are preserved even if Next.js's rewrite merging drops them.
+  // req.url = "/api/wp-proxy?wpPath=wp-admin/edit.php&post_type=page&..."
+  const rawQs = req.url?.includes('?') ? req.url.split('?')[1] : ''
+  const params = new URLSearchParams(rawQs)
+  const pathSegment = params.get('wpPath') ?? ''
+  params.delete('wpPath')
+  const qs = params.toString()
   const upstreamUrl = `${WP_ORIGIN}/${pathSegment}${qs ? '?' + qs : ''}`
 
   // Build request headers

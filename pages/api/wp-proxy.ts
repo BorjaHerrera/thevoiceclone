@@ -1,7 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 const WP_HOST = 'cms.thevoiceclone.com'
+const WP_ORIGIN = `https://${WP_HOST}`
 const PUBLIC_HOST = 'thevoiceclone.com'
+const PUBLIC_ORIGIN = `https://${PUBLIC_HOST}`
 
 const SKIP_RESPONSE_HEADERS = new Set([
   'content-encoding',
@@ -10,6 +12,13 @@ const SKIP_RESPONSE_HEADERS = new Set([
   'connection',
   'keep-alive',
 ])
+
+/** Rewrite public-facing URLs in a header value to the upstream WP host */
+function rewriteToWp(value: string): string {
+  return value
+    .replace(PUBLIC_ORIGIN, WP_ORIGIN)
+    .replace(PUBLIC_HOST, WP_HOST)
+}
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   // Reconstruct upstream path from wpPath + remaining query params
@@ -20,18 +29,37 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       Array.isArray(v) ? v.map((val) => [k, val]) : [[k, v ?? '']]
     )
   ).toString()
-  const upstreamUrl = `https://${WP_HOST}/${pathSegment}${qs ? '?' + qs : ''}`
+  const upstreamUrl = `${WP_ORIGIN}/${pathSegment}${qs ? '?' + qs : ''}`
 
-  // Build request headers, replacing Host
+  // Build request headers
   const reqHeaders: Record<string, string> = {}
   for (const [key, value] of Object.entries(req.headers)) {
     const k = key.toLowerCase()
     if (k === 'host' || k === 'connection') continue
-    reqHeaders[key] = Array.isArray(value) ? value.join(', ') : (value ?? '')
+    const v = Array.isArray(value) ? value.join(', ') : (value ?? '')
+
+    // Rewrite Referer and Origin so WordPress nonce/capability checks pass —
+    // WordPress validates these against its own siteurl (cms.thevoiceclone.com).
+    if (k === 'referer' || k === 'origin') {
+      reqHeaders[key] = rewriteToWp(v)
+      continue
+    }
+
+    reqHeaders[key] = v
   }
+
   reqHeaders['host'] = WP_HOST
   reqHeaders['x-forwarded-host'] = WP_HOST
   reqHeaders['x-forwarded-proto'] = 'https'
+
+  // Preserve the real client IP for WordPress audit logs / security plugins
+  const clientIp =
+    (req.headers['x-real-ip'] as string) ||
+    (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim()
+  if (clientIp) {
+    reqHeaders['x-forwarded-for'] = clientIp
+    reqHeaders['x-real-ip'] = clientIp
+  }
 
   // Read request body for non-GET methods (bodyParser is disabled)
   let body: Buffer | undefined
@@ -65,7 +93,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const location = upstream.headers.get('location')
   if (location) {
     const rewritten = location
-      .replace(`https://${WP_HOST}`, '')
+      .replace(WP_ORIGIN, '')
       .replace(`http://${WP_HOST}`, '')
     res.setHeader('location', rewritten || '/')
   }

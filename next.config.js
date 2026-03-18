@@ -22,6 +22,15 @@ const nextConfig = {
         { source: '/wp-content/:path*',     destination: '/api/wp-proxy?wpPath=wp-content/:path*' },
         { source: '/wp-json/:path*',        destination: '/api/wp-proxy?wpPath=wp-json/:path*' },
         { source: '/graphql',               destination: '/api/wp-proxy?wpPath=graphql' },
+        // WordPress dashboard pages that redirect without the /wp-admin/ prefix
+        { source: '/edit.php',             destination: '/api/wp-proxy?wpPath=edit.php' },
+        { source: '/post.php',             destination: '/api/wp-proxy?wpPath=post.php' },
+        { source: '/admin.php',            destination: '/api/wp-proxy?wpPath=admin.php' },
+        { source: '/admin-ajax.php',       destination: '/api/wp-proxy?wpPath=admin-ajax.php' },
+        { source: '/async-upload.php',     destination: '/api/wp-proxy?wpPath=async-upload.php' },
+        { source: '/media-upload.php',     destination: '/api/wp-proxy?wpPath=media-upload.php' },
+        // Generic catch-all for any other bare .php file WordPress might reference
+        { source: '/:file((?!api/)[^/]+\\.php)', destination: '/api/wp-proxy?wpPath=:file' },
       ],
       afterFiles: [],
       fallback: [],

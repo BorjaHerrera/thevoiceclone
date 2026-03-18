@@ -2,15 +2,11 @@
 module.exports = {
   siteUrl: 'https://thevoiceclone.com',
   generateRobotsTxt: false,
-  // next-sitemap auto-generates from pages/ — we exclude and override manually
-  exclude: [
-    '/aviso-legal',
-    '/politica-cookies',
-    '/en/legal-notice',
-    '/en/cookie-policy',
-    // exclude Next.js i18n alternate paths that next-sitemap might generate
-    '/es/*',
-  ],
+  // Suppress ALL auto-discovered paths from pages/ — only additionalPaths are used.
+  // next-sitemap discovers page files (e.g. pages/ai-voices.tsx → /ai-voices) which
+  // don't match the real i18n URLs (/en/ai-voices). Using transform: null ensures
+  // only the explicit list below appears in the sitemap.
+  transform: async () => null,
   additionalPaths: async () => [
     // Spanish routes
     { loc: '/',                            lastmod: new Date().toISOString(), changefreq: 'weekly',  priority: 1.0 },

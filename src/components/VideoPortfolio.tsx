@@ -1,30 +1,54 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Play } from "lucide-react";
+import { useRouter } from "next/router";
 
 interface VideoItem {
   id: string;
   youtubeId: string;
-  title: string;
+  titleEs: string;
+  titleEn: string;
 }
 
 const videos: VideoItem[] = [
   {
     id: "1",
     youtubeId: "QeDAESHmZBU",
-    title: "AI Voices. Human Touch",
+    titleEs: "AI Voices. Human Touch",
+    titleEn: "AI Voices. Human Touch",
   },
   {
     id: "2",
     youtubeId: "S17marPSB8g",
-    title: "La eficiencia de la IA combinada con la precisión humana",
+    titleEs: "La eficiencia de la IA combinada con la precisión humana",
+    titleEn: "AI efficiency combined with human precision",
   },
   {
     id: "3",
     youtubeId: "tbD-8HViFl4",
-    title: "Vídeos corporativos hechos con IA",
+    titleEs: "Vídeos corporativos hechos con IA",
+    titleEn: "Corporate videos made with AI",
   },
 ];
+
+const copy = {
+  es: {
+    heading: "Casos de éxito: El futuro de la producción de vídeo.",
+    description:
+      "Descubre cómo transformamos tus contenidos de formación, publicidad y comunicación corporativa al combinar la agilidad de la IA con la experiencia de nuestros expertos.",
+    pill: "Proyectos Destacados",
+    prev: "Anterior",
+    next: "Siguiente",
+  },
+  en: {
+    heading: "Success Stories: The Future of Video Production.",
+    description:
+      "Discover how we transform your training, advertising and corporate communication content by combining the agility of AI with the expertise of our specialists.",
+    pill: "Featured Projects",
+    prev: "Previous",
+    next: "Next",
+  },
+};
 
 const EMBED_PARAMS = "autoplay=1&rel=0&enablejsapi=1&origin=https://thevoiceclone.com";
 
@@ -41,12 +65,15 @@ const VideoCard = ({
   video,
   onPlay,
   isPlaying,
+  isEn,
 }: {
   video: VideoItem;
   onPlay: () => void;
   isPlaying: boolean;
+  isEn: boolean;
 }) => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const title = isEn ? video.titleEn : video.titleEs;
 
   // Pausa el vídeo cuando isPlaying pasa a false o cuando el componente se desmonta
   useEffect(() => {
@@ -70,13 +97,13 @@ const VideoCard = ({
           className="absolute inset-0 w-full h-full"
           allow="autoplay; encrypted-media"
           allowFullScreen
-          title={video.title}
+          title={title}
         />
       ) : (
         <>
           <img
             src={`https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`}
-            alt={video.title}
+            alt={title}
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             loading="lazy"
           />
@@ -90,7 +117,7 @@ const VideoCard = ({
 
           <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5">
             <p className="text-white font-semibold text-sm leading-snug">
-              {video.title}
+              {title}
             </p>
           </div>
         </>
@@ -104,6 +131,9 @@ const VideoPortfolio = () => {
   // Estado separado para cada layout: evita que ambos monten el iframe a la vez
   const [playingDesktopId, setPlayingDesktopId] = useState<string | null>(null);
   const [playingMobileId, setPlayingMobileId] = useState<string | null>(null);
+  const router = useRouter();
+  const isEn = router.locale === "en";
+  const t = isEn ? copy.en : copy.es;
 
   const getVisibleVideos = useCallback(() => {
     const result: VideoItem[] = [];
@@ -140,11 +170,10 @@ const VideoPortfolio = () => {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight mb-6">
-              Casos de éxito: El futuro de la producción de vídeo.
+              {t.heading}
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Descubre cómo transformamos tus contenidos de formación, publicidad y comunicación
-              corporativa al combinar la agilidad de la IA con la experiencia de nuestros expertos.
+              {t.description}
             </p>
           </motion.div>
 
@@ -158,7 +187,7 @@ const VideoPortfolio = () => {
           >
             <div className="inline-flex rounded-full border border-border p-1 bg-card">
               <button className="px-5 py-2 rounded-full text-sm font-semibold bg-foreground text-background shadow-sm">
-                Proyectos Destacados
+                {t.pill}
               </button>
             </div>
           </motion.div>
@@ -178,11 +207,12 @@ const VideoPortfolio = () => {
                   video={visibleVideos[0]}
                   isPlaying={playingDesktopId === visibleVideos[0].id}
                   onPlay={() => setPlayingDesktopId(visibleVideos[0].id)}
+                  isEn={isEn}
                 />
                 <button
                   onClick={scrollPrev}
                   className="self-start w-14 h-14 rounded-xl bg-secondary hover:bg-secondary/80 flex items-center justify-center transition-colors"
-                  aria-label="Anterior"
+                  aria-label={t.prev}
                 >
                   <ChevronLeft className="w-6 h-6 text-foreground" />
                 </button>
@@ -193,6 +223,7 @@ const VideoPortfolio = () => {
                   video={visibleVideos[1]}
                   isPlaying={playingDesktopId === visibleVideos[1].id}
                   onPlay={() => setPlayingDesktopId(visibleVideos[1].id)}
+                  isEn={isEn}
                 />
               </div>
 
@@ -200,7 +231,7 @@ const VideoPortfolio = () => {
                 <button
                   onClick={scrollNext}
                   className="self-end w-14 h-14 rounded-xl bg-secondary hover:bg-secondary/80 flex items-center justify-center transition-colors"
-                  aria-label="Siguiente"
+                  aria-label={t.next}
                 >
                   <ChevronRight className="w-6 h-6 text-foreground" />
                 </button>
@@ -208,6 +239,7 @@ const VideoPortfolio = () => {
                   video={visibleVideos[2]}
                   isPlaying={playingDesktopId === visibleVideos[2].id}
                   onPlay={() => setPlayingDesktopId(visibleVideos[2].id)}
+                  isEn={isEn}
                 />
               </div>
             </motion.div>
@@ -221,6 +253,7 @@ const VideoPortfolio = () => {
                   video={video}
                   isPlaying={playingMobileId === video.id}
                   onPlay={() => setPlayingMobileId(video.id)}
+                  isEn={isEn}
                 />
               </div>
             ))}
@@ -231,14 +264,14 @@ const VideoPortfolio = () => {
             <button
               onClick={scrollPrev}
               className="w-11 h-11 rounded-xl bg-secondary hover:bg-secondary/80 flex items-center justify-center transition-colors"
-              aria-label="Anterior"
+              aria-label={t.prev}
             >
               <ChevronLeft className="w-5 h-5 text-foreground" />
             </button>
             <button
               onClick={scrollNext}
               className="w-11 h-11 rounded-xl bg-secondary hover:bg-secondary/80 flex items-center justify-center transition-colors"
-              aria-label="Siguiente"
+              aria-label={t.next}
             >
               <ChevronRight className="w-5 h-5 text-foreground" />
             </button>

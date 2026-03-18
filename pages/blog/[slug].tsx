@@ -130,11 +130,14 @@ export default function BlogPostPage({ post, locale }: Props) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="prose prose-lg max-w-none bg-transparent prose-headings:font-heading prose-headings:font-extrabold prose-headings:uppercase prose-a:text-primary [&_figure]:hidden [&_img]:hidden [&_*]:bg-transparent [&_*]:bg-none"
+            className="prose prose-lg max-w-none bg-transparent prose-headings:font-heading prose-headings:font-extrabold prose-headings:uppercase prose-a:text-primary [&_figure]:hidden [&_img]:hidden"
             dangerouslySetInnerHTML={{
               __html: post.content
                 .replace(/<figure[^>]*>[\s\S]*?<\/figure>/gi, '')
-                .replace(/<img[^>]*\/?>/gi, ''),
+                .replace(/<img[^>]*\/?>/gi, '')
+                // Strip background-color and background from inline styles (WP block colors)
+                .replace(/\bbackground-color\s*:[^;}"']+;?/gi, '')
+                .replace(/\bbackground\s*:[^;}"']+;?/gi, ''),
             }}
           />
 

@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import FeatureGridSection from "@/components/FeatureGridSection";
 import VideoPortfolio from "@/components/VideoPortfolio";
-import videoLocalizationSrc from "@/assets/LOCALIZACION VIDEO SERVICIO.webp";
+import videoLocalizationSrc from "@/assets/LOCALIZACION_VIDEO_SERVICIO.webp";
 const videoLocalization = typeof videoLocalizationSrc === "string" ? videoLocalizationSrc : (videoLocalizationSrc as { src: string }).src;
 
 const sections = [

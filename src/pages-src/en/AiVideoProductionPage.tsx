@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import FeatureGridSection from "@/components/FeatureGridSection";
 import VideoPortfolio from "@/components/VideoPortfolio";
-import videoProduccionIASrc from "@/assets/PRODUCCION VIDEO SERVICIO.webp";
+import videoProduccionIASrc from "@/assets/PRODUCCION_VIDEO_SERVICIO.webp";
 const videoProduccionIA = typeof videoProduccionIASrc === "string" ? videoProduccionIASrc : (videoProduccionIASrc as { src: string }).src;
 
 const featureCards = [

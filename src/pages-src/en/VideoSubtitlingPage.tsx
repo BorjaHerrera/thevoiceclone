@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import FeatureGridSection from "@/components/FeatureGridSection";
 import VideoPortfolio from "@/components/VideoPortfolio";
-import humanAiCollaborationSrc from "@/assets/SUBTITULADO MULTILINGUE SERVICIO.webp";
+import humanAiCollaborationSrc from "@/assets/SUBTITULADO_MULTILINGUE_SERVICIO.webp";
 const humanAiCollaboration = typeof humanAiCollaborationSrc === "string" ? humanAiCollaborationSrc : (humanAiCollaborationSrc as { src: string }).src;
 
 const sections: { id: string; title: string; navLabel: string; intro: string; subsections: { heading: string; text: string }[] }[] = [

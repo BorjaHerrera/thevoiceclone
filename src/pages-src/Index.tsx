@@ -11,12 +11,12 @@ import FAQ from "@/components/FAQ";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 
-import localizacionVideoHomeSrc from "@/assets/LOCALIZACION VIDEO HOME.webp";
-import produccionVideoHomeSrc from "@/assets/PRODUCCION VIDEO HOME.webp";
-import localizacionMultimediaHomeSrc from "@/assets/LOCALIZACION MULTIMEDIA HOME.webp";
-import locucionVocesIAHomeSrc from "@/assets/LOCUCION VOCES IA HOME.webp";
-import subtituladoMultilingueHomeSrc from "@/assets/SUBTITULADO MULTILINGUE HOME.webp";
-import traduccionHomeSrc from "@/assets/TRADUCCION CON IA SUPERVISADA HOME.webp";
+import localizacionVideoHomeSrc from "@/assets/LOCALIZACION_VIDEO_HOME.webp";
+import produccionVideoHomeSrc from "@/assets/PRODUCCION_VIDEO_HOME.webp";
+import localizacionMultimediaHomeSrc from "@/assets/LOCALIZACION_MULTIMEDIA_HOME.webp";
+import locucionVocesIAHomeSrc from "@/assets/LOCUCION_VOCES_IA_HOME.webp";
+import subtituladoMultilingueHomeSrc from "@/assets/SUBTITULADO_MULTILINGUE_HOME.webp";
+import traduccionHomeSrc from "@/assets/TRADUCCION_CON_IA_SUPERVISADA_HOME.webp";
 const localizacionVideoHome = typeof localizacionVideoHomeSrc === "string" ? localizacionVideoHomeSrc : (localizacionVideoHomeSrc as { src: string }).src;
 const produccionVideoHome = typeof produccionVideoHomeSrc === "string" ? produccionVideoHomeSrc : (produccionVideoHomeSrc as { src: string }).src;
 const localizacionMultimediaHome = typeof localizacionMultimediaHomeSrc === "string" ? localizacionMultimediaHomeSrc : (localizacionMultimediaHomeSrc as { src: string }).src;

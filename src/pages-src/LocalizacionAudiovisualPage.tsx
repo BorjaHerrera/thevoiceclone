@@ -9,7 +9,7 @@ import ContactForm from "@/components/ContactForm";
 import FeatureGridSection from "@/components/FeatureGridSection";
 import VideoPortfolio from "@/components/VideoPortfolio";
 import type { FeatureCard } from "@/components/FeatureGridSection";
-import localizacionAudiovisualSrc from "@/assets/LOCALIZACION MULTIMEDIA SERVICIO.webp";
+import localizacionAudiovisualSrc from "@/assets/LOCALIZACION_MULTIMEDIA_SERVICIO.webp";
 const localizacionAudiovisual = typeof localizacionAudiovisualSrc === "string" ? localizacionAudiovisualSrc : (localizacionAudiovisualSrc as { src: string }).src;
 
 const featureCards: FeatureCard[] = [

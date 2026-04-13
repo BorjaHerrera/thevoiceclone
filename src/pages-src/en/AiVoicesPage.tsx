@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import FeatureGridSection from "@/components/FeatureGridSection";
 import VideoPortfolio from "@/components/VideoPortfolio";
-import voiceoverImgSrc from "@/assets/LOCUCION VOCES IA SERVICIO.webp";
+import voiceoverImgSrc from "@/assets/LOCUCION_VOCES_IA_SERVICIO.webp";
 const voiceoverImg = typeof voiceoverImgSrc === "string" ? voiceoverImgSrc : (voiceoverImgSrc as { src: string }).src;
 
 const sections = [

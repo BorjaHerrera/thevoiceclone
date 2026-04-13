@@ -78,7 +78,7 @@ const IndexEnPage = () => (
     />
 
     <CTASection />
-    <VideoPortfolio />
+    <VideoPortfolio videoIds={["Ohr6Kw1Qmx0", "wyMLE_um2Sk", "lHSTqk_1uc4"]} />
     <FAQ />
     <FinalCTA />
     <Footer />

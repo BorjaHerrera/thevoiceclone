@@ -370,7 +370,7 @@ const SubtituladoProfesionalVideoPage = () => {
         </div>
       </section>
 
-      <VideoPortfolio />
+      <VideoPortfolio videoIds={["lHSTqk_1uc4", "QeDAESHmZBU", "wyMLE_um2Sk"]} />
 
       {/* FAQ */}
       <section className="py-20 lg:py-28">

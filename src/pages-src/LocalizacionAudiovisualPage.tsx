@@ -423,7 +423,7 @@ const LocalizacionAudiovisualPage = () => {
         </div>
       </section>
 
-      <VideoPortfolio />
+      <VideoPortfolio videoIds={["wyMLE_um2Sk", "lHSTqk_1uc4", "gWnV2XRaUv0"]} />
 
       {/* FAQ */}
       <section className="py-20 lg:py-28">

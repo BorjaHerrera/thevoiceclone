@@ -10,26 +10,60 @@ interface VideoItem {
   titleEn: string;
 }
 
-const videos: VideoItem[] = [
-  {
-    id: "1",
-    youtubeId: "QeDAESHmZBU",
+const VIDEO_REGISTRY: Record<string, { titleEs: string; titleEn: string }> = {
+  QeDAESHmZBU: {
     titleEs: "AI Voices. Human Touch",
     titleEn: "AI Voices. Human Touch",
   },
-  {
-    id: "2",
-    youtubeId: "S17marPSB8g",
+  S17marPSB8g: {
     titleEs: "La eficiencia de la IA combinada con la precisión humana",
     titleEn: "AI efficiency combined with human precision",
   },
-  {
-    id: "3",
-    youtubeId: "tbD-8HViFl4",
+  "tbD-8HViFl4": {
     titleEs: "Vídeos corporativos hechos con IA",
     titleEn: "Corporate videos made with AI",
   },
+  wyMLE_um2Sk: {
+    titleEs: "Localización de vídeo con IA",
+    titleEn: "Video localization with AI",
+  },
+  lHSTqk_1uc4: {
+    titleEs: "Subtitulado multilingüe profesional",
+    titleEn: "Professional multilingual subtitling",
+  },
+  gWnV2XRaUv0: {
+    titleEs: "Voces IA para tu marca",
+    titleEn: "AI voices for your brand",
+  },
+  "7Hlge9Q_8iQ": {
+    titleEs: "Producción de vídeo con IA",
+    titleEn: "AI video production",
+  },
+  Ohr6Kw1Qmx0: {
+    titleEs: "Localización audiovisual profesional",
+    titleEn: "Professional audiovisual localization",
+  },
+  yDDZg_Qh4Rs: {
+    titleEs: "Traducción y subtitulado con IA",
+    titleEn: "AI translation and subtitling",
+  },
+};
+
+const DEFAULT_VIDEO_IDS: [string, string, string] = [
+  "QeDAESHmZBU",
+  "S17marPSB8g",
+  "tbD-8HViFl4",
 ];
+
+function makeVideoItems(ids: [string, string, string]): VideoItem[] {
+  return ids.map((youtubeId, i) => {
+    const meta = VIDEO_REGISTRY[youtubeId] ?? {
+      titleEs: youtubeId,
+      titleEn: youtubeId,
+    };
+    return { id: String(i + 1), youtubeId, ...meta };
+  });
+}
 
 const copy = {
   es: {
@@ -126,7 +160,14 @@ const VideoCard = ({
   );
 };
 
-const VideoPortfolio = () => {
+const VideoPortfolio = ({
+  videoIds,
+}: {
+  videoIds?: [string, string, string];
+}) => {
+  const ids = videoIds ?? DEFAULT_VIDEO_IDS;
+  const videos = makeVideoItems(ids);
+
   const [startIndex, setStartIndex] = useState(0);
   // Estado separado para cada layout: evita que ambos monten el iframe a la vez
   const [playingDesktopId, setPlayingDesktopId] = useState<string | null>(null);
@@ -141,7 +182,7 @@ const VideoPortfolio = () => {
       result.push(videos[(startIndex + i) % videos.length]);
     }
     return result;
-  }, [startIndex]);
+  }, [startIndex, videos]);
 
   const scrollPrev = () => {
     setPlayingDesktopId(null);
@@ -156,6 +197,10 @@ const VideoPortfolio = () => {
   };
 
   const visibleVideos = getVisibleVideos();
+
+  // visibleVideos[0] = V1 (featured, large center)
+  // visibleVideos[1] = V2 (left, small)
+  // visibleVideos[2] = V3 (right, small)
 
   return (
     <section className="py-20 lg:py-28 bg-background">
@@ -192,7 +237,7 @@ const VideoPortfolio = () => {
             </div>
           </motion.div>
 
-          {/* Desktop staircase layout — solo este layout usa playingDesktopId */}
+          {/* Desktop staircase layout — V1 grande en el centro */}
           <AnimatePresence mode="wait">
             <motion.div
               key={startIndex}
@@ -202,11 +247,12 @@ const VideoPortfolio = () => {
               transition={{ duration: 0.4, ease: "easeInOut" }}
               className="hidden md:flex gap-2 items-start justify-center"
             >
+              {/* V2 — izquierda pequeño */}
               <div className="flex flex-col gap-3 w-[28%] shrink-0">
                 <VideoCard
-                  video={visibleVideos[0]}
-                  isPlaying={playingDesktopId === visibleVideos[0].id}
-                  onPlay={() => setPlayingDesktopId(visibleVideos[0].id)}
+                  video={visibleVideos[1]}
+                  isPlaying={playingDesktopId === visibleVideos[1].id}
+                  onPlay={() => setPlayingDesktopId(visibleVideos[1].id)}
                   isEn={isEn}
                 />
                 <button
@@ -218,15 +264,17 @@ const VideoPortfolio = () => {
                 </button>
               </div>
 
+              {/* V1 — centro grande */}
               <div className="w-[40%] shrink-0 mt-[3%]">
                 <VideoCard
-                  video={visibleVideos[1]}
-                  isPlaying={playingDesktopId === visibleVideos[1].id}
-                  onPlay={() => setPlayingDesktopId(visibleVideos[1].id)}
+                  video={visibleVideos[0]}
+                  isPlaying={playingDesktopId === visibleVideos[0].id}
+                  onPlay={() => setPlayingDesktopId(visibleVideos[0].id)}
                   isEn={isEn}
                 />
               </div>
 
+              {/* V3 — derecha pequeño */}
               <div className="flex flex-col gap-3 w-[28%] shrink-0 mt-[12%]">
                 <button
                   onClick={scrollNext}

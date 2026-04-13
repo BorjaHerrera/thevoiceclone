@@ -370,7 +370,7 @@ const ServicioTraduccionPage = () => {
         </div>
       </section>
 
-      <VideoPortfolio />
+      <VideoPortfolio videoIds={["gWnV2XRaUv0", "lHSTqk_1uc4", "S17marPSB8g"]} />
 
       {/* FAQ */}
       <section className="py-20 lg:py-28">

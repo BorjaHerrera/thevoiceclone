@@ -407,7 +407,7 @@ const VideoEmpresasPage = () => {
         </div>
       </section>
 
-      <VideoPortfolio />
+      <VideoPortfolio videoIds={["wyMLE_um2Sk", "tbD-8HViFl4", "S17marPSB8g"]} />
 
       {/* FAQ */}
       <section className="py-20 lg:py-28">

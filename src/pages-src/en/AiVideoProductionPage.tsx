@@ -382,7 +382,7 @@ const AiVideoProductionPage = () => {
         </div>
       </section>
 
-      <VideoPortfolio />
+      <VideoPortfolio videoIds={["tbD-8HViFl4", "wyMLE_um2Sk", "7Hlge9Q_8iQ"]} />
 
       {/* FAQ */}
       <section className="py-20 lg:py-28">

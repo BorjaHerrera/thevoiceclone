@@ -78,7 +78,7 @@ const Index = () => (
     />
 
     <CTASection />
-    <VideoPortfolio />
+    <VideoPortfolio videoIds={["S17marPSB8g", "wyMLE_um2Sk", "lHSTqk_1uc4"]} />
     <FAQ />
     <FinalCTA />
     <Footer />

@@ -389,7 +389,7 @@ const AiVoicesPage = () => {
         </div>
       </section>
 
-      <VideoPortfolio />
+      <VideoPortfolio videoIds={["yDDZg_Qh4Rs", "QeDAESHmZBU", "lHSTqk_1uc4"]} />
 
       {/* FAQ */}
       <section className="py-20 lg:py-28">

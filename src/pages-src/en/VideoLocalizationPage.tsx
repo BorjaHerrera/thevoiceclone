@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import FeatureGridSection from "@/components/FeatureGridSection";
 import VideoPortfolio from "@/components/VideoPortfolio";
-import videoLocalizationSrc from "@/assets/video-localization.jpg";
+import videoLocalizationSrc from "@/assets/LOCALIZACION VIDEO SERVICIO.webp";
 const videoLocalization = typeof videoLocalizationSrc === "string" ? videoLocalizationSrc : (videoLocalizationSrc as { src: string }).src;
 
 const sections = [
@@ -248,7 +248,7 @@ const VideoLocalizationPage = () => {
           >
             <img
               src={videoLocalization}
-              alt="Video localization process with artificial intelligence technology and human supervision"
+              alt="Video Localization"
               className="w-full h-full object-cover"
             />
           </motion.div>

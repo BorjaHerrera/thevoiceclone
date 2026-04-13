@@ -11,14 +11,18 @@ import FAQ from "@/components/FAQ";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 
-import videoImgSrc from "@/assets/video-localization.jpg";
-import voiceoverImgSrc from "@/assets/voiceover.jpg";
-import subtitlingImgSrc from "@/assets/subtitling.jpg";
-import translationImgSrc from "@/assets/translation.jpg";
-const videoImg = typeof videoImgSrc === "string" ? videoImgSrc : (videoImgSrc as { src: string }).src;
-const voiceoverImg = typeof voiceoverImgSrc === "string" ? voiceoverImgSrc : (voiceoverImgSrc as { src: string }).src;
-const subtitlingImg = typeof subtitlingImgSrc === "string" ? subtitlingImgSrc : (subtitlingImgSrc as { src: string }).src;
-const translationImg = typeof translationImgSrc === "string" ? translationImgSrc : (translationImgSrc as { src: string }).src;
+import localizacionVideoHomeSrc from "@/assets/LOCALIZACION VIDEO HOME.webp";
+import produccionVideoHomeSrc from "@/assets/PRODUCCION VIDEO HOME.webp";
+import localizacionMultimediaHomeSrc from "@/assets/LOCALIZACION MULTIMEDIA HOME.webp";
+import locucionVocesIAHomeSrc from "@/assets/LOCUCION VOCES IA HOME.webp";
+import subtituladoMultilingueHomeSrc from "@/assets/SUBTITULADO MULTILINGUE HOME.webp";
+import traduccionHomeSrc from "@/assets/TRADUCCION CON IA SUPERVISADA HOME.webp";
+const localizacionVideoHome = typeof localizacionVideoHomeSrc === "string" ? localizacionVideoHomeSrc : (localizacionVideoHomeSrc as { src: string }).src;
+const produccionVideoHome = typeof produccionVideoHomeSrc === "string" ? produccionVideoHomeSrc : (produccionVideoHomeSrc as { src: string }).src;
+const localizacionMultimediaHome = typeof localizacionMultimediaHomeSrc === "string" ? localizacionMultimediaHomeSrc : (localizacionMultimediaHomeSrc as { src: string }).src;
+const locucionVocesIAHome = typeof locucionVocesIAHomeSrc === "string" ? locucionVocesIAHomeSrc : (locucionVocesIAHomeSrc as { src: string }).src;
+const subtituladoMultilingueHome = typeof subtituladoMultilingueHomeSrc === "string" ? subtituladoMultilingueHomeSrc : (subtituladoMultilingueHomeSrc as { src: string }).src;
+const traduccionHome = typeof traduccionHomeSrc === "string" ? traduccionHomeSrc : (traduccionHomeSrc as { src: string }).src;
 
 const Index = () => (
   <div className="min-h-screen bg-background">
@@ -29,17 +33,17 @@ const Index = () => (
     <ServicesGrid />
 
     <ServiceSectionDual
-      image={videoImg}
-      imageAlt="Interfaz de edición de vídeo con formas de onda y overlays multilingües"
-      image2={subtitlingImg}
-      image2Alt="Producción de vídeo con IA"
+      image={localizacionVideoHome}
+      imageAlt="Localización de Vídeo"
+      image2={produccionVideoHome}
+      image2Alt="Producción de Vídeo con IA"
     />
 
     <div className="bg-secondary/30">
       <ServiceDetail
         id="localizacion-integral"
-        image={voiceoverImg}
-        imageAlt="Workflow de localización multimedia integral"
+        image={localizacionMultimediaHome}
+        imageAlt="Localización Multimedia"
         title="Localización Multimedia"
         details="Flujo de trabajo único que unifica vídeo, locución, subtítulos y traducción, evitando errores de traspaso y asegurando mensajes consistentes con un único partner estratégico."
         reverse
@@ -48,8 +52,8 @@ const Index = () => (
 
     <ServiceDetail
       id="voiceover"
-      image={voiceoverImg}
-      imageAlt="Micrófono profesional de estudio con ondas sonoras abstractas"
+      image={locucionVocesIAHome}
+      imageAlt="Locuciones con Voces IA"
       title="Locuciones con voces IA"
       details="Tecnologías de voz avanzadas con validación humana que llevan tu narrativa a cualquier idioma manteniendo voz de marca coherente, pronunciación y naturalidad impecables."
     />
@@ -57,8 +61,8 @@ const Index = () => (
     <div className="bg-secondary/30">
       <ServiceDetail
         id="subtitulacion"
-        image={subtitlingImg}
-        imageAlt="Pantalla cinematográfica con subtítulos tipográficos limpios"
+        image={subtituladoMultilingueHome}
+        imageAlt="Subtitulado Multilingüe"
         title="Subtitulado Multilingüe"
         details="Subtítulos precisos y culturalmente apropiados generados con IA y revisores expertos que garantizan legibilidad, sincronización perfecta y mejoran el engagement global."
         reverse
@@ -67,8 +71,8 @@ const Index = () => (
 
     <ServiceDetail
       id="traduccion"
-      image={translationImg}
-      imageAlt="Visualización de conectividad global con líneas y nodos"
+      image={traduccionHome}
+      imageAlt="Traducción con IA Supervisada"
       title="Traducción con IA supervisada"
       details="Modelo de IA supervisada que adapta guiones y textos con rigor terminológico y estilo corporativo, optimizando velocidad y coste a gran escala."
     />

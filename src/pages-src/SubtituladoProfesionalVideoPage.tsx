@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import FeatureGridSection from "@/components/FeatureGridSection";
 import VideoPortfolio from "@/components/VideoPortfolio";
-import humanAiCollaborationSrc from "@/assets/human-ai-collaboration.jpg";
+import humanAiCollaborationSrc from "@/assets/SUBTITULADO MULTILINGUE SERVICIO.webp";
 const humanAiCollaboration = typeof humanAiCollaborationSrc === "string" ? humanAiCollaborationSrc : (humanAiCollaborationSrc as { src: string }).src;
 
 const sections: { id: string; title: string; navLabel: string; intro: string; subsections: { heading: string; text: string }[] }[] = [
@@ -228,7 +228,7 @@ const SubtituladoProfesionalVideoPage = () => {
           >
             <img
               src={humanAiCollaboration}
-              alt="Subtitulado profesional con tecnología IA y revisión humana"
+              alt="Subtitulado Multilingüe"
               className="w-full h-full object-cover"
             />
           </motion.div>

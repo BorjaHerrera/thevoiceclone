@@ -9,7 +9,7 @@ import ContactForm from "@/components/ContactForm";
 import FeatureGridSection from "@/components/FeatureGridSection";
 import VideoPortfolio from "@/components/VideoPortfolio";
 import type { FeatureCard } from "@/components/FeatureGridSection";
-import localizacionAudiovisualSrc from "@/assets/localizacion-audiovisual.jpg";
+import localizacionAudiovisualSrc from "@/assets/LOCALIZACION MULTIMEDIA SERVICIO.webp";
 const localizacionAudiovisual = typeof localizacionAudiovisualSrc === "string" ? localizacionAudiovisualSrc : (localizacionAudiovisualSrc as { src: string }).src;
 
 const featureCards: FeatureCard[] = [
@@ -316,7 +316,7 @@ const LocalizacionAudiovisualPage = () => {
           >
             <img
               src={localizacionAudiovisual}
-              alt="Interfaz profesional de localización audiovisual con edición de subtítulos y traducción digital"
+              alt="Localización Multimedia"
               className="w-full h-full object-cover"
             />
           </motion.div>

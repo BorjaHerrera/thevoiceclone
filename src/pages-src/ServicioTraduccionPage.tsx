@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import FeatureGridSection from "@/components/FeatureGridSection";
 import VideoPortfolio from "@/components/VideoPortfolio";
-import humanAiCollaborationSrc from "@/assets/human-ai-collaboration.jpg";
+import humanAiCollaborationSrc from "@/assets/TRADUCCION CON IA SUPERVISADA SERVICIO.webp";
 const humanAiCollaboration = typeof humanAiCollaborationSrc === "string" ? humanAiCollaborationSrc : (humanAiCollaborationSrc as { src: string }).src;
 
 const sections: { id: string; title: string; navLabel: string; intro: string; subsections: { heading: string; text: string }[] }[] = [
@@ -228,7 +228,7 @@ const ServicioTraduccionPage = () => {
           >
             <img
               src={humanAiCollaboration}
-              alt="Traducción profesional con tecnología IA y revisión humana"
+              alt="Traducción con IA Supervisada"
               className="w-full h-full object-cover"
             />
           </motion.div>

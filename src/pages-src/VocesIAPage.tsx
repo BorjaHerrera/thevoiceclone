@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import FeatureGridSection from "@/components/FeatureGridSection";
 import VideoPortfolio from "@/components/VideoPortfolio";
-import voiceoverImgSrc from "@/assets/voiceover.jpg";
+import voiceoverImgSrc from "@/assets/LOCUCION VOCES IA SERVICIO.webp";
 const voiceoverImg = typeof voiceoverImgSrc === "string" ? voiceoverImgSrc : (voiceoverImgSrc as { src: string }).src;
 
 const sections = [
@@ -291,7 +291,7 @@ const VocesIAPage = () => {
           >
             <img
               src={voiceoverImg}
-              alt="Producción profesional de voces con inteligencia artificial y supervisión humana"
+              alt="Voces IA"
               className="w-full h-full object-cover"
             />
           </motion.div>

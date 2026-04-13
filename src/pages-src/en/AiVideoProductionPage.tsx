@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import FeatureGridSection from "@/components/FeatureGridSection";
 import VideoPortfolio from "@/components/VideoPortfolio";
-import videoProduccionIASrc from "@/assets/video-produccion-ia.jpg";
+import videoProduccionIASrc from "@/assets/PRODUCCION VIDEO SERVICIO.webp";
 const videoProduccionIA = typeof videoProduccionIASrc === "string" ? videoProduccionIASrc : (videoProduccionIASrc as { src: string }).src;
 
 const featureCards = [
@@ -278,7 +278,7 @@ const AiVideoProductionPage = () => {
           >
             <img
               src={videoProduccionIA}
-              alt="Professional video production environment with artificial intelligence technology"
+              alt="AI Video Production"
               className="w-full h-full object-cover"
             />
           </motion.div>

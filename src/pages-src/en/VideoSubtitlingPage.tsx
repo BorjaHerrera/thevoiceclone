@@ -1,60 +1,82 @@
-import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
-import { ChevronsDown, Globe, Timer, Type, Users, Languages, ShieldCheck } from "lucide-react";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import GradientText from "@/components/GradientText";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import ContactForm from "@/components/ContactForm";
-import FeatureGridSection from "@/components/FeatureGridSection";
-import VideoPortfolio from "@/components/VideoPortfolio";
-import humanAiCollaborationSrc from "@/assets/SUBTITULADO_MULTILINGUE_SERVICIO.webp";
-const humanAiCollaboration = typeof humanAiCollaborationSrc === "string" ? humanAiCollaborationSrc : (humanAiCollaborationSrc as { src: string }).src;
+import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import {
+  ChevronsDown,
+  Globe,
+  Timer,
+  Type,
+  Users,
+  Languages,
+  ShieldCheck
+} from 'lucide-react';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger
+} from '@/components/ui/accordion';
+import GradientText from '@/components/GradientText';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import ContactForm from '@/components/ContactForm';
+import FeatureGridSection from '@/components/FeatureGridSection';
+import VideoPortfolio from '@/components/VideoPortfolio';
+import humanAiCollaborationSrc from '@/assets/SUBTITULADO_MULTILINGUE_SERVICIO.webp';
+const humanAiCollaboration =
+  typeof humanAiCollaborationSrc === 'string'
+    ? humanAiCollaborationSrc
+    : (humanAiCollaborationSrc as { src: string }).src;
 
-const sections: { id: string; title: string; navLabel: string; intro: string; subsections: { heading: string; text: string }[] }[] = [
+const sections: {
+  id: string;
+  title: string;
+  navLabel: string;
+  intro: string;
+  subsections: { heading: string; text: string }[];
+}[] = [
   {
-    id: "multilingual-subtitling",
-    title: "Multilingual subtitling: scalability with global consistency",
-    navLabel: "Multilingual subtitling: scalability and rigour.",
+    id: 'multilingual-subtitling',
+    title: 'Multilingual subtitling: scalability with global consistency',
+    navLabel: 'Multilingual subtitling: scalability and rigour.',
     intro:
-      "We centralise the translation and subtitling of your videos, eliminating the dispersed management of local vendors. We design processes that ensure fidelity to the original message and homogeneous technical quality across all languages simultaneously.",
-    subsections: [],
+      'We centralise the translation and subtitling of your videos, eliminating the dispersed management of local vendors. We design processes that ensure fidelity to the original message and homogeneous technical quality across all languages simultaneously.',
+    subsections: []
   },
   {
-    id: "hybrid-methodology",
-    title: "Hybrid methodology: the balance between AI and human review",
-    navLabel: "The balance between automation and expert review.",
+    id: 'hybrid-methodology',
+    title: 'Hybrid methodology: the balance between AI and human review',
+    navLabel: 'The balance between automation and expert review.',
     intro:
-      "AI accelerates the initial generation of subtitles in high-volume projects such as corporate e-learning. However, we apply strategic human review to ensure that technical terminology and cultural context are perfect, achieving an efficiency that is unattainable manually.",
-    subsections: [],
+      'AI accelerates the initial generation of subtitles in high-volume projects such as corporate e-learning. However, we apply strategic human review to ensure that technical terminology and cultural context are perfect, achieving an efficiency that is unattainable manually.',
+    subsections: []
   },
   {
-    id: "outsource-subtitling",
-    title: "Outsourcing subtitling simplifies corporate processes",
-    navLabel: "Outsourcing subtitling simplifies your expansion.",
+    id: 'outsource-subtitling',
+    title: 'Outsourcing subtitling simplifies corporate processes',
+    navLabel: 'Outsourcing subtitling simplifies your expansion.',
     intro:
-      "Delegating subtitle management allows your team to focus on strategy while we guarantee precision and delivery times. You access advanced technology and transform logistical complexity into a predictable and professional workflow.",
-    subsections: [],
-  },
+      'Delegating subtitle management allows your team to focus on strategy while we guarantee precision and delivery times. You access advanced technology and transform logistical complexity into a predictable and professional workflow.',
+    subsections: []
+  }
 ];
 
 const faqs = [
   {
-    q: "What is the difference between automatic and professional subtitling?",
-    a: "Automatic subtitling is generated by software without supervision, leading to context and synchronisation errors. Professional subtitling includes human review, cultural adaptation and linguistic quality control.",
+    q: 'What is the difference between automatic and professional subtitling?',
+    a: 'Automatic subtitling is generated by software without supervision, leading to context and synchronisation errors. Professional subtitling includes human review, cultural adaptation and linguistic quality control.'
   },
   {
-    q: "Why is human review necessary for subtitles?",
-    a: "AI often fails to detect cultural nuances, company technical terminology or subtle timing mismatches. Experts ensure the message is accurate and consistent with the brand.",
+    q: 'Why is human review necessary for subtitles?',
+    a: 'AI often fails to detect cultural nuances, company technical terminology or subtle timing mismatches. Experts ensure the message is accurate and consistent with the brand.'
   },
   {
-    q: "When is a hybrid workflow recommended?",
-    a: "It is ideal for international launches, global training and projects with high video volume where AI speed is required but with human-certified precision.",
+    q: 'When is a hybrid workflow recommended?',
+    a: 'It is ideal for international launches, global training and projects with high video volume where AI speed is required but with human-certified precision.'
   },
   {
-    q: "Can you adapt subtitles to my brand manual?",
-    a: "Yes. We ensure that style, terminology and tone are consistent with your corporate identity in all markets.",
-  },
+    q: 'Can you adapt subtitles to my brand manual?',
+    a: 'Yes. We ensure that style, terminology and tone are consistent with your corporate identity in all markets.'
+  }
 ];
 
 const VideoSubtitlingPage = () => {
@@ -69,7 +91,7 @@ const VideoSubtitlingPage = () => {
         ([entry]) => {
           if (entry.isIntersecting) setActiveSection(section.id);
         },
-        { rootMargin: "-40% 0px -40% 0px" },
+        { rootMargin: '-40% 0px -40% 0px' }
       );
       observer.observe(el);
       observers.push(observer);
@@ -78,26 +100,26 @@ const VideoSubtitlingPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className='min-h-screen bg-background'>
       <Navbar />
 
       {/* Hero */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
+      <section className='relative min-h-screen flex items-center justify-center overflow-hidden bg-background'>
         <div
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[140%] h-[55%] pointer-events-none"
+          className='absolute bottom-0 left-1/2 -translate-x-1/2 w-[140%] h-[55%] pointer-events-none'
           style={{
             background:
-              "radial-gradient(ellipse at 50% 100%, rgba(237, 94, 166, 0.45) 0%, rgba(123, 73, 223, 0.4) 25%, rgba(0, 99, 204, 0.35) 50%, transparent 75%)",
-            filter: "blur(100px)",
+              'radial-gradient(ellipse at 50% 100%, rgba(237, 94, 166, 0.45) 0%, rgba(123, 73, 223, 0.4) 25%, rgba(0, 99, 204, 0.35) 50%, transparent 75%)',
+            filter: 'blur(100px)'
           }}
         />
-        <div className="container relative z-10 px-4 lg:px-8 py-20 lg:py-32">
-          <div className="max-w-5xl mx-auto text-center">
+        <div className='container relative z-10 px-4 lg:px-8 pt-36 pb-24 lg:pt-48 lg:pb-36'>
+          <div className='max-w-5xl mx-auto text-center'>
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-extrabold leading-[1.05] uppercase tracking-tight text-foreground mb-8"
+              className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-extrabold leading-[1.05] uppercase tracking-tight text-foreground mb-8'
             >
               Video subtitling with human review
             </motion.h1>
@@ -105,11 +127,13 @@ const VideoSubtitlingPage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.15 }}
-              className="text-lg md:text-xl text-muted-foreground max-w-4xl mx-auto mb-10 leading-relaxed"
+              className='text-lg md:text-xl text-muted-foreground max-w-4xl mx-auto mb-10 leading-relaxed'
             >
-              Boost the accessibility and internationalisation of your corporate videos. We do not use uncontrolled
-              automatic tools: we manage a comprehensive process that combines linguistic precision, cultural
-              adaptation and expert review to protect your brand identity in every market.
+              Boost the accessibility and internationalisation of your corporate
+              videos. We do not use uncontrolled automatic tools: we manage a
+              comprehensive process that combines linguistic precision, cultural
+              adaptation and expert review to protect your brand identity in
+              every market.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -117,8 +141,8 @@ const VideoSubtitlingPage = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               <a
-                href="#contacto"
-                className="inline-block bg-foreground text-background px-10 py-4 rounded-full font-semibold text-base hover:bg-foreground/85 transition-colors"
+                href='#contacto'
+                className='inline-block bg-foreground text-background px-10 py-4 rounded-full font-semibold text-base hover:bg-foreground/85 transition-colors'
               >
                 Schedule a demo
               </a>
@@ -127,24 +151,36 @@ const VideoSubtitlingPage = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="mt-12 flex justify-center"
+              className='mt-12 flex justify-center'
             >
               <button
                 onClick={() => {
-                  const firstH2 = document.querySelector("section:nth-of-type(2) h2");
+                  const firstH2 = document.querySelector(
+                    'section:nth-of-type(2) h2'
+                  );
                   if (firstH2) {
-                    const top = firstH2.getBoundingClientRect().top + window.scrollY - 160;
-                    window.scrollTo({ top, behavior: "smooth" });
+                    const top =
+                      firstH2.getBoundingClientRect().top +
+                      window.scrollY -
+                      160;
+                    window.scrollTo({ top, behavior: 'smooth' });
                   }
                 }}
-                className="cursor-pointer bg-transparent border-none p-2"
-                aria-label="Scroll down"
+                className='cursor-pointer bg-transparent border-none p-2'
+                aria-label='Scroll down'
               >
                 <motion.div
                   animate={{ y: [0, 8, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: 'easeInOut'
+                  }}
                 >
-                  <ChevronsDown className="w-12 h-12 text-foreground/70" strokeWidth={1.5} />
+                  <ChevronsDown
+                    className='w-12 h-12 text-foreground/70'
+                    strokeWidth={1.5}
+                  />
                 </motion.div>
               </button>
             </motion.div>
@@ -153,17 +189,20 @@ const VideoSubtitlingPage = () => {
       </section>
 
       {/* Intro */}
-      <section className="py-20 lg:py-28 bg-secondary/50">
-        <div className="container px-4 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-start max-w-6xl mx-auto">
+      <section className='py-20 lg:py-28 bg-secondary/50'>
+        <div className='container px-4 lg:px-8'>
+          <div className='grid lg:grid-cols-2 gap-10 lg:gap-20 items-start max-w-6xl mx-auto'>
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight">
-                Professional quality on every line: <GradientText>Forget the errors of pure automation.</GradientText>
+              <h2 className='text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight'>
+                Professional quality on every line:{' '}
+                <GradientText>
+                  Forget the errors of pure automation.
+                </GradientText>
               </h2>
             </motion.div>
             <motion.div
@@ -172,11 +211,12 @@ const VideoSubtitlingPage = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.15 }}
             >
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Many companies rely on automatic generators that produce synchronisation and terminology errors.
-                At The Voice Clone, our hybrid workflow ensures that subtitling is not just a technical process,
-                but a faithful adaptation that respects the cultural context and international standards of
-                corporate communication.
+              <p className='text-lg text-muted-foreground leading-relaxed'>
+                Many companies rely on automatic generators that produce
+                synchronisation and terminology errors. At The Voice Clone, our
+                hybrid workflow ensures that subtitling is not just a technical
+                process, but a faithful adaptation that respects the cultural
+                context and international standards of corporate communication.
               </p>
             </motion.div>
           </div>
@@ -184,35 +224,40 @@ const VideoSubtitlingPage = () => {
       </section>
 
       {/* AI + Human Section – Full Width Split */}
-      <section className="py-20 lg:py-28 overflow-hidden">
-        <div className="grid lg:grid-cols-2 gap-0">
+      <section className='py-20 lg:py-28 overflow-hidden'>
+        <div className='grid lg:grid-cols-2 gap-0'>
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="flex items-center px-6 md:px-12 lg:pl-20 xl:pl-32 lg:pr-16 py-12 lg:py-0"
+            className='flex items-center px-6 md:px-12 lg:pl-20 xl:pl-32 lg:pr-16 py-12 lg:py-0'
           >
-            <div className="max-w-2xl">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight text-foreground mb-8">
-                Linguistic precision with AI speed. Maximum efficiency in your global content.
+            <div className='max-w-2xl'>
+              <h2 className='text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight text-foreground mb-8'>
+                Linguistic precision with AI speed. Maximum efficiency in your
+                global content.
               </h2>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                Scale your audiovisual communication with a solution that optimises time and budget in{" "}
-                <strong>corporate videos, e-learning and marketing campaigns</strong>. Our methodology allows
-                dramatically reducing production costs while maintaining millimetric precision in timing and
-                language, without the need for upfront infrastructure investment.
+              <p className='text-lg text-muted-foreground leading-relaxed mb-6'>
+                Scale your audiovisual communication with a solution that
+                optimises time and budget in{' '}
+                <strong>
+                  corporate videos, e-learning and marketing campaigns
+                </strong>
+                . Our methodology allows dramatically reducing production costs
+                while maintaining millimetric precision in timing and language,
+                without the need for upfront infrastructure investment.
               </p>
               <div
-                className="h-[4px] w-full mb-10 rounded-full"
+                className='h-[4px] w-full mb-10 rounded-full'
                 style={{
                   background:
-                    "linear-gradient(135deg, hsl(330 80% 65%) 0%, hsl(260 70% 58%) 35%, hsl(211 100% 40%) 65%, hsl(220 30% 12%) 100%)",
+                    'linear-gradient(135deg, hsl(330 80% 65%) 0%, hsl(260 70% 58%) 35%, hsl(211 100% 40%) 65%, hsl(220 30% 12%) 100%)'
                 }}
               />
               <a
-                href="#contacto"
-                className="inline-block bg-yellow-400 text-foreground px-10 py-4 rounded-full font-semibold text-base hover:bg-yellow-300 transition-colors text-center min-w-[220px]"
+                href='#contacto'
+                className='inline-block bg-yellow-400 text-foreground px-10 py-4 rounded-full font-semibold text-base hover:bg-yellow-300 transition-colors text-center min-w-[220px]'
               >
                 Learn more
               </a>
@@ -224,12 +269,12 @@ const VideoSubtitlingPage = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="h-[400px] lg:h-[600px]"
+            className='h-[400px] lg:h-[600px]'
           >
             <img
               src={humanAiCollaboration}
-              alt="Multilingual Subtitling"
-              className="w-full h-full object-cover"
+              alt='Multilingual Subtitling'
+              className='w-full h-full object-cover'
             />
           </motion.div>
         </div>
@@ -237,64 +282,65 @@ const VideoSubtitlingPage = () => {
 
       {/* Feature Cards Grid */}
       <FeatureGridSection
-        heading="The definitive ecosystem for your professional subtitling"
-        description="We combine technological efficiency and human review to deliver impeccable subtitles in any format."
+        heading='The definitive ecosystem for your professional subtitling'
+        description='We combine technological efficiency and human review to deliver impeccable subtitles in any format.'
         cards={[
           {
             icon: Timer,
-            iconBg: "bg-blue-500/20",
-            iconColor: "text-blue-400",
-            title: "Timing Precision",
-            text: "We adjust the synchronisation of every sentence to guarantee perfect readability and a smooth user experience.",
+            iconBg: 'bg-blue-500/20',
+            iconColor: 'text-blue-400',
+            title: 'Timing Precision',
+            text: 'We adjust the synchronisation of every sentence to guarantee perfect readability and a smooth user experience.'
           },
           {
             icon: Globe,
-            iconBg: "bg-purple-500/20",
-            iconColor: "text-purple-400",
-            title: "Cultural Adaptation",
-            text: "Native experts adapt the message to ensure that local nuances and idioms are culturally relevant.",
+            iconBg: 'bg-purple-500/20',
+            iconColor: 'text-purple-400',
+            title: 'Cultural Adaptation',
+            text: 'Native experts adapt the message to ensure that local nuances and idioms are culturally relevant.'
           },
           {
             icon: Type,
-            iconBg: "bg-emerald-500/20",
-            iconColor: "text-emerald-400",
-            title: "Style Consistency",
-            text: "We maintain corporate tone and terminology across all languages, protecting the integrity of your brand.",
+            iconBg: 'bg-emerald-500/20',
+            iconColor: 'text-emerald-400',
+            title: 'Style Consistency',
+            text: 'We maintain corporate tone and terminology across all languages, protecting the integrity of your brand.'
           },
           {
             icon: Users,
-            iconBg: "bg-orange-500/20",
-            iconColor: "text-orange-400",
-            title: "Global Accessibility",
-            text: "We comply with international standards to ensure your content is inclusive and accessible to all audiences.",
+            iconBg: 'bg-orange-500/20',
+            iconColor: 'text-orange-400',
+            title: 'Global Accessibility',
+            text: 'We comply with international standards to ensure your content is inclusive and accessible to all audiences.'
           },
           {
             icon: Languages,
-            iconBg: "bg-red-500/20",
-            iconColor: "text-red-400",
-            title: "Multilingual Scalability",
-            text: "Centralised management that allows translating and subtitling large volumes of video in record time.",
+            iconBg: 'bg-red-500/20',
+            iconColor: 'text-red-400',
+            title: 'Multilingual Scalability',
+            text: 'Centralised management that allows translating and subtitling large volumes of video in record time.'
           },
           {
             icon: ShieldCheck,
-            iconBg: "bg-violet-500/20",
-            iconColor: "text-violet-400",
-            title: "Quality Control",
-            text: "Final human review to detect and correct context or grammar errors that AI often overlooks.",
-          },
+            iconBg: 'bg-violet-500/20',
+            iconColor: 'text-violet-400',
+            title: 'Quality Control',
+            text: 'Final human review to detect and correct context or grammar errors that AI often overlooks.'
+          }
         ]}
       />
 
       {/* Services – Editorial Two-Column Layout */}
-      <section className="py-20 lg:py-28">
-        <div className="px-6 md:px-12 lg:px-20 xl:px-32">
-          <div className="grid lg:grid-cols-[1fr_2fr] gap-12 lg:gap-24">
-            <div className="hidden lg:block">
-              <div className="sticky top-40 self-start">
-                <h2 className="text-4xl font-heading font-extrabold uppercase leading-tight text-foreground mb-12">
-                  A model that unites cutting-edge technology and linguistic rigour.
+      <section className='py-20 lg:py-28'>
+        <div className='px-6 md:px-12 lg:px-20 xl:px-32'>
+          <div className='grid lg:grid-cols-[1fr_2fr] gap-12 lg:gap-24'>
+            <div className='hidden lg:block'>
+              <div className='sticky top-40 self-start'>
+                <h2 className='text-4xl font-heading font-extrabold uppercase leading-tight text-foreground mb-12'>
+                  A model that unites cutting-edge technology and linguistic
+                  rigour.
                 </h2>
-                <nav className="flex flex-col gap-6">
+                <nav className='flex flex-col gap-6'>
                   {sections.map((section) => (
                     <a
                       key={section.id}
@@ -303,12 +349,17 @@ const VideoSubtitlingPage = () => {
                         e.preventDefault();
                         const el = document.getElementById(section.id);
                         if (el) {
-                          const top = el.getBoundingClientRect().top + window.scrollY - 160;
-                          window.scrollTo({ top, behavior: "smooth" });
+                          const top =
+                            el.getBoundingClientRect().top +
+                            window.scrollY -
+                            160;
+                          window.scrollTo({ top, behavior: 'smooth' });
                         }
                       }}
                       className={`text-lg font-semibold leading-tight transition-all duration-300 no-underline decoration-transparent text-foreground ${
-                        activeSection === section.id ? "opacity-100" : "opacity-40 hover:opacity-70"
+                        activeSection === section.id
+                          ? 'opacity-100'
+                          : 'opacity-40 hover:opacity-70'
                       }`}
                     >
                       {section.navLabel}
@@ -318,27 +369,31 @@ const VideoSubtitlingPage = () => {
               </div>
             </div>
 
-            <div className="flex flex-col">
+            <div className='flex flex-col'>
               {sections.map((section, i) => (
                 <motion.div
                   key={section.id}
                   id={section.id}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
+                  viewport={{ once: true, margin: '-100px' }}
                   transition={{ duration: 0.6, delay: i * 0.05 }}
-                  className="pb-32 last:pb-0 scroll-mt-40"
+                  className='pb-32 last:pb-0 scroll-mt-40'
                 >
-                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold uppercase leading-tight tracking-tight text-foreground mb-8">
+                  <h2 className='text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold uppercase leading-tight tracking-tight text-foreground mb-8'>
                     {section.title}
                   </h2>
-                  <p className="text-lg text-foreground/70 leading-relaxed mb-12 max-w-3xl">{section.intro}</p>
+                  <p className='text-lg text-foreground/70 leading-relaxed mb-12 max-w-3xl'>
+                    {section.intro}
+                  </p>
                   {section.subsections.map((sub, j) => (
-                    <div key={j} className="mb-10 last:mb-0">
-                      <h3 className="text-3xl md:text-4xl font-heading font-extrabold uppercase text-foreground mt-8 mb-4">
+                    <div key={j} className='mb-10 last:mb-0'>
+                      <h3 className='text-3xl md:text-4xl font-heading font-extrabold uppercase text-foreground mt-8 mb-4'>
                         {sub.heading}
                       </h3>
-                      <p className="text-base text-foreground/60 leading-relaxed max-w-3xl">{sub.text}</p>
+                      <p className='text-base text-foreground/60 leading-relaxed max-w-3xl'>
+                        {sub.text}
+                      </p>
                     </div>
                   ))}
                 </motion.div>
@@ -349,40 +404,45 @@ const VideoSubtitlingPage = () => {
       </section>
 
       {/* Visibility */}
-      <section className="py-20 lg:py-28 bg-secondary/50">
-        <div className="container px-4 lg:px-8 max-w-4xl mx-auto text-center">
+      <section className='py-20 lg:py-28 bg-secondary/50'>
+        <div className='container px-4 lg:px-8 max-w-4xl mx-auto text-center'>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight mb-8">
-              The Voice Clone: where subtitling becomes a <GradientText>strategic advantage.</GradientText>
+            <h2 className='text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight mb-8'>
+              The Voice Clone: where subtitling becomes a{' '}
+              <GradientText>strategic advantage.</GradientText>
             </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-              Producing subtitles internally involves technical errors and hidden costs. By trusting our managed
-              service, you obtain video assets ready for global publication with optimised costs. We transform
-              subtitling into a powerful internationalisation tool, eliminating operational friction and
-              ensuring certified professional results.
+            <p className='text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto'>
+              Producing subtitles internally involves technical errors and
+              hidden costs. By trusting our managed service, you obtain video
+              assets ready for global publication with optimised costs. We
+              transform subtitling into a powerful internationalisation tool,
+              eliminating operational friction and ensuring certified
+              professional results.
             </p>
           </motion.div>
         </div>
       </section>
 
-      <VideoPortfolio videoIds={["lHSTqk_1uc4", "QeDAESHmZBU", "wyMLE_um2Sk"]} />
+      <VideoPortfolio
+        videoIds={['lHSTqk_1uc4', 'QeDAESHmZBU', 'wyMLE_um2Sk']}
+      />
 
       {/* FAQ */}
-      <section className="py-20 lg:py-28">
-        <div className="px-6 md:px-12 lg:px-20 xl:px-32">
+      <section className='py-20 lg:py-28'>
+        <div className='px-6 md:px-12 lg:px-20 xl:px-32'>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="mb-12"
+            className='mb-12'
           >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight">
+            <h2 className='text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-extrabold uppercase leading-[1.05] tracking-tight'>
               Frequently <GradientText>Asked Questions</GradientText>
             </h2>
           </motion.div>
@@ -392,17 +452,19 @@ const VideoSubtitlingPage = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <Accordion type="single" collapsible className="space-y-3">
+            <Accordion type='single' collapsible className='space-y-3'>
               {faqs.map((faq, i) => (
                 <AccordionItem
                   key={i}
                   value={`faq-${i}`}
-                  className="surface-elevated rounded-xl border border-border/50 px-6"
+                  className='surface-elevated rounded-xl border border-border/50 px-6'
                 >
-                  <AccordionTrigger className="text-left font-heading font-semibold text-base hover:no-underline py-5">
+                  <AccordionTrigger className='text-left font-heading font-semibold text-base hover:no-underline py-5'>
                     {faq.q}
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground leading-relaxed pb-5">{faq.a}</AccordionContent>
+                  <AccordionContent className='text-muted-foreground leading-relaxed pb-5'>
+                    {faq.a}
+                  </AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>

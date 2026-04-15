@@ -45,7 +45,7 @@ export default function Page() {
 
 export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
   if (locale !== 'en') {
-    return { redirect: { destination: '/localizacion-audiovisual', permanent: false } }
+    return { redirect: { destination: '/localizacion-audiovisual', permanent: true } }
   }
   return { props: {} }
 }

@@ -45,7 +45,7 @@ export default function Page() {
 
 export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
   if (locale !== 'en') {
-    return { redirect: { destination: '/traduccion-profesional', permanent: false } }
+    return { redirect: { destination: '/traduccion-profesional', permanent: true } }
   }
   return { props: {} }
 }

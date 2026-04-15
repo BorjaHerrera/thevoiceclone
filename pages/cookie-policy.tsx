@@ -25,7 +25,7 @@ export default function Page() {
 
 export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
   if (locale !== 'en') {
-    return { redirect: { destination: '/politica-cookies', permanent: false } }
+    return { redirect: { destination: '/politica-cookies', permanent: true } }
   }
   return { props: {} }
 }

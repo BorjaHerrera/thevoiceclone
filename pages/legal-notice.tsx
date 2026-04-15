@@ -25,7 +25,7 @@ export default function Page() {
 
 export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
   if (locale !== 'en') {
-    return { redirect: { destination: '/aviso-legal', permanent: false } }
+    return { redirect: { destination: '/aviso-legal', permanent: true } }
   }
   return { props: {} }
 }

@@ -42,7 +42,7 @@ export default function Page() {
 
 export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
   if (locale !== 'en') {
-    return { redirect: { destination: '/contacto', permanent: false } }
+    return { redirect: { destination: '/contacto', permanent: true } }
   }
   return { props: {} }
 }

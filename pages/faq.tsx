@@ -73,7 +73,7 @@ export default function Page() {
 
 export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
   if (locale !== 'en') {
-    return { redirect: { destination: '/preguntas-frecuentes', permanent: false } }
+    return { redirect: { destination: '/preguntas-frecuentes', permanent: true } }
   }
   return { props: {} }
 }

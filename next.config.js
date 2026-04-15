@@ -8,6 +8,13 @@ const nextConfig = {
     locales: ['es', 'en'],
     defaultLocale: 'es',
   },
+  async redirects() {
+    return [
+      { source: '/about',               destination: 'https://www.thevoiceclone.com/en',                permanent: true },
+      { source: '/services/voice-over', destination: 'https://www.thevoiceclone.com/en/ai-voices',      permanent: true },
+      { source: '/services/subtitling', destination: 'https://www.thevoiceclone.com/en/video-subtitling', permanent: true },
+    ]
+  },
   async rewrites() {
     return {
       // beforeFiles runs before filesystem/i18n routing

@@ -20,7 +20,7 @@ export default function Page({ posts, locale }: Props) {
         <NextSeo
           title={title}
           description={description}
-          canonical="https://thevoiceclone.com/en/blog"
+          canonical="https://www.thevoiceclone.com/en/blog"
           openGraph={{ title, description }}
         />
         <Head>
@@ -44,7 +44,7 @@ export default function Page({ posts, locale }: Props) {
       <NextSeo
         title={defaults.title}
         description={defaults.description}
-        canonical="https://thevoiceclone.com/blog"
+        canonical="https://www.thevoiceclone.com/blog"
         openGraph={{ title: defaults.title, description: defaults.description }}
       />
       <Head>

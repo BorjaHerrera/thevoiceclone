@@ -12,7 +12,7 @@ export default function Page() {
       <NextSeo
         title={defaults.title}
         description={defaults.description}
-        canonical="https://thevoiceclone.com/en/contact"
+        canonical="https://www.thevoiceclone.com/en/contact"
         openGraph={{
           title: defaults.title,
           description: defaults.description,

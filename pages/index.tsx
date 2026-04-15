@@ -22,7 +22,7 @@ export default function Page({ seo, locale }: Props) {
         <NextSeo
           title={title}
           description={description}
-          canonical="https://thevoiceclone.com/en"
+          canonical="https://www.thevoiceclone.com/en"
           openGraph={{
             title: seo?.opengraphTitle || title,
             description: seo?.opengraphDescription || description,
